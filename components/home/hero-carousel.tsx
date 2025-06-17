@@ -9,19 +9,63 @@ import Image from "next/image";
 const carouselSlides = [
   {
     id: 1,
-    images: ["/clean.png"],
+    images: ["/Croser/gavtara.jpg"],
   },
   {
     id: 2,
-    images: ["/flag.jpg"],
+    images: ["/Croser/gavview.jpg"],
   },
   {
     id: 3,
-    images: ["/Tree.jpg"],
+    images: ["/Croser/matamandir"],
   },
   {
     id: 4,
-    images: ["flag.jpg"],
+    images: ["/Croser/rammandir.jpg"],
+  },
+  {
+    id: 5,
+    images: ["/Croser/grampanchayat.jpg"],
+  },
+  {
+    id: 6,
+    images: ["/Croser/grampanchayat2.jpg"],
+  },
+  {
+    id: 7,
+    images: ["/Croser/hanuman.jpg"],
+  },
+  {
+    id: 8,
+    images: ["/Croser/mandir4.jpg"],
+  },
+  {
+    id: 9,
+    images: ["/Croser/phc.jpg"],
+  },
+  {
+    id: 10,
+    images: ["/Croser/phc2.jpg"],
+  },
+   {
+    id: 11,
+    images: ["/Croser/phule.jpg"],
+  },
+   {
+    id: 12,
+    images: ["/Croser/ravidas.jpg"],
+  },
+   {
+    id: 13,
+    images: ["/Croser/school1.jpg"],
+  },
+   {
+    id: 14,
+    images: ["/Croser/school2.jpg"],
+  },
+   {
+    id: 15,
+    images: ["/Croser/school3.jpg"],
   },
 ];
 
