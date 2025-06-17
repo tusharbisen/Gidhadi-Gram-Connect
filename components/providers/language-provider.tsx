@@ -614,6 +614,7 @@ const translations: Translations = {
     hi: "लॉगिन सफल",
     mr: "लॉगिन यशस्वी",
   },
+  
 }
 
 type LanguageContextType = {

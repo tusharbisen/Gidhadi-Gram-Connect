@@ -1,7 +1,9 @@
+ 
 import EmergencyContact from "@/components/home/emergency-contact"
 import EventCarousel from "@/components/home/event-carousel"
 import HeroSection from "@/components/home/hero-carousel"
 import AnnouncementCarousel from "@/components/home/announcement-carousel"
+import BrandPromotion from "@/components/brand/BrandPromotion"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -22,6 +24,7 @@ export default function Home() {
           <EmergencyContact />
         </div>
       </div>
+       <BrandPromotion/>
     </div>
   )
 }
