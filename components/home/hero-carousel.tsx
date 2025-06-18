@@ -17,7 +17,7 @@ const carouselSlides = [
   },
   {
     id: 3,
-    images: ["/Croser/matamandir"],
+    images: ["/Croser/matamandir.jpg"],
   },
   {
     id: 4,
@@ -66,6 +66,18 @@ const carouselSlides = [
    {
     id: 15,
     images: ["/Croser/school3.jpg"],
+  },
+  {
+    id: 16,
+    images: ["/Croser/ambedkar.jpg"],
+  },
+  {
+    id: 17,
+    images: ["/Croser/ambekar1.jpg"],
+  },
+  {
+    id: 18,
+    images: ["/Croser/ambekadr2.jpg"],
   },
 ];
 
@@ -127,7 +139,7 @@ const HeroCarousel = () => {
   };
 
   return (
-    <div className="relative mb-8 md:mb-12 overflow-hidden rounded-lg shadow-xl">
+    <div className="relative mb-8 md:mb-12 overflow-hidden rounded-lg shadow-xl boder-2">
       {/* Background Images with cycling */}
       {carouselSlides.map((slide, slideIndex) => (
         <div
