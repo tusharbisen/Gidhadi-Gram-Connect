@@ -1,13 +1,13 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Star, Shield, Award } from "lucide-react"
-import Image from "next/image"
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Star, Shield, Award } from "lucide-react";
+import Image from "next/image";
 
 const soldiersData = [
   {
     name: "Nikhil Rupchand Thakare",
-    photo: "/brave/nikhilthakre.png",
+    photo: "/brave/nikhilthakre.jpg",
     rank: "Corporal (Special Force)",
     branch: "Indian Air Force",
     yearsOfService: "7 Years",
@@ -16,14 +16,14 @@ const soldiersData = [
   },
   {
     name: "Jayandra Kumar Tekchand Chawhan",
-    photo: "/brave/jaykumar.png",
+    photo: "/brave/jaykumar.jpg",
     rank: "Ex Havildar",
     branch: "Indian Army",
     yearsOfService: "20 Years",
     status: "Retired",
     story: "Bahot Badiya upkram hai sabhi ko Jai Hind",
   },
-]
+];
 
 export default function BraveSoldiersSection() {
   return (
@@ -42,7 +42,9 @@ export default function BraveSoldiersSection() {
               <Shield className="h-8 w-8 text-white" />
             </div>
           </div>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto font-medium">Honoring Their Service and Sacrifice</p>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto font-medium">
+            Honoring Their Service and Sacrifice
+          </p>
           <div className="w-32 h-2 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 mx-auto mt-4 rounded-full shadow-md"></div>
 
           {/* Military Pattern Background */}
@@ -58,12 +60,12 @@ export default function BraveSoldiersSection() {
             >
               <div className="relative">
                 {/* Photo */}
-                <div className="aspect-[4/3] relative overflow-hidden bg-slate-200">
+                <div className="aspect-[4/3] relative overflow-hidden bg-slate-200 rounded-md flex items-center justify-center">
                   <Image
                     src={soldier.photo || "/placeholder.svg"}
                     alt={`Photo of ${soldier.name}`}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent group-hover:from-black/40 transition-all duration-300"></div>
@@ -75,7 +77,11 @@ export default function BraveSoldiersSection() {
                 {/* Status Badge with Enhanced Styling */}
                 <div className="absolute top-4 right-4">
                   <Badge
-                    variant={soldier.status === "Currently Serving" ? "default" : "secondary"}
+                    variant={
+                      soldier.status === "Currently Serving"
+                        ? "default"
+                        : "secondary"
+                    }
                     className={`${
                       soldier.status === "Currently Serving"
                         ? "bg-emerald-700 hover:bg-emerald-800 group-hover:bg-emerald-600"
@@ -113,13 +119,17 @@ export default function BraveSoldiersSection() {
                 {/* Service Details with Military Theme */}
                 <div className="space-y-3 mb-4">
                   <div className="flex items-center justify-between p-2 rounded-lg group-hover:bg-slate-100 transition-colors duration-300">
-                    <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Branch:</span>
+                    <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">
+                      Branch:
+                    </span>
                     <span className="text-sm font-bold text-slate-800 group-hover:text-emerald-700 transition-colors duration-300">
                       {soldier.branch}
                     </span>
                   </div>
                   <div className="flex items-center justify-between p-2 rounded-lg group-hover:bg-slate-100 transition-colors duration-300">
-                    <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Service:</span>
+                    <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">
+                      Service:
+                    </span>
                     <span className="text-sm font-bold text-slate-800 group-hover:text-emerald-700 transition-colors duration-300">
                       {soldier.yearsOfService}
                     </span>
@@ -166,25 +176,28 @@ export default function BraveSoldiersSection() {
         {/* Call to Action */}
         <div className="text-center mt-12">
           <div className="bg-slate-100 rounded-2xl p-8 max-w-2xl mx-auto">
-            <h3 className="text-xl font-semibold text-slate-800 mb-3">Know a Brave Soldier from Our Village?</h3>
+            <h3 className="text-xl font-semibold text-slate-800 mb-3">
+              Know a Brave Soldier from Our Village?
+            </h3>
             <p className="text-slate-600 mb-6">
-              Help us honor more heroes by sharing their stories with our community.
+              Help us honor more heroes by sharing their stories with our
+              community.
             </p>
             <a
-  href="https://docs.google.com/forms/d/1K2xP06egTSRr2BLvb86nmP20vs_z_jTreOHxbUrwk3A/edit"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <Button
-    size="lg"
-    className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-medium px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-  >
-    Share Your Story
-  </Button>
-</a>
+              href="https://docs.google.com/forms/d/1K2xP06egTSRr2BLvb86nmP20vs_z_jTreOHxbUrwk3A/edit"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-medium px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Share Your Story
+              </Button>
+            </a>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

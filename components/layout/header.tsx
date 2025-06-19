@@ -42,9 +42,11 @@ const Header = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-white"
-      }`}
+       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+    isScrolled
+      ?  "backdrop-blur-lg shadow-md"
+      : "bg-transparent"
+  }`}
     >
       <div className="tricolor-border"></div>
       <div className="container mx-auto px-4">
@@ -54,9 +56,9 @@ const Header = () => {
               <Image
                 src="/logo.png"
                 alt="GP Gidhadi Logo"
-                width={48}
-                height={48}
-                className="rounded-full border-2 "
+                width={80}
+                height={80}
+                className="rounded-full  "
               />
             </div>
             <div>

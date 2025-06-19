@@ -9,76 +9,150 @@ import Image from "next/image";
 const carouselSlides = [
   {
     id: 1,
-    images: ["/Croser/gavtara.jpg"],
+    images: [
+      "https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348443/5_m374vi.png",
+    ],
   },
   {
     id: 2,
-    images: ["/Croser/gavview.jpg"],
+    images: [
+      "https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348456/6_wshx3y.png",
+    ],
   },
   {
     id: 3,
-    images: ["/Croser/matamandir.jpg"],
+    images: [
+      "https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348434/7_q3bwtl.png",
+    ],
   },
   {
     id: 4,
-    images: ["/Croser/rammandir.jpg"],
+    images: [
+      "https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348525/24_r5sxia.png",
+    ],
   },
   {
     id: 5,
-    images: ["/Croser/grampanchayat.jpg"],
+    images: [
+      "https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348542/25_u6uob0.png",
+    ],
   },
   {
     id: 6,
-    images: ["/Croser/grampanchayat2.jpg"],
+    images: [
+      " https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348530/26_vwyjto.png",
+    ],
   },
   {
     id: 7,
-    images: ["/Croser/hanuman.jpg"],
+    images: [
+      "https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348505/19_d2gvsn.png",
+    ],
   },
   {
     id: 8,
-    images: ["/Croser/mandir4.jpg"],
+    images: [
+      "https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348519/21_stmgbg.png",
+    ],
   },
   {
     id: 9,
-    images: ["/Croser/phc.jpg"],
+    images: [
+      "https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348509/20_yqpsmj.png",
+    ],
   },
   {
     id: 10,
-    images: ["/Croser/phc2.jpg"],
+    images: [
+      "https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348512/22_lhmmpw.png",
+    ],
   },
-   {
+  {
     id: 11,
-    images: ["/Croser/phule.jpg"],
+    images: [
+      "https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348518/23_xxi3pz.png",
+    ],
   },
-   {
+  {
     id: 12,
-    images: ["/Croser/ravidas.jpg"],
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348442/2_x48kn6.png"],
   },
-   {
+  {
     id: 13,
-    images: ["/Croser/school1.jpg"],
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348431/3_t0avvj.png"],
   },
-   {
+  {
     id: 14,
-    images: ["/Croser/school2.jpg"],
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348432/4_v2gx3x.png"],
   },
-   {
+  {
     id: 15,
-    images: ["/Croser/school3.jpg"],
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348733/33_kbnvii.png"],
   },
   {
     id: 16,
-    images: ["/Croser/ambedkar.jpg"],
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348423/8_rkay1o.png"],
   },
   {
     id: 17,
-    images: ["/Croser/ambekar1.jpg"],
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348729/30_uvxonr.png"],
   },
   {
     id: 18,
-    images: ["/Croser/ambekadr2.jpg"],
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348729/32_fqm8am.png"],
   },
+   {
+    id: 19,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348729/31_gkfx0s.png"],
+  }, {
+    id: 20,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348430/1_oeheaa.png"],
+  }, {
+    id: 21,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348457/9_ijcwrh.png"],
+  }, {
+    id: 22,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348463/10_apzyop.png"],
+  }, {
+    id: 23,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348460/11_o5o8zw.png"],
+  }, {
+    id: 24,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348462/12_lzqm4e.png"],
+  }, {
+    id: 25,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348479/14_o0bdvm.png"],
+  }, {
+    id: 26,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348481/13_hejnci.png"],
+  }, {
+    id: 27,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348490/15_iouxna.png"],
+  }, {
+    id: 28,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348480/17_wz9hjt.png"],
+  }, {
+    id: 29,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348507/18_lon1fk.png"],
+  }, {
+    id: 30,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348483/16_ulnsxo.png"],
+  }, {
+    id: 31,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348542/27_caex1u.png"],
+  }, {
+    id: 32,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348729/28_diusho.png"],
+  }, {
+    id: 33,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348534/29_y5ovmf.png"],
+  }, {
+    id: 34,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348735/34_jspgwz.png"],
+  }, {
+    id: 35,
+    images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750348736/35_rhacsp.png"],
+  },  
 ];
 
 const HeroCarousel = () => {
@@ -94,23 +168,19 @@ const HeroCarousel = () => {
     if (isAutoPlaying) {
       const interval = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
-      }, 6000); // Change slide every 6 seconds
-
+      }, 6000);
       return () => clearInterval(interval);
     }
   }, [isAutoPlaying]);
 
-  // Image cycling effect
   useEffect(() => {
     const slideData = carouselSlides[currentSlide];
     const imageInterval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % slideData.images.length);
-    }, 3000); // Change image every 3 seconds
-
+    }, 3000);
     return () => clearInterval(imageInterval);
   }, [currentSlide]);
 
-  // Reset image index when slide changes
   useEffect(() => {
     setCurrentImageIndex(0);
   }, [currentSlide]);
@@ -118,7 +188,6 @@ const HeroCarousel = () => {
   const nextSlide = () => {
     setIsAutoPlaying(false);
     setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
-    // Resume auto-play after 10 seconds
     setTimeout(() => setIsAutoPlaying(true), 10000);
   };
 
@@ -127,20 +196,17 @@ const HeroCarousel = () => {
     setCurrentSlide(
       (prev) => (prev - 1 + carouselSlides.length) % carouselSlides.length
     );
-    // Resume auto-play after 10 seconds
     setTimeout(() => setIsAutoPlaying(true), 10000);
   };
 
   const goToSlide = (index: number) => {
     setIsAutoPlaying(false);
     setCurrentSlide(index);
-    // Resume auto-play after 10 seconds
     setTimeout(() => setIsAutoPlaying(true), 10000);
   };
 
   return (
-    <div className="relative mb-8 md:mb-12 overflow-hidden rounded-lg shadow-xl boder-2">
-      {/* Background Images with cycling */}
+    <div className="relative mb-8 md:mb-12 overflow-hidden rounded-lg shadow-xl border-2">
       {carouselSlides.map((slide, slideIndex) => (
         <div
           key={slide.id}
@@ -161,17 +227,15 @@ const HeroCarousel = () => {
                 src={image || "/placeholder.svg"}
                 alt={`Slide ${slideIndex + 1} - Image ${imageIndex + 1}`}
                 fill
-                className="object-cover"
+                className="object-contain"
                 priority={slideIndex === 0 && imageIndex === 0}
               />
             </div>
           ))}
-          {/* Optional subtle overlay for better contrast with controls */}
           <div className="absolute inset-0 bg-black/10" />
         </div>
       ))}
 
-      {/* Navigation Arrows */}
       <Button
         variant="ghost"
         size="icon"
@@ -196,7 +260,6 @@ const HeroCarousel = () => {
         <span className="sr-only">Next slide</span>
       </Button>
 
-      {/* Image Indicators for current slide */}
       <div className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20 flex space-x-1">
         {currentSlideData.images.map((_, index) => (
           <div
@@ -208,7 +271,6 @@ const HeroCarousel = () => {
         ))}
       </div>
 
-      {/* Slide Indicators */}
       <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-20 flex space-x-1 md:space-x-2">
         {carouselSlides.map((_, index) => (
           <button
@@ -224,7 +286,6 @@ const HeroCarousel = () => {
         ))}
       </div>
 
-      {/* Auto-play Progress Bar */}
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
         <div
           className="h-full bg-white transition-all duration-100"
@@ -236,7 +297,6 @@ const HeroCarousel = () => {
         />
       </div>
 
-      {/* Auto-play Status Indicator */}
       <div className="absolute top-2 md:top-4 right-2 md:right-4 z-20 flex items-center space-x-1 md:space-x-2 bg-black/30 rounded-full px-2 md:px-3 py-1">
         <div
           className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ${
@@ -249,8 +309,8 @@ const HeroCarousel = () => {
         </span>
       </div>
 
-      {/* Mobile-responsive height container */}
-      <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]" />
+      {/* ✅ Aspect Ratio Box (Maintains 16:9) */}
+      <div className="w-full aspect-[16/9]" />
     </div>
   );
 };
