@@ -20,7 +20,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-4">
           <div>
             <h3 className="mb-4 text-white lg font-semibold primary">
-              {t("gramPanchayat")} {t("gidhadi")}
+              {t("Gidhadi")} {t("Gram Connect")}
             </h3>
             <p className="mb-4 text-white sm ">
               {t("footerDescription")}
