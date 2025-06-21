@@ -10,8 +10,8 @@ import AnnouncementMarquee from "@/components/home/announcement-marquee"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Gram Panchayat Gidhadi",
-  description: "Official website of Gram Panchayat Gidhadi",
+  title: "Gidhadi Gram Connect",
+  description: "Gidhadi Gram Connect is a Public Information Awareness Website",
     generator: 'v0.dev'
 }
 

@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react"
+import { createContext, useContext, useState, type ReactNode } from "react";
 
-type Language = "en" | "hi" | "mr"
+type Language = "en" | "hi" | "mr";
 
 type Translations = {
   [key: string]: {
-    en: string
-    hi: string
-    mr: string
-  }
-}
+    en: string;
+    hi: string;
+    mr: string;
+  };
+};
 
 const translations: Translations = {
   // Navigation & Header
@@ -62,9 +62,9 @@ const translations: Translations = {
 
   // Hero Section
   welcomeToGidhadi: {
-    en: "Welcome to Gram Panchayat Gidhadi",
-    hi: "ग्राम पंचायत गिधाड़ी में आपका स्वागत है",
-    mr: "ग्रामपंचायत गिधाडी मध्ये आपले स्वागत आहे",
+    en: "Welcome to Gidhadi Gram Connect",
+    hi: "गिधाड़ी ग्राम कनेक्ट में आपका स्वागत है",
+    mr: "गिधाडी ग्राम कनेक्ट मध्ये आपले स्वागत आहे",
   },
   welcomeMessage: {
     en: "Empowering rural governance through transparency, accountability and citizen participation for sustainable development",
@@ -123,9 +123,9 @@ const translations: Translations = {
 
   // Footer
   footerDescription: {
-    en: "Official website of Gram Panchayat Gidhadi. Serving the community with transparency and accountability.",
-    hi: "ग्राम पंचायत गिधाड़ी की आधिकारिक वेबसाइट। पारदर्शिता और जवाबदेही के साथ समुदाय की सेवा करना।",
-    mr: "ग्रामपंचायत गिधाडीची अधिकृत वेबसाइट. पारदर्शकता आणि उत्तरदायित्वासह समुदायाची सेवा करणे.",
+    en: "This website is for public information only. It is not affiliated with the Gram Panchayat or any government website, and we share only publicly available information.",
+    hi: "यह वेबसाइट केवल सार्वजनिक जानकारी के लिए है। इसका ग्राम पंचायत या किसी सरकारी वेबसाइट से कोई संबंध नहीं है, और हम केवल सार्वजनिक रूप से उपलब्ध जानकारी साझा करते हैं।",
+    mr: "ही वेबसाइट केवळ सार्वजनिक माहितीसाठी आहे. याचा ग्रामपंचायत किंवा कोणत्याही सरकारी वेबसाइटशी संबंध नाही आणि आम्ही फक्त सार्वजनिक माहिती शेअर करतो.",
   },
   quickLinks: {
     en: "Quick Links",
@@ -158,9 +158,9 @@ const translations: Translations = {
     mr: "संपर्क करा",
   },
   gramPanchayatAddress: {
-    en: "Gram Panchayat Office, Gidhadi Village, District, State - PIN",
-    hi: "ग्राम पंचायत कार्यालय, गिधाड़ी गांव, जिला, राज्य - पिन",
-    mr: "ग्रामपंचायत कार्यालय, गिधाडी गाव, जिल्हा, राज्य - पिन",
+    en: "Gidhadi Gram Connect, Gidhadi, Gondia, Maharashtra - 441801",
+    hi: "गिधाड़ी ग्राम कनेक्ट, गिधाड़ी, गोंदिया, महाराष्ट्र - ४४१८०१",
+    mr: "गिधाडी ग्राम कनेक्ट, गिधाडी, गोंदिया, महाराष्ट्र - ४४१८०१",
   },
   allRightsReserved: {
     en: "All Rights Reserved",
@@ -539,9 +539,9 @@ const translations: Translations = {
 
   // Announcements Content
   covidVaccination: {
-    en: "COVID-19 Vaccination Drive",
-    hi: "कोविड-19 टीकाकरण अभियान",
-    mr: "कोविड-19 लसीकरण मोहीम",
+    en: "Connecting Gidhadi Village with Information, Updates, and Community Awareness",
+  hi: "गिधाड़ी गांव को जानकारी, अपडेट और सामुदायिक जागरूकता से जोड़ने का प्रयास",
+  mr: "गिधाडी गावाला माहिती, अद्यतने आणि सामुदायिक जनजागृतीने जोडण्याचा प्रयत्न"
   },
   covidVaccinationDesc: {
     en: "COVID-19 vaccination drive at GP office on 20th June. All residents 18+ eligible.",
@@ -614,35 +614,40 @@ const translations: Translations = {
     hi: "लॉगिन सफल",
     mr: "लॉगिन यशस्वी",
   },
-  
-}
+};
 
 type LanguageContextType = {
-  language: Language
-  setLanguage: (lang: Language) => void
-  t: (key: string) => string
-}
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: (key: string) => string;
+};
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
+const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined
+);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>("en")
+  const [language, setLanguage] = useState<Language>("en");
 
   const t = (key: string): string => {
     if (!translations[key]) {
-      console.warn(`Translation key "${key}" not found`)
-      return key
+      console.warn(`Translation key "${key}" not found`);
+      return key;
     }
-    return translations[key][language]
-  }
+    return translations[key][language];
+  };
 
-  return <LanguageContext.Provider value={{ language, setLanguage, t }}>{children}</LanguageContext.Provider>
-}
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};
 
 export const useLanguage = () => {
-  const context = useContext(LanguageContext)
+  const context = useContext(LanguageContext);
   if (context === undefined) {
-    throw new Error("useLanguage must be used within a LanguageProvider")
+    throw new Error("useLanguage must be used within a LanguageProvider");
   }
-  return context
-}
+  return context;
+};

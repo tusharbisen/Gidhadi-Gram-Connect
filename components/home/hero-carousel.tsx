@@ -188,7 +188,7 @@ const HeroCarousel = () => {
   const nextSlide = () => {
     setIsAutoPlaying(false);
     setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
-    setTimeout(() => setIsAutoPlaying(true), 10000);
+    setTimeout(() => setIsAutoPlaying(true), 25000);
   };
 
   const prevSlide = () => {
@@ -196,13 +196,13 @@ const HeroCarousel = () => {
     setCurrentSlide(
       (prev) => (prev - 1 + carouselSlides.length) % carouselSlides.length
     );
-    setTimeout(() => setIsAutoPlaying(true), 10000);
+    setTimeout(() => setIsAutoPlaying(true), 15000);
   };
 
   const goToSlide = (index: number) => {
     setIsAutoPlaying(false);
     setCurrentSlide(index);
-    setTimeout(() => setIsAutoPlaying(true), 10000);
+    setTimeout(() => setIsAutoPlaying(true), 15000);
   };
 
   return (
@@ -210,14 +210,14 @@ const HeroCarousel = () => {
       {carouselSlides.map((slide, slideIndex) => (
         <div
           key={slide.id}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
+          className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
             slideIndex === currentSlide ? "opacity-100" : "opacity-0"
           }`}
         >
           {slide.images.map((image, imageIndex) => (
             <div
               key={imageIndex}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
+              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
                 slideIndex === currentSlide && imageIndex === currentImageIndex
                   ? "opacity-100"
                   : "opacity-0"
@@ -239,7 +239,7 @@ const HeroCarousel = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white border-white/20 h-8 w-8 md:h-10 md:w-10"
+        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-blue-400 text-white border-white/20 h-8 w-8 md:h-10 md:w-10"
         onClick={prevSlide}
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
@@ -251,7 +251,7 @@ const HeroCarousel = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white border-white/20 h-8 w-8 md:h-10 md:w-10"
+        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-blue-400 text-white border-white/20 h-8 w-8 md:h-10 md:w-10"
         onClick={nextSlide}
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
