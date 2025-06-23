@@ -62,7 +62,7 @@ const Header = () => {
               />
             </div>
             <div>
-              <h1 className="text-lg md:text-xl font-bold text-gov-blue leading-tight">Gidhadi Gram Connect</h1>
+              <h1 className="text-lg md:text-xl font-bold text-sky-700 leading-tight">Gidhadi Gram Connect</h1>
               <p className="text-xs text-gray-600 hidden sm:block">{t("districtState")}</p>
             </div>
           </Link>
@@ -74,7 +74,7 @@ const Header = () => {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="px-3 py-2 text-sm font-medium text-gray-700 rounded-md transition-colors hover:text-gov-blue hover:bg-blue-50"
+                    className="px-3 py-2 text-sm font-medium text-gray-700 rounded-md transition-colors hover:text-sky-700 hover:bg-blue-50"
                   >
                     {item.name}
                   </Link>
@@ -94,8 +94,8 @@ const Header = () => {
                   onClick={() => setLanguage(lang.code as "en" | "hi" | "mr")}
                   className={`h-8 px-2 md:px-3 text-xs md:text-sm font-medium transition-all ${
                     language === lang.code
-                      ? "bg-gov-blue text-white shadow-sm"
-                      : "text-gray-600 hover:text-gov-blue hover:bg-white"
+                      ? "bg-sky-700 text-white shadow-sm"
+                      : "text-gray-600 hover:text-sky-700 hover:bg-white"
                   }`}
                 >
                   <span className="hidden sm:inline">{lang.name}</span>
@@ -108,7 +108,7 @@ const Header = () => {
               <Button
                 variant="outline"
                 size="sm"
-                className="hidden md:inline-flex border-gov-blue text-gov-blue hover:bg-gov-blue hover:text-white"
+                className="hidden md:inline-flex border-sky-700 text-sky-700 hover:bg-sky-700 hover:text-white"
               >
                 {t("adminLogin")}
               </Button>
@@ -140,8 +140,8 @@ const Header = () => {
                     onClick={() => setLanguage(lang.code as "en" | "hi" | "mr")}
                     className={`flex-1 text-xs ${
                       language === lang.code
-                        ? "bg-gov-blue text-white"
-                        : "border-gov-blue text-gov-blue hover:bg-gov-blue hover:text-white"
+                        ? "bg-sky-700 text-white"
+                        : "border-sky-700 text-sky-700 hover:bg-sky-700 hover:text-white"
                     }`}
                   >
                     {lang.name}
@@ -154,7 +154,7 @@ const Header = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-gov-blue"
+                className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-sky-700"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
@@ -162,7 +162,7 @@ const Header = () => {
             ))}
             <Link
               href="/admin"
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-gov-blue"
+              className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-sky-700"
               onClick={() => setIsMenuOpen(false)}
             >
               {t("adminLogin")}
