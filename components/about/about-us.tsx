@@ -1,740 +1,345 @@
-"use client";
-
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-
-import {
-  Target,
-  Eye,
-  Heart,
-  Globe,
-  Smartphone,
-  Code,
-  Palette,
-  Award,
-  Shield,
-  Zap,
-  TrendingUp,
-  Database,
-  Monitor,
-} from "lucide-react";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-
-// Animation variants
-const fadeInUp = {
-  initial: { opacity: 0, y: 60 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: "easeOut" },
-};
-
-const fadeInLeft = {
-  initial: { opacity: 0, x: -60 },
-  animate: { opacity: 1, x: 0 },
-  transition: { duration: 0.6, ease: "easeOut" },
-};
-
-const fadeInRight = {
-  initial: { opacity: 0, x: 60 },
-  animate: { opacity: 1, x: 0 },
-  transition: { duration: 0.6, ease: "easeOut" },
-};
-
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const scaleIn = {
-  initial: { opacity: 0, scale: 0.8 },
-  animate: { opacity: 1, scale: 1 },
-  transition: { duration: 0.5, ease: "easeOut" },
-};
+ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Users, Target, Heart, Shield, Globe, Phone, Mail, MapPin, Star } from "lucide-react"
+import Image from "next/image"
 
 export default function AboutUs() {
-  const heroRef = useRef(null);
-  const aboutRef = useRef(null);
-  const visionRef = useRef(null);
-  const teamRef = useRef(null);
-  const valuesRef = useRef(null);
-
- const heroInView = useInView(heroRef, { once: true });
-const aboutInView = useInView(aboutRef, { once: true });
-const visionInView = useInView(visionRef, { once: true });
-const teamInView = useInView(teamRef, { once: true });
-const valuesInView = useInView(valuesRef, { once: true });
-
-
-
   const teamMembers = [
     {
-      name: "Er. Tejas Bisen",
-      role: "Full Stack Developer & Software Engineer",
-      description:
-        "Ensures seamless functionality across both backend and frontend, bringing technical depth to the project.",
-      icon: Smartphone,
-      image: "/tejas.jpg",
-      skills: [
-        "React/Next.js",
-        "JAVA/SPRING BOOT",
-        "GO Programming",
-        "Responsive Design",
-      ],
+      name: "राहुल शर्मा (Rahul Sharma)",
+      role: "Project Coordinator",
+      designation: "Village Development Officer",
+      responsibility: "Overall project management and community liaison",
+      contact: "+91 98765 43210",
+      skills: ["Leadership", "Community Relations", "Project Management"],
     },
+    {
+      name: "प्रिया पाटील (Priya Patil)",
+      role: "Content Manager",
+      designation: "Digital Content Specialist",
+      responsibility: "Managing village news, events, and information updates",
+      contact: "+91 98765 43211",
+      skills: ["Content Writing", "Social Media", "Photography"],
+    },
+    {
+      name: "अमित कुमार (Amit Kumar)",
+      role: "Technical Support",
+      designation: "IT Support Specialist",
+      responsibility: "Website maintenance and technical assistance",
+      contact: "+91 98765 43212",
+      skills: ["Web Development", "Technical Support", "Database Management"],
+    },
+    {
+      name: "सुनीता देवी (Sunita Devi)",
+      role: "Community Outreach",
+      designation: "Community Relations Coordinator",
+      responsibility: "Connecting with villagers and gathering feedback",
+      contact: "+91 98765 43213",
+      skills: ["Public Speaking", "Community Engagement", "Event Planning"],
+    },
+    {
+      name: "विकास जोशी (Vikas Joshi)",
+      role: "Documentation Lead",
+      designation: "Records & Documentation Manager",
+      responsibility: "Maintaining records and important documents",
+      contact: "+91 98765 43214",
+      skills: ["Documentation", "Data Management", "Administrative Support"],
+    },
+  ]
 
-    {
-      name: " Er.Tushar Bisen  ",
-      role: "Frontend Developer & Freelancer",
-      description:
-        "Lead developer who built the Gidhadi Gram Connect platform. Expert in creating scalable information systems and public service portals for rural communities.",
-      icon: Code,
-      image: "/tushar.jpg",
-      skills: [
-        "Fronted Development",
-        "Database Design",
-        "API Development",
-        "Next.js/Typescript/Tailwind",
-      ],
-    },
-    {
-      name: "Pankaj Meshram ",
-      role: "Platform UI/UX Designer",
-      description:
-        "Creative designer who developed the user-friendly interface for Gidhadi Gram Connect. Specializes in accessible design for rural information platforms and government service portals.",
-      icon: Palette,
-      image: "/pnk.jpg",
-      skills: [
-        "Web Design",
-        "User Experience",
-        "Information Architecture",
-        "Accessibility Design",
-      ],
-    },
-  ];
-
-  const platformFeatures = [
-    {
-      number: "24/7",
-      label: "Information Access",
-      description: "Round-the-clock platform availability",
-    },
-    {
-      number: "50+",
-      label: "Service Information",
-      description: "Comprehensive service details provided",
-    },
-    {
-      number: "100%",
-      label: "Mobile Responsive",
-      description: "Optimized for all devices",
-    },
-    {
-      number: "Free",
-      label: "Public Access",
-      description: "No cost information platform",
-    },
-  ];
-
-  const informationServices = [
-    {
-      title: "Government Services Info",
-      description:
-        "Detailed information about available certificates and application processes",
-      icon: Award,
-    },
-    {
-      title: "Scheme Information",
-      description:
-        "Comprehensive details about government welfare schemes and eligibility",
-      icon: Shield,
-    },
-    {
-      title: "Contact Information",
-      description:
-        "Official contact details and office hours for citizen convenience",
-      icon: Zap,
-    },
-    {
-      title: "Process Guidance",
-      description:
-        "Step-by-step guides for various government procedures and applications",
-      icon: TrendingUp,
-    },
-  ];
+  const missionPoints = [
+    "Provide easy access to important village information and government schemes",
+    "Create a digital platform for villagers to stay connected and informed",
+    "Promote transparency in local governance and community activities",
+    "Support local businesses and farmers through digital visibility",
+    "Bridge the digital divide by making technology accessible to all villagers",
+  ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-50">
-      {/* Hero Section - Updated for Platform */}
-      <motion.section
-        ref={heroRef}
-        className="relative py-12 md:py-20 lg:py-24 overflow-hidden"
-        initial="initial"
-        animate={heroInView ? "animate" : "initial"}
-        variants={staggerContainer}
-      >
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center space-y-6">
-            <motion.div variants={fadeInUp}>
-              <Badge
-                variant="outline"
-                className="bg-blue-100 text-blue-800 border-blue-300"
-              >
-                Gidhadi Gram Connect | Public Information Platform | Community
-                Resource
-              </Badge>
-            </motion.div>
-
-            <motion.h1
-              className="text-3xl md:text-4xl lg:text-6xl font-bold text-gray-900"
-              variants={fadeInUp}
-            >
-              About <span className="text-blue-600">Gidhadi Gram Connect</span>
-              <br />
-              <span className="text-2xl md:text-3xl lg:text-4xl text-gray-600 font-normal">
-                Your Gateway to Gidhadi Gram Panchayat Information
-              </span>
-            </motion.h1>
-
-            <motion.p
-              className="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed"
-              variants={fadeInUp}
-            >
-              An <strong>independent information platform</strong> dedicated to
-              providing comprehensive public information about{" "}
-              <strong>Gidhadi Gram Panchayat services</strong>, government
-              schemes, and procedures. Bridging the gap between citizens and
-              government information through accessible digital resources.
-            </motion.p>
-
-            <motion.div
-              className="flex flex-wrap justify-center gap-4 pt-4"
-              variants={fadeInUp}
-            >
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-                  <Database className="mr-2 h-5 w-5" />
-                  Explore Information
-                </Button>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-blue-600 text-blue-600 hover:bg-blue-50"
-                >
-                  Contact Platform Team
-                </Button>
-              </motion.div>
-            </motion.div>
+    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-7xl">
+        {/* Logo and Header */}
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="flex justify-center mb-6">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-sky-100 rounded-full flex items-center justify-center border-4 border-sky-200 shadow-lg">
+              <Image
+                src="/logo.png"
+                alt="Gidhadi Gram Connect Logo"
+                width={200}
+                height={200}
+                className=""
+              />
+            </div>
           </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-800 mb-4 px-2">
+            About Gidhadi Gram Connect
+          </h1>
+          <div className="w-16 sm:w-24 h-1 bg-sky-600 mx-auto rounded-full"></div>
         </div>
-      </motion.section>
 
-      {/* About Platform Section */}
-      <motion.section
-        ref={aboutRef}
-        className="py-12 md:py-16 bg-white"
-        initial="initial"
-        animate={aboutInView ? "animate" : "initial"}
-        variants={staggerContainer}
-      >
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <motion.div className="space-y-6" variants={fadeInLeft}>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
-                Welcome to Gidhadi Gram Connect
-                <span className="block text-lg font-normal text-blue-600 mt-2">
-                  Independent Information Platform | Community Resource | Public
-                  Service Portal
-                </span>
-              </h2>
+        {/* Introduction Section */}
+        <Card className="mb-6 sm:mb-8 border-sky-200 shadow-lg">
+          <CardHeader className="bg-sky-100 p-4 sm:p-6">
+            <CardTitle className="flex flex-col sm:flex-row items-center gap-2 text-xl sm:text-2xl text-sky-800">
+              <Globe className="h-6 w-6 flex-shrink-0" />
+              <span className="text-center sm:text-left">Welcome to Our Digital Village</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-4 sm:p-6">
+            <p className="text-base sm:text-lg leading-relaxed text-gray-700 mb-4">
+              <strong>Gidhadi Gram Connect</strong> is a community-driven digital platform created by and for the people
+              of Gidhadi village. Our website serves as a bridge between traditional village life and modern digital
+              convenience, making important information easily accessible to every villager.
+            </p>
+            <p className="text-base sm:text-lg leading-relaxed text-gray-700">
+              Whether you're looking for government scheme updates, local news, community events, or want to connect
+              with fellow villagers, this platform is designed to serve our entire community with simplicity and trust
+              at its core.
+            </p>
+          </CardContent>
+        </Card>
 
-              <p className="text-gray-600 text-lg leading-relaxed">
-                <strong>Gidhadi Gram Connect</strong> is an{" "}
-                <strong>independent digital platform</strong> created to serve
-                as a comprehensive information resource about Gidhadi Gram
-                Panchayat. Our mission is to make government information more
-                accessible to citizens through a user-friendly,
-                mobile-responsive platform.
+        {/* Vision and Mission */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
+          {/* Vision */}
+          <Card className="border-sky-200 shadow-lg">
+            <CardHeader className="bg-sky-100 p-4 sm:p-6">
+              <CardTitle className="flex flex-col sm:flex-row items-center gap-2 text-lg sm:text-xl text-sky-800">
+                <Target className="h-5 w-5 flex-shrink-0" />
+                <span>Our Vision</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6">
+              <p className="text-base sm:text-lg leading-relaxed text-gray-700 italic">
+                "To create a digitally empowered Gidhadi village where every resident has easy access to information,
+                opportunities, and community connections, fostering growth, transparency, and unity in our beloved
+                village."
               </p>
+            </CardContent>
+          </Card>
 
-              <p className="text-gray-600 leading-relaxed">
-                This platform provides detailed information about{" "}
-                <strong>government services</strong>, application procedures,
-                welfare schemes, contact details, and office hours. We aim to
-                bridge the information gap between citizens and local government
-                services, promoting transparency and accessibility in rural
-                governance.
-              </p>
-
-              <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-400">
-                <h3 className="font-bold text-gray-900 mb-3">
-                  Platform Features:
-                </h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li>
-                    • <strong>Service Information Hub</strong> - Comprehensive
-                    details about all government services
-                  </li>
-                  <li>
-                    • <strong>Scheme Database</strong> - Complete information
-                    about welfare programs and eligibility
-                  </li>
-                  <li>
-                    • <strong>Process Guides</strong> - Step-by-step
-                    instructions for various procedures
-                  </li>
-                  <li>
-                    • <strong>Contact Directory</strong> - Official contact
-                    information and office hours
-                  </li>
-                </ul>
-              </div>
-
-              <motion.div
-                className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4"
-                variants={staggerContainer}
-              >
-                {platformFeatures.map((feature, index) => (
-                  <motion.div
-                    key={index}
-                    className="text-center p-4 bg-gradient-to-br from-blue-50 to-sky-50 rounded-lg"
-                    variants={scaleIn}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                  >
-                    <div className="text-2xl md:text-3xl font-bold text-blue-600">
-                      {feature.number}
-                    </div>
-                    <div className="text-sm font-medium text-gray-800">
-                      {feature.label}
-                    </div>
-                    <div className="text-xs text-gray-600 mt-1">
-                      {feature.description}
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
-
-            <motion.div className="relative" variants={fadeInRight}>
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Image
-                  src="/placeholder.svg?height=400&width=600"
-                  alt="Gidhadi Gram Connect - Digital Information Platform Interface"
-                  width={600}
-                  height={400}
-                  className="rounded-lg shadow-lg w-full"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
-              </motion.div>
-
-              {/* Floating Platform Info Cards */}
-              <motion.div
-                className="absolute -bottom-6 -left-6 bg-white p-4 rounded-lg shadow-lg"
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  aboutInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                }
-                transition={{ delay: 0.5, duration: 0.6 }}
-              >
-                <div className="text-sm font-bold text-blue-600">
-                  Information Platform
-                </div>
-                <div className="text-xs text-gray-600">Community Resource</div>
-              </motion.div>
-
-              <motion.div
-                className="absolute -top-6 -right-6 bg-white p-4 rounded-lg shadow-lg"
-                initial={{ opacity: 0, y: -20 }}
-                animate={
-                  aboutInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }
-                }
-                transition={{ delay: 0.7, duration: 0.6 }}
-              >
-                <div className="text-sm font-bold text-green-600">
-                  Free Access
-                </div>
-                <div className="text-xs text-gray-600">Public Service</div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Information Services Showcase */}
-      <section className="py-12 md:py-16 bg-gradient-to-r from-blue-600 to-sky-600 text-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
-              Information Services & Resources
-            </h2>
-            <p className="text-blue-100 max-w-2xl mx-auto">
-              Comprehensive information resources designed to help citizens
-              understand and access government services
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid grid-cols-1 lg:grid-cols-4 gap-6"
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-          >
-            {informationServices.map((service, index) => (
-              <motion.div
-                key={index}
-                className="bg-white/10 backdrop-blur-sm p-6 rounded-lg text-center"
-                variants={scaleIn}
-                whileHover={{ scale: 1.05, y: -10 }}
-                transition={{ duration: 0.3 }}
-              >
-                <service.icon className="h-12 w-12 mx-auto mb-4 text-blue-200" />
-                <h3 className="font-bold mb-2">{service.title}</h3>
-                <p className="text-blue-100 text-sm">{service.description}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Vision & Mission Section - Platform Focused */}
-      <motion.section
-        ref={visionRef}
-        className="py-12 md:py-16 bg-gray-50"
-        initial="initial"
-        animate={visionInView ? "animate" : "initial"}
-        variants={staggerContainer}
-      >
-        <div className="container mx-auto px-4 md:px-6">
-          <motion.div className="text-center mb-12" variants={fadeInUp}>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Our Platform Vision & Mission
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Committed to creating an accessible bridge between citizens and
-              government information through innovative digital solutions.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 gap-8 lg:gap-12">
-            {/* Vision Card */}
-            <motion.div variants={fadeInLeft}>
-              <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
-                <CardContent className="p-6 md:p-8">
-                  <motion.div
-                    className="flex items-center mb-6"
-                    whileHover={{ x: 10 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="bg-blue-100 p-3 rounded-full mr-4">
-                      <Eye className="h-6 w-6 text-blue-600" />
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900">
-                      Our Vision
-                    </h3>
-                  </motion.div>
-                  <p className="text-gray-600 leading-relaxed mb-4">
-                    To become the{" "}
-                    <strong>
-                      most trusted and comprehensive information platform
-                    </strong>{" "}
-                    for Gidhadi Gram Panchayat, ensuring every citizen has easy
-                    access to accurate, up-to-date information about government
-                    services and procedures.
-                  </p>
-                  <p className="text-gray-600 leading-relaxed">
-                    We envision a digitally informed community where{" "}
-                    <strong>information barriers are eliminated</strong>,
-                    enabling citizens to easily understand and access the
-                    government services they need.
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Mission Card */}
-            <motion.div variants={fadeInRight}>
-              <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
-                <CardContent className="p-6 md:p-8">
-                  <motion.div
-                    className="flex items-center mb-6"
-                    whileHover={{ x: 10 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="bg-green-100 p-3 rounded-full mr-4">
-                      <Target className="h-6 w-6 text-green-600" />
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900">
-                      Our Mission
-                    </h3>
-                  </motion.div>
-                  <div className="space-y-3 text-gray-600">
-                    <p className="leading-relaxed">
-                      • Provide{" "}
-                      <strong>accurate, comprehensive information</strong> about
-                      all Gram Panchayat services and procedures
-                    </p>
-                    <p className="leading-relaxed">
-                      • Create <strong>user-friendly digital resources</strong>{" "}
-                      accessible to citizens of all technical backgrounds
-                    </p>
-                    <p className="leading-relaxed">
-                      • Maintain <strong>up-to-date information</strong> about
-                      government schemes, eligibility, and application processes
-                    </p>
-                    <p className="leading-relaxed">
-                      • Bridge the <strong>digital divide</strong> by making
-                      government information accessible on all devices
-                    </p>
-                    <p className="leading-relaxed">
-                      • Support <strong>informed citizenship</strong> through
-                      transparent access to public information
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Team Section - Platform Development Team */}
-      <motion.section
-        ref={teamRef}
-        className="py-12 md:py-16 bg-white"
-        initial="initial"
-        animate={teamInView ? "animate" : "initial"}
-        variants={staggerContainer}
-      >
-        <div className="container mx-auto px-4 md:px-6">
-          <motion.div className="text-center mb-12" variants={fadeInUp}>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Meet Our{" "}
-              <span className="text-blue-600">Platform Development Team</span>
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              The dedicated developers and designers who created{" "}
-              <strong>Gidhadi Gram Connect</strong> to serve as your trusted
-              information resource. Independent professionals committed to
-              improving access to public information.
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8"
-            variants={staggerContainer}
-          >
-            {teamMembers.map((member, index) => (
-              <motion.div
-                key={index}
-                variants={scaleIn}
-                whileHover={{ y: -10, scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 h-full">
-                  <CardContent className="p-6 text-center">
-                    <motion.div
-                      className="relative mb-6"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <Image
-                        src={member.image || "/placeholder.svg"}
-                        alt={`${member.name} - ${member.role} at Gidhadi Gram Connect`}
-                        width={120}
-                        height={120}
-                        className="rounded-full mx-auto border-4 border-blue-100"
-                      />
-                      <motion.div
-                        className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-blue-600 p-2 rounded-full"
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.5 }}
-                      >
-                        <member.icon className="h-4 w-4 text-white" />
-                      </motion.div>
-                    </motion.div>
-
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      {member.name}
-                    </h3>
+          {/* Mission */}
+          <Card className="border-sky-300 shadow-lg">
+            <CardHeader className="bg-sky-200 p-4 sm:p-6">
+              <CardTitle className="flex flex-col sm:flex-row items-center gap-2 text-lg sm:text-xl text-sky-800">
+                <Heart className="h-5 w-5 flex-shrink-0" />
+                <span>Our Mission</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6">
+              <ul className="space-y-3">
+                {missionPoints.map((point, index) => (
+                  <li key={index} className="flex items-start gap-2 sm:gap-3">
                     <Badge
-                      variant="secondary"
-                      className="mb-4 bg-blue-100 text-blue-800"
+                      variant="outline"
+                      className="mt-1 text-xs px-2 py-1 bg-sky-50 text-sky-700 border-sky-300 flex-shrink-0"
                     >
-                      {member.role}
+                      {index + 1}
                     </Badge>
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                      {member.description}
-                    </p>
+                    <span className="text-sm sm:text-base text-gray-700 leading-relaxed">{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
 
-                    <div className="flex flex-wrap gap-2 justify-center">
-                      {member.skills.map((skill, skillIndex) => (
-                        <motion.span
-                          key={skillIndex}
-                          className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full"
-                          whileHover={{ scale: 1.1 }}
-                        >
-                          {skill}
-                        </motion.span>
-                      ))}
+        {/* Team Section */}
+        <Card className="mb-6 sm:mb-8 border-sky-200 shadow-lg">
+          <CardHeader className="bg-sky-100 p-4 sm:p-6">
+            <CardTitle className="flex flex-col sm:flex-row items-center gap-2 text-xl sm:text-2xl text-sky-800">
+              <Users className="h-6 w-6 flex-shrink-0" />
+              <span>Our Dedicated Team</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-4 sm:p-6">
+            <p className="text-gray-700 mb-6 text-center text-sm sm:text-base">
+              Meet the passionate volunteers who work tirelessly to keep our village connected and informed.
+            </p>
+
+            {/* Team Members Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+              {teamMembers.map((member, index) => (
+                <Card
+                  key={index}
+                  className="border-sky-200 shadow-md hover:shadow-lg transition-shadow duration-300 bg-gradient-to-br from-white to-sky-50"
+                >
+                  <CardContent className="p-4 sm:p-6">
+                    <div className="space-y-4">
+                      {/* Profile Image and Basic Info */}
+                      <div className="flex flex-col items-center text-center space-y-3">
+                        <div className="relative">
+                          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-4 border-sky-200 shadow-lg bg-sky-100">
+                            <Image
+                              src={`/placeholder.svg?height=96&width=96&text=${member.name.split(" ")[0]}`}
+                              alt={`${member.name} profile picture`}
+                              width={96}
+                              height={96}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-sky-500 rounded-full border-2 border-white flex items-center justify-center">
+                            <Star className="h-3 w-3 text-white" />
+                          </div>
+                        </div>
+
+                        <div className="space-y-1">
+                          <h3 className="font-bold text-gray-800 text-sm sm:text-base leading-tight">{member.name}</h3>
+                          <Badge variant="secondary" className="bg-sky-100 text-sky-800 text-xs">
+                            {member.role}
+                          </Badge>
+                        </div>
+                      </div>
+
+                      {/* Designation */}
+                      <div className="bg-sky-50 rounded-lg p-3 border border-sky-100">
+                        <div className="text-center">
+                          <span className="text-xs font-medium text-sky-600 uppercase tracking-wide block mb-1">
+                            Designation
+                          </span>
+                          <p className="text-sm font-medium text-gray-800">{member.designation}</p>
+                        </div>
+                      </div>
+
+                      {/* Responsibility */}
+                      <div className="space-y-2">
+                        <span className="text-xs font-medium text-gray-500 uppercase tracking-wide flex items-center gap-1">
+                          <Target className="h-3 w-3" />
+                          Responsibility
+                        </span>
+                        <p className="text-sm text-gray-700 leading-relaxed bg-gray-50 p-3 rounded-lg border">
+                          {member.responsibility}
+                        </p>
+                      </div>
+
+                      {/* Skills */}
+                      <div className="space-y-2">
+                        <span className="text-xs font-medium text-gray-500 uppercase tracking-wide flex items-center gap-1">
+                          <Star className="h-3 w-3" />
+                          Skills
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {member.skills.map((skill, skillIndex) => (
+                            <Badge
+                              key={skillIndex}
+                              variant="outline"
+                              className="text-xs bg-sky-50 text-sky-700 border-sky-300 hover:bg-sky-100 transition-colors"
+                            >
+                              {skill}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Contact */}
+                      <div className="pt-3 border-t border-sky-100">
+                        <div className="flex items-center justify-center gap-2 text-sm text-gray-600 bg-sky-50 p-3 rounded-lg">
+                          <Phone className="h-4 w-4 text-sky-600 flex-shrink-0" />
+                          <span className="font-medium">{member.contact}</span>
+                        </div>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
+              ))}
+            </div>
 
-      {/* Values Section - Platform Values */}
-      <motion.section
-        ref={valuesRef}
-        className="py-12 md:py-16 bg-gradient-to-r from-blue-500 to-sky-500 text-white overflow-hidden"
-        initial="initial"
-        animate={valuesInView ? "animate" : "initial"}
-        variants={staggerContainer}
-      >
-        <div className="container mx-auto px-4 md:px-6">
-          <motion.div className="text-center mb-12" variants={fadeInUp}>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
-              Our Platform Values & Principles
-            </h2>
-            <p className="text-blue-100 max-w-2xl mx-auto">
-              The core principles that guide our commitment to providing
-              reliable, accessible public information.
-            </p>
-          </motion.div>
+            {/* Team Stats */}
+            <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="text-center p-4 bg-sky-50 rounded-lg border border-sky-100">
+                <div className="text-2xl font-bold text-sky-600">{teamMembers.length}</div>
+                <div className="text-xs text-gray-600 uppercase tracking-wide">Team Members</div>
+              </div>
+              <div className="text-center p-4 bg-sky-50 rounded-lg border border-sky-100">
+                <div className="text-2xl font-bold text-sky-600">24/7</div>
+                <div className="text-xs text-gray-600 uppercase tracking-wide">Support</div>
+              </div>
+              <div className="text-center p-4 bg-sky-50 rounded-lg border border-sky-100">
+                <div className="text-2xl font-bold text-sky-600">100%</div>
+                <div className="text-xs text-gray-600 uppercase tracking-wide">Dedicated</div>
+              </div>
+              <div className="text-center p-4 bg-sky-50 rounded-lg border border-sky-100">
+                <div className="text-2xl font-bold text-sky-600">∞</div>
+                <div className="text-xs text-gray-600 uppercase tracking-wide">Community Love</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-          <motion.div
-            className="grid grid-cols-1 lg:grid-cols-4 gap-6"
-            variants={staggerContainer}
-          >
-            {[
-              {
-                icon: Heart,
-                title: "Public Service",
-                description:
-                  "Dedicated to serving the community by providing free, accessible information about government services.",
-              },
-              {
-                icon: Monitor,
-                title: "Transparency",
-                description:
-                  "Clear about our role as an independent platform and our commitment to accurate information sharing.",
-              },
-              {
-                icon: Globe,
-                title: "Accessibility",
-                description:
-                  "Ensuring our platform works for everyone, regardless of technical expertise or device limitations.",
-              },
-              {
-                icon: Target,
-                title: "Accuracy",
-                description:
-                  "Committed to providing the most current and accurate information available from official sources.",
-              },
-            ].map((value, index) => (
-              <motion.div
-                key={index}
-                className="text-center"
-                variants={scaleIn}
-                whileHover={{ scale: 1.05, y: -10 }}
-                transition={{ duration: 0.3 }}
-              >
-                <motion.div
-                  className="bg-white/10 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <value.icon className="h-8 w-8" />
-                </motion.div>
-                <h3 className="text-lg font-bold mb-2">{value.title}</h3>
-                <p className="text-blue-100 text-sm leading-relaxed">
-                  {value.description}
+        {/* Contact Information */}
+        <Card className="mb-6 sm:mb-8 border-sky-200 shadow-lg">
+          <CardHeader className="bg-sky-100 p-4 sm:p-6">
+            <CardTitle className="flex flex-col sm:flex-row items-center gap-2 text-lg sm:text-xl text-sky-800">
+              <Mail className="h-5 w-5 flex-shrink-0" />
+              <span>Get in Touch</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-4 sm:p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+              <div className="flex flex-col items-center gap-3 p-4 bg-sky-50 rounded-lg">
+                <MapPin className="h-8 w-8 text-sky-600" />
+                <h3 className="font-semibold text-gray-800">Visit Us</h3>
+                <p className="text-gray-600 text-sm">
+                  Village Gidhadi
+                  <br />
+                  District Office
                 </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
+              </div>
+              <div className="flex flex-col items-center gap-3 p-4 bg-sky-50 rounded-lg">
+                <Phone className="h-8 w-8 text-sky-600" />
+                <h3 className="font-semibold text-gray-800">Call Us</h3>
+                <p className="text-gray-600 text-sm">
+                  +91 98765 43210
+                  <br />
+                  Mon-Sat: 9AM-6PM
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-3 p-4 bg-sky-50 rounded-lg sm:col-span-2 lg:col-span-1">
+                <Mail className="h-8 w-8 text-sky-600" />
+                <h3 className="font-semibold text-gray-800">Email Us</h3>
+                <p className="text-gray-600 text-sm">
+                  info@gidhadigramconnect.in
+                  <br />
+                  We reply within 24 hours
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-      {/* Contact CTA Section - Platform Contact */}
-      <motion.section
-        className="py-12 md:py-16 bg-gray-900 text-white"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="container mx-auto px-4 md:px-6 text-center">
-          <motion.h2
-            className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Connect with Our Platform Team
-          </motion.h2>
-          <motion.p
-            className="text-gray-300 max-w-2xl mx-auto mb-8"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Have questions about our <strong>information platform</strong>, need
-            help finding specific information, or want to suggest improvements?
-            Our team is here to help make government information more
-            accessible.
-          </motion.p>
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-                Contact Platform Team
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-gray-900"
-              >
-                Browse Information
-              </Button>
-            </motion.div>
-          </motion.div>
+        {/* Disclaimer */}
+        <Card className="border-amber-200 shadow-lg mb-6 sm:mb-8">
+          <CardHeader className="bg-amber-50 p-4 sm:p-6">
+            <CardTitle className="flex flex-col sm:flex-row items-center gap-2 text-lg sm:text-xl text-amber-800">
+              <Shield className="h-5 w-5 flex-shrink-0" />
+              <span>Important Disclaimer</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-4 sm:p-6">
+            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+              <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
+                <strong>Please Note:</strong> Gidhadi Gram Connect is an <strong>unofficial community website</strong>{" "}
+                created for public awareness and community benefit. This platform is not affiliated with any government
+                body or official administrative office. All information provided here is for informational purposes only
+                and should be verified with official sources when necessary.
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-3 text-sm sm:text-base">
+                Our goal is to serve our community with accurate and helpful information. For official government
+                services and documentation, please visit the appropriate government offices or official websites.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Footer Message */}
+        <div className="text-center p-4 sm:p-6 bg-sky-50 rounded-lg border border-sky-200">
+          <h3 className="text-lg sm:text-xl font-semibold text-sky-800 mb-2">Together We Grow</h3>
+          <p className="text-gray-700 text-sm sm:text-base">
+            Thank you for being part of the Gidhadi Gram Connect community. Your participation and feedback help us
+            serve our village better every day.
+          </p>
         </div>
-      </motion.section>
+      </div>
     </div>
-  );
+  )
 }
