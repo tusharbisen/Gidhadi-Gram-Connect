@@ -18,9 +18,9 @@ const announcements = [
     date: "2023-06-20",
     urgent: false,
     content: {
-      en: "COVID-19 vaccination drive at GP office. All residents 18+ eligible. Bring Aadhaar card and previous vaccination certificate.",
-      hi: "जीपी कार्यालय में कोविड-19 टीकाकरण। 18+ सभी निवासी पात्र। आधार कार्ड और पिछला टीकाकरण प्रमाणपत्र लाएं।",
-      mr: "जीपी कार्यालयात कोविड-19 लसीकरण. 18+ सर्व रहिवासी पात्र. आधार कार्ड आणि मागील लसीकरण प्रमाणपत्र आणा.",
+      en: "Welcome to Gidhadi Gram Connect – Your Village, Now Online!",
+      hi: "📢 गिधाड़ी ग्राम कनेक्ट में आपका स्वागत है – अब गांव की जानकारी ऑनलाइन!",
+      mr: "📢 गिधाडी ग्राम कनेक्टमध्ये तुमचं स्वागत आहे – आता गावाची माहिती ऑनलाइन!",
     },
   },
   {

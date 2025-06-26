@@ -1,51 +1,69 @@
- import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Users, Target, Heart, Shield, Globe, Phone, Mail, MapPin, Star } from "lucide-react"
-import Image from "next/image"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Users,
+  Target,
+  Heart,
+  Shield,
+  Globe,
+  Phone,
+  Mail,
+  MapPin,
+  Star,
+} from "lucide-react";
+import Image from "next/image";
 
 export default function AboutUs() {
   const teamMembers = [
     {
-      name: "राहुल शर्मा (Rahul Sharma)",
-      role: "Project Coordinator",
-      designation: "Village Development Officer",
-      responsibility: "Overall project management and community liaison",
-      contact: "+91 98765 43210",
-      skills: ["Leadership", "Community Relations", "Project Management"],
+      name: "तेजस बिसेन (Tejas Bisen)",
+      role: "Project Coordinator & Full Stack Developer",
+      designation: "Software Engineer",
+      responsibility:
+        "Leading project coordination, backend development, and community liaison",
+      contact: "+91 98343 39517",
+      skills: [
+        "Leadership",
+        "Project Management",
+        "React.js",
+        "Java",
+        "Spring Boot",
+        "Go Programming",
+        "API Development",
+        "Database Design",
+      ],
+      image: "/tejas.jpg",
     },
     {
-      name: "प्रिया पाटील (Priya Patil)",
-      role: "Content Manager",
-      designation: "Digital Content Specialist",
-      responsibility: "Managing village news, events, and information updates",
-      contact: "+91 98765 43211",
-      skills: ["Content Writing", "Social Media", "Photography"],
+      name: "तुषार बिसेन (Tushar Bisen)",
+      role: "Team Lead & Frontend Developer",
+      designation: "Frontend Developer",
+      responsibility:"Leading the UI development and managing village news, events, and content updates",
+      contact: "+91 91683 83674",
+      skills: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React.js",
+        "Next.js",
+        "Tailwind CSS",
+        "Responsive Design",
+      ],
+      image: "/tushar.jpg",
     },
     {
-      name: "अमित कुमार (Amit Kumar)",
-      role: "Technical Support",
-      designation: "IT Support Specialist",
-      responsibility: "Website maintenance and technical assistance",
-      contact: "+91 98765 43212",
-      skills: ["Web Development", "Technical Support", "Database Management"],
+      name: "पंकज मेश्राम (Pankaj Meshram)",
+      role: "Platform UI Designer",
+      designation: "UI/UX Designer",
+      responsibility:
+        "Designing user-friendly interfaces and enhancing platform aesthetics",
+      contact: "+91 8805920106",
+      skills: ["UI/UX Design", "Figma", "Responsive Design", "User Research"],
+      image: "/pnk.jpg",
     },
-    {
-      name: "सुनीता देवी (Sunita Devi)",
-      role: "Community Outreach",
-      designation: "Community Relations Coordinator",
-      responsibility: "Connecting with villagers and gathering feedback",
-      contact: "+91 98765 43213",
-      skills: ["Public Speaking", "Community Engagement", "Event Planning"],
-    },
-    {
-      name: "विकास जोशी (Vikas Joshi)",
-      role: "Documentation Lead",
-      designation: "Records & Documentation Manager",
-      responsibility: "Maintaining records and important documents",
-      contact: "+91 98765 43214",
-      skills: ["Documentation", "Data Management", "Administrative Support"],
-    },
-  ]
+
+  ];
+  
 
   const missionPoints = [
     "Provide easy access to important village information and government schemes",
@@ -53,7 +71,7 @@ export default function AboutUs() {
     "Promote transparency in local governance and community activities",
     "Support local businesses and farmers through digital visibility",
     "Bridge the digital divide by making technology accessible to all villagers",
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white">
@@ -65,8 +83,8 @@ export default function AboutUs() {
               <Image
                 src="/logo.png"
                 alt="Gidhadi Gram Connect Logo"
-                width={200}
-                height={200}
+                width={250}
+                height={250}
                 className=""
               />
             </div>
@@ -82,19 +100,24 @@ export default function AboutUs() {
           <CardHeader className="bg-sky-100 p-4 sm:p-6">
             <CardTitle className="flex flex-col sm:flex-row items-center gap-2 text-xl sm:text-2xl text-sky-800">
               <Globe className="h-6 w-6 flex-shrink-0" />
-              <span className="text-center sm:text-left">Welcome to Our Digital Village</span>
+              <span className="text-center sm:text-left">
+                Welcome to Our Digital Village
+              </span>
             </CardTitle>
           </CardHeader>
           <CardContent className="p-4 sm:p-6">
             <p className="text-base sm:text-lg leading-relaxed text-gray-700 mb-4">
-              <strong>Gidhadi Gram Connect</strong> is a community-driven digital platform created by and for the people
-              of Gidhadi village. Our website serves as a bridge between traditional village life and modern digital
-              convenience, making important information easily accessible to every villager.
+              <strong>Gidhadi Gram Connect</strong> is a community-driven
+              digital platform created by and for the people of Gidhadi village.
+              Our website serves as a bridge between traditional village life
+              and modern digital convenience, making important information
+              easily accessible to every villager.
             </p>
             <p className="text-base sm:text-lg leading-relaxed text-gray-700">
-              Whether you're looking for government scheme updates, local news, community events, or want to connect
-              with fellow villagers, this platform is designed to serve our entire community with simplicity and trust
-              at its core.
+              Whether you're looking for government scheme updates, local news,
+              community events, or want to connect with fellow villagers, this
+              platform is designed to serve our entire community with simplicity
+              and trust at its core.
             </p>
           </CardContent>
         </Card>
@@ -111,9 +134,10 @@ export default function AboutUs() {
             </CardHeader>
             <CardContent className="p-4 sm:p-6">
               <p className="text-base sm:text-lg leading-relaxed text-gray-700 italic">
-                "To create a digitally empowered Gidhadi village where every resident has easy access to information,
-                opportunities, and community connections, fostering growth, transparency, and unity in our beloved
-                village."
+                "To create a digitally empowered Gidhadi village where every
+                resident has easy access to information, opportunities, and
+                community connections, fostering growth, transparency, and unity
+                in our beloved village."
               </p>
             </CardContent>
           </Card>
@@ -136,7 +160,9 @@ export default function AboutUs() {
                     >
                       {index + 1}
                     </Badge>
-                    <span className="text-sm sm:text-base text-gray-700 leading-relaxed">{point}</span>
+                    <span className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                      {point}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -154,7 +180,8 @@ export default function AboutUs() {
           </CardHeader>
           <CardContent className="p-4 sm:p-6">
             <p className="text-gray-700 mb-6 text-center text-sm sm:text-base">
-              Meet the passionate volunteers who work tirelessly to keep our village connected and informed.
+              Meet the passionate volunteers who work tirelessly to keep our
+              village connected and informed.
             </p>
 
             {/* Team Members Grid */}
@@ -171,7 +198,7 @@ export default function AboutUs() {
                         <div className="relative">
                           <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-4 border-sky-200 shadow-lg bg-sky-100">
                             <Image
-                              src={`/placeholder.svg?height=96&width=96&text=${member.name.split(" ")[0]}`}
+                              src={member.image || `/placeholder.svg?height=96&width=96&text=${member.name.split(" ")[0]}`}
                               alt={`${member.name} profile picture`}
                               width={96}
                               height={96}
@@ -184,12 +211,18 @@ export default function AboutUs() {
                         </div>
 
                         <div className="space-y-1">
-                          <h3 className="font-bold text-gray-800 text-sm sm:text-base leading-tight">{member.name}</h3>
-                          <Badge variant="secondary" className="bg-sky-100 text-sky-800 text-xs">
+                          <h3 className="font-bold text-gray-800 text-sm sm:text-base leading-tight">
+                            {member.name}
+                          </h3>
+                          <Badge
+                            variant="secondary"
+                            className="bg-sky-100 text-sky-800 text-xs"
+                          >
                             {member.role}
                           </Badge>
                         </div>
                       </div>
+
 
                       {/* Designation */}
                       <div className="bg-sky-50 rounded-lg p-3 border border-sky-100">
@@ -197,7 +230,9 @@ export default function AboutUs() {
                           <span className="text-xs font-medium text-sky-600 uppercase tracking-wide block mb-1">
                             Designation
                           </span>
-                          <p className="text-sm font-medium text-gray-800">{member.designation}</p>
+                          <p className="text-sm font-medium text-gray-800">
+                            {member.designation}
+                          </p>
                         </div>
                       </div>
 
@@ -247,20 +282,30 @@ export default function AboutUs() {
             {/* Team Stats */}
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div className="text-center p-4 bg-sky-50 rounded-lg border border-sky-100">
-                <div className="text-2xl font-bold text-sky-600">{teamMembers.length}</div>
-                <div className="text-xs text-gray-600 uppercase tracking-wide">Team Members</div>
+                <div className="text-2xl font-bold text-sky-600">
+                  {teamMembers.length}
+                </div>
+                <div className="text-xs text-gray-600 uppercase tracking-wide">
+                  Team Members
+                </div>
               </div>
               <div className="text-center p-4 bg-sky-50 rounded-lg border border-sky-100">
                 <div className="text-2xl font-bold text-sky-600">24/7</div>
-                <div className="text-xs text-gray-600 uppercase tracking-wide">Support</div>
+                <div className="text-xs text-gray-600 uppercase tracking-wide">
+                  Support
+                </div>
               </div>
               <div className="text-center p-4 bg-sky-50 rounded-lg border border-sky-100">
                 <div className="text-2xl font-bold text-sky-600">100%</div>
-                <div className="text-xs text-gray-600 uppercase tracking-wide">Dedicated</div>
+                <div className="text-xs text-gray-600 uppercase tracking-wide">
+                  Dedicated
+                </div>
               </div>
               <div className="text-center p-4 bg-sky-50 rounded-lg border border-sky-100">
                 <div className="text-2xl font-bold text-sky-600">∞</div>
-                <div className="text-xs text-gray-600 uppercase tracking-wide">Community Love</div>
+                <div className="text-xs text-gray-600 uppercase tracking-wide">
+                  Community Love
+                </div>
               </div>
             </div>
           </CardContent>
@@ -318,14 +363,18 @@ export default function AboutUs() {
           <CardContent className="p-4 sm:p-6">
             <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
               <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
-                <strong>Please Note:</strong> Gidhadi Gram Connect is an <strong>unofficial community website</strong>{" "}
-                created for public awareness and community benefit. This platform is not affiliated with any government
-                body or official administrative office. All information provided here is for informational purposes only
-                and should be verified with official sources when necessary.
+                <strong>Please Note:</strong> Gidhadi Gram Connect is an{" "}
+                <strong>unofficial community website</strong> created for public
+                awareness and community benefit. This platform is not affiliated
+                with any government body or official administrative office. All
+                information provided here is for informational purposes only and
+                should be verified with official sources when necessary.
               </p>
               <p className="text-gray-700 leading-relaxed mt-3 text-sm sm:text-base">
-                Our goal is to serve our community with accurate and helpful information. For official government
-                services and documentation, please visit the appropriate government offices or official websites.
+                Our goal is to serve our community with accurate and helpful
+                information. For official government services and documentation,
+                please visit the appropriate government offices or official
+                websites.
               </p>
             </div>
           </CardContent>
@@ -333,13 +382,16 @@ export default function AboutUs() {
 
         {/* Footer Message */}
         <div className="text-center p-4 sm:p-6 bg-sky-50 rounded-lg border border-sky-200">
-          <h3 className="text-lg sm:text-xl font-semibold text-sky-800 mb-2">Together We Grow</h3>
+          <h3 className="text-lg sm:text-xl font-semibold text-sky-800 mb-2">
+            Together We Grow
+          </h3>
           <p className="text-gray-700 text-sm sm:text-base">
-            Thank you for being part of the Gidhadi Gram Connect community. Your participation and feedback help us
-            serve our village better every day.
+            Thank you for being part of the Gidhadi Gram Connect community. Your
+            participation and feedback help us serve our village better every
+            day.
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }
