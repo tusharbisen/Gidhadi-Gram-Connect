@@ -327,14 +327,14 @@ export default function AboutUs() {
                 <p className="text-gray-600 text-sm">
                   Village Gidhadi
                   <br />
-                  District Office
+                  
                 </p>
               </div>
               <div className="flex flex-col items-center gap-3 p-4 bg-sky-50 rounded-lg">
                 <Phone className="h-8 w-8 text-sky-600" />
                 <h3 className="font-semibold text-gray-800">Call Us</h3>
                 <p className="text-gray-600 text-sm">
-                  +91 98765 43210
+                  +91 9168383674
                   <br />
                   Mon-Sat: 9AM-6PM
                 </p>
@@ -343,7 +343,7 @@ export default function AboutUs() {
                 <Mail className="h-8 w-8 text-sky-600" />
                 <h3 className="font-semibold text-gray-800">Email Us</h3>
                 <p className="text-gray-600 text-sm">
-                  info@gidhadigramconnect.in
+                  gidhadigramconnect@gmail.com
                   <br />
                   We reply within 24 hours
                 </p>

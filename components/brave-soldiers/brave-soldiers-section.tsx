@@ -75,7 +75,7 @@ export default function BraveSoldiersSection() {
                 </div>
 
                 {/* Status Badge with Enhanced Styling */}
-                <div className="absolute top-4 right-4">
+                <div className="absolute top-[290px]  right-2 ">
                   <Badge
                     variant={
                       soldier.status === "Currently Serving"
@@ -160,14 +160,7 @@ export default function BraveSoldiersSection() {
                   </div>
                 </div>
 
-                {/* Military Action Indicator */}
-                <div className="mt-4 text-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                  <div className="inline-flex items-center gap-2 text-xs font-bold text-amber-700 uppercase tracking-widest">
-                    <div className="w-2 h-2 bg-amber-600 rounded-full animate-pulse"></div>
-                    Click to Honor
-                    <div className="w-2 h-2 bg-amber-600 rounded-full animate-pulse"></div>
-                  </div>
-                </div>
+                 
               </CardContent>
             </Card>
           ))}

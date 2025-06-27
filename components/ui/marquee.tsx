@@ -58,15 +58,15 @@ export function Marquee({ text, speed = "normal", className, icon = true, urgent
             aria-hidden="true"
           />
         )}
-        <span className={cn("font-medium", urgent ? "text-red-800" : "text-gov-blue")}>{text}</span>
+        <span className={cn("font-medium", urgent ? "text-blue-600" : "text-blue-600")}>{text}</span>
         <span className="mx-8">•</span>
         {icon && (
           <AlertCircle
-            className={cn("mr-2 inline-block h-4 w-4", urgent ? "text-red-600" : "text-gov-blue")}
+            className={cn("mr-2 inline-block h-4 w-4", urgent ? "text-blue-600" : "text-gov-blue")}
             aria-hidden="true"
           />
         )}
-        <span className={cn("font-medium", urgent ? "text-red-800" : "text-gov-blue")}>{text}</span>
+        <span className={cn("font-medium", urgent ? "text-blue-600" : "text-gov-blue")}>{text}</span>
         <span className="mx-8">•</span>
       </div>
     </div>

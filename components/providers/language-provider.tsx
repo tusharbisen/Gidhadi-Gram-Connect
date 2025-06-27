@@ -544,9 +544,9 @@ const translations: Translations = {
   mr: "गिधाडी गावाला माहिती, अद्यतने आणि सामुदायिक जनजागृतीने जोडण्याचा प्रयत्न"
   },
   covidVaccinationDesc: {
-    en: "COVID-19 vaccination drive at GP office on 20th June. All residents 18+ eligible.",
-    hi: "20 जून को जीपी कार्यालय में कोविड-19 टीकाकरण अभियान। 18+ सभी निवासी पात्र।",
-    mr: "20 जून रोजी जीपी कार्यालयात कोविड-19 लसीकरण मोहीम. 18+ सर्व रहिवासी पात्र.",
+    en: "🌟 Welcome to Gidhadi Gram Connect – Stay updated with village news, schemes, and events! Join us in building a connected and informed Gidhadi! 🌱📢",
+    hi: "🌟 गिधाड़ी ग्राम कनेक्ट में आपका स्वागत है – गांव की खबरें, योजनाएं और कार्यक्रमों से अपडेट रहें! मिलकर एक प्रगत गिधाड़ी बनाएं! 🌱📢s",
+    mr: "🌟 गिधाडी ग्राम कनेक्टमध्ये आपले स्वागत आहे – गावातील बातम्या, योजना आणि कार्यक्रमांची माहिती मिळवा! एकत्र येऊन प्रगत गिधाडी घडवूया! 🌱📢",
   },
   waterSupplyInterruption: {
     en: "Water Supply Interruption - URGENT",
