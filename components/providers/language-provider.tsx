@@ -106,17 +106,17 @@ const translations: Translations = {
 
   // Basic Info
   gramPanchayat: {
-    en: "Gram Panchayat",
+    en: "Gidhadi Gram",
     hi: "ग्राम पंचायत",
     mr: "ग्रामपंचायत",
   },
   gidhadi: {
-    en: "Gidhadi",
+    en: "Connect",
     hi: "गिधाड़ी",
     mr: "गिधाडी",
   },
   districtState: {
-    en: "District, State - 123456",
+    en: "Gondia, Maharastra  - 123456",
     hi: "जिला, राज्य - 123456",
     mr: "जिल्हा, राज्य - 123456",
   },

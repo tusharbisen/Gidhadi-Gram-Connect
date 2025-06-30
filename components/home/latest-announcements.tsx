@@ -18,16 +18,10 @@ const announcements = [
     id: 2,
     titleKey: "waterSupplyInterruption",
     contentKey: "waterSupplyInterruptionDesc",
-    date: "2023-06-10",
+    date: "2025-07-01",
     urgent: true,
   },
-  {
-    id: 3,
-    titleKey: "gramSabhaMeeting",
-    contentKey: "gramSabhaMeetingDesc",
-    date: "2023-06-05",
-    urgent: false,
-  },
+    
 ]
 
 const LatestAnnouncements = () => {
