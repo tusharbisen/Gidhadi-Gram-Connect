@@ -1,43 +1,47 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Play, Pause, Volume2, VolumeX } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { Play, Pause, Volume2, VolumeX } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function VideoIntroSection() {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isMuted, setIsMuted] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
 
   const handlePlayPause = () => {
-    const video = document.getElementById("intro-video") as HTMLVideoElement
+    const video = document.getElementById("intro-video") as HTMLVideoElement;
     if (video) {
       if (isPlaying) {
-        video.pause()
+        video.pause();
       } else {
-        video.play()
+        video.play();
       }
-      setIsPlaying(!isPlaying)
+      setIsPlaying(!isPlaying);
     }
-  }
+  };
 
   const handleMuteToggle = () => {
-    const video = document.getElementById("intro-video") as HTMLVideoElement
+    const video = document.getElementById("intro-video") as HTMLVideoElement;
     if (video) {
-      video.muted = !isMuted
-      setIsMuted(!isMuted)
+      video.muted = !isMuted;
+      setIsMuted(!isMuted);
     }
-  }
+  };
 
   return (
     <section className="w-full py-12 md:py-16 lg:py-20 bg-gradient-to-br from-sky-50 to-blue-50 mt-5 rounded-2xl">
       <div className="container mx-auto px-4 md:px-6">
         {/* Section Header */}
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">"गिधाडी ग्राम कनेक्ट म्हणजे काय?"</h2>
-          <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-sky-700 mb-6">What is Gidhadi Gram?</h3>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            "गिधाडी ग्राम कनेक्ट म्हणजे काय?"
+          </h2>
+          <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-sky-700 mb-6">
+            What is Gidhadi Gram?
+          </h3>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discover how our village community connects, grows, and thrives together through digital innovation and
-            traditional values.
+            Discover how our village community connects, grows, and thrives
+            together through digital innovation and traditional values.
           </p>
         </div>
 
@@ -53,7 +57,10 @@ export default function VideoIntroSection() {
               onPause={() => setIsPlaying(false)}
               onEnded={() => setIsPlaying(false)}
             >
-              <source src="https://res.cloudinary.com/dy1w6zqom/video/upload/v1751307759/ADMIN_yypgey.mp4" type="video/mp4" />
+              <source
+                src="https://res.cloudinary.com/dy1w6zqom/video/upload/v1751344140/_%E0%A4%97%E0%A4%BF%E0%A4%A7%E0%A4%BE%E0%A4%A1%E0%A5%80_%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%AE_%E0%A4%95%E0%A4%A8%E0%A5%87%E0%A4%95%E0%A5%8D%E0%A4%9F_%E0%A4%97%E0%A4%BE%E0%A4%81%E0%A4%B5_%E0%A4%95%E0%A5%80_%E0%A4%86%E0%A4%B5%E0%A4%BE%E0%A4%9C%E0%A4%BC_%E0%A4%B9%E0%A4%B0_%E0%A4%A6%E0%A4%BF%E0%A4%B2_%E0%A4%95%E0%A5%87_%E0%A4%B8%E0%A4%BE%E0%A4%A5__bk7uu1.mp4"
+                type="video/mp4"
+              />
               <source src="/videos/gidhadi-gram-intro.webm" type="video/webm" />
               Your browser does not support the video tag.
             </video>
@@ -66,7 +73,11 @@ export default function VideoIntroSection() {
                   size="lg"
                   className="bg-white bg-opacity-90 hover:bg-opacity-100 text-black rounded-full p-4"
                 >
-                  {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6 ml-1" />}
+                  {isPlaying ? (
+                    <Pause className="h-6 w-6" />
+                  ) : (
+                    <Play className="h-6 w-6 ml-1" />
+                  )}
                 </Button>
                 <Button
                   onClick={handleMuteToggle}
@@ -74,7 +85,11 @@ export default function VideoIntroSection() {
                   variant="outline"
                   className="bg-white bg-opacity-90 hover:bg-opacity-100 text-black rounded-full p-4"
                 >
-                  {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                  {isMuted ? (
+                    <VolumeX className="h-5 w-5" />
+                  ) : (
+                    <Volume2 className="h-5 w-5" />
+                  )}
                 </Button>
               </div>
             </div>
@@ -97,20 +112,31 @@ export default function VideoIntroSection() {
           <div className="mt-8 text-center">
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               <div className="bg-white p-6 rounded-xl shadow-lg">
-                <h4 className="text-xl font-semibold text-sky-700 mb-3">🏘️ Community Connection</h4>
+                <h4 className="text-xl font-semibold text-sky-700 mb-3">
+                  🏘️ Community Connection
+                </h4>
                 <p className="text-gray-600">
-                  Connecting villagers, sharing resources, and building stronger community bonds
+                  Connecting villagers, sharing resources, and building stronger
+                  community bonds
                 </p>
               </div>
               <div className="bg-white p-6 rounded-xl shadow-lg">
-                <h4 className="text-xl font-semibold text-sky-600 mb-3">💼 Local Services</h4>
+                <h4 className="text-xl font-semibold text-sky-600 mb-3">
+                  💼 Local Services
+                </h4>
                 <p className="text-gray-600">
-                  Access to local businesses, government services, and essential information
+                  Access to local businesses, government services, and essential
+                  information
                 </p>
               </div>
               <div className="bg-white p-6 rounded-xl shadow-lg">
-                <h4 className="text-xl font-semibold text-sky-800 mb-3">📱 Digital Innovation</h4>
-                <p className="text-gray-600">Modern technology meeting traditional village life for better living</p>
+                <h4 className="text-xl font-semibold text-sky-800 mb-3">
+                  📱 Digital Innovation
+                </h4>
+                <p className="text-gray-600">
+                  Modern technology meeting traditional village life for better
+                  living
+                </p>
               </div>
             </div>
           </div>
@@ -127,5 +153,5 @@ export default function VideoIntroSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
