@@ -116,9 +116,9 @@ const translations: Translations = {
     mr: "गिधाडी",
   },
   districtState: {
-    en: "Gondia, Maharastra  - 123456",
-    hi: "जिला, राज्य - 123456",
-    mr: "जिल्हा, राज्य - 123456",
+    en: "Gondia, Maharastra  - 441801",
+    hi: "जिला, राज्य - 441801",
+    mr: "जिल्हा, राज्य - 441801",
   },
 
   // Footer

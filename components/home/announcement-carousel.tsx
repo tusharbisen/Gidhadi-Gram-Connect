@@ -22,7 +22,7 @@ const announcements = [
       mr: "📢 गिधाडी ग्राम कनेक्टमध्ये तुमचं स्वागत आहे – आता गावाची माहिती ऑनलाइन!",
     },
     date: "2023-06-20",
-    urgent: true,
+    urgent: false,
     content: {
       en: "Welcome to Gidhadi Gram Connect – Your Village, Now Online!",
       hi: "📢 गिधाड़ी ग्राम कनेक्ट में आपका स्वागत है – अब गांव की जानकारी ऑनलाइन!",
