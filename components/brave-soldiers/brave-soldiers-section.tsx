@@ -27,7 +27,7 @@ const soldiersData = [
 
 export default function BraveSoldiersSection() {
   return (
-    <section className="py-16 px-4 bg-gradient-to-b from-slate-50 to-white rounded-2xl border-2 mt-4">
+    <section className="py-16 px-4 bg-gradient-to-b from-slate-50 to-white rounded-2xl border-2 mt-4 border-sky-700">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
@@ -56,7 +56,7 @@ export default function BraveSoldiersSection() {
           {soldiersData.map((soldier, index) => (
             <Card
               key={index}
-              className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-slate-200 hover:border-amber-500 bg-white hover:bg-gradient-to-r from-green-600 via-yellow-500 to-red-500  cursor-pointer transform hover:scale-[1.02] hover:-translate-y-1"
+              className="group overflow-hidden  shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-slate-200 hover:border-amber-500 bg-white hover:bg-gradient-to-r from-green-600 via-yellow-500 to-red-500  cursor-pointer transform hover:scale-[1.02] hover:-translate-y-1"
             >
               <div className="relative">
                 {/* Photo */}

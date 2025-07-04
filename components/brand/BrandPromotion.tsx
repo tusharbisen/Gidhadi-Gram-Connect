@@ -126,7 +126,7 @@ export default function BrandPromotion() {
   };
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-orange-50 via-white to-blue-50 mt-8 rounded-2xl  ">
+    <section className="py-16 lg:py-24 bg-gradient-to-br from-orange-50 via-white to-blue-50 mt-8 rounded-2xl  border-2 border-sky-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
         <div className="text-center space-y-4 mb-16">
           <div className="inline-flex items-center px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">

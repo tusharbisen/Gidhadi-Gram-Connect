@@ -41,7 +41,7 @@ const EventCarousel = () => {
   }
 
   return (
-    <Card>
+    <Card className="border-2 border-sky-700">
       <CardHeader>
         <CardTitle>{t("recentEvents")}</CardTitle>
       </CardHeader>

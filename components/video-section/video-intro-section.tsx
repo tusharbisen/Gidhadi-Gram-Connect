@@ -29,7 +29,7 @@ export default function VideoIntroSection() {
   };
 
   return (
-    <section className="w-full py-12 md:py-16 lg:py-20 bg-gradient-to-br from-sky-50 to-blue-50 mt-5 rounded-2xl">
+    <section className="w-full py-12 md:py-16 lg:py-20 bg-gradient-to-br from-sky-50 to-blue-50 mt-5 rounded-2xl border-2 border-sky-700">
       <div className="container mx-auto px-4 md:px-6">
         {/* Section Header */}
         <div className="text-center mb-8 md:mb-12">

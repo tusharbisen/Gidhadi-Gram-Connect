@@ -31,7 +31,7 @@ const EmergencyContact = () => {
   const { t } = useLanguage()
 
   return (
-    <Card className="sticky top-24">
+    <Card className="sticky top-24 border-sky-700 border-2">
       <CardHeader>
         <CardTitle className="flex items-center">
           <AlertTriangle className="mr-2 h-5 w-5 text-red-500" />
@@ -41,7 +41,7 @@ const EmergencyContact = () => {
       <CardContent>
         <div className="space-y-3">
           {emergencyContacts.map((contact, index) => (
-            <div key={index} className="flex items-center justify-between rounded-md bg-gray-50 p-3">
+            <div key={index} className="flex items-center justify-between rounded-md bg-gray-50 p-3 border-2  shadow-md  hover:shadow-sky-400 ">
               <div className="flex items-center">
                 <contact.icon className="mr-3 h-5 w-5 text-primary" />
                 <span className="font-medium">{t(contact.nameKey)}</span>
