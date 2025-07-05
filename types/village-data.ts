@@ -16,6 +16,11 @@ export interface VillageData {
     govtOffices: number
     schools: number
   }
+  location?: {
+    latitude: number
+    longitude: number
+    name: string
+  }
 }
 
 export interface VillageInfoProps {

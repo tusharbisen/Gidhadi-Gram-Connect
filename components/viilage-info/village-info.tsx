@@ -13,10 +13,11 @@ import {
   Shield,
 } from "lucide-react"
 import { OfficialBadge } from "@/components/viilage-info/official-badge"
+import { GoogleMap } from "@/components/viilage-info/google-map"
 import { useLanguage } from "@/components/providers/language-provider"
+import type { VillageData } from "@/types/village-data"
 
-// Sample data - replace with your actual data source
-const villageData = {
+const villageData: VillageData = {
   population: {
     total: 2847,
     growth: "+2.3%",
@@ -34,20 +35,25 @@ const villageData = {
     govtOffices: 3,
     schools: 5,
   },
+  location: {
+    latitude: 21.1458,
+    longitude: 79.0882,
+    name: "Gidhadi",
+  },
 }
 
 export default function VillageInfo() {
   const { t } = useLanguage()
 
   return (
-    <section className="bg-gray-50 py-8 mt-5 rounded-lg border-2 border-sky-700">
+    <section className="bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4">
         {/* Page Header */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{t("Village Information")}</h1>
-              <p className="text-gray-600">{t("Gidhadi Pincode- 441801")}</p>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">{t("villageDashboard")}</h1>
+              <p className="text-gray-600">{t("villageSubtitle")}</p>
             </div>
             <div className="text-right">
               <div className="flex items-center gap-2 text-sm text-gray-500 mb-1">
@@ -143,7 +149,7 @@ export default function VillageInfo() {
         </div>
 
         {/* Infrastructure Grid */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
           <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
             <Building2 className="w-5 h-5 text-sky-700" />
             {t("infrastructureFacilities")}
@@ -199,6 +205,28 @@ export default function VillageInfo() {
             </div>
           </div>
         </div>
+
+        {/* Google Map Section */}
+        {villageData.location && (
+          <GoogleMap
+            latitude={villageData.location.latitude}
+            longitude={villageData.location.longitude}
+            villageName={villageData.location.name}
+            zoom={15}
+          />
+        )}
+
+        {/* If no location data, show a placeholder or default map */}
+        {!villageData.location && (
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div className="flex items-center justify-center h-80 bg-gray-50 rounded-lg">
+              <div className="text-center">
+                <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-2" />
+                <p className="text-gray-500">Map data not available</p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Footer Note */}
         <div className="mt-8 bg-white rounded-lg shadow-sm border border-gray-200 p-4">
