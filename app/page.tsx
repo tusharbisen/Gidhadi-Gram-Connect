@@ -5,6 +5,7 @@ import AnnouncementCarousel from "@/components/home/announcement-carousel";
 import BrandPromotion from "@/components/brand/BrandPromotion";
 import BraveSoldiersSection from "@/components/brave-soldiers/brave-soldiers-section";
 import VideoIntroSection from "@/components/video-section/video-intro-section";
+import VillageInfo from "@/components/viilage-info/village-info";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ export default function Home() {
           <EmergencyContact />
         </div>
       </div>
-      <BrandPromotion />
+      <VillageInfo/>
       <BraveSoldiersSection />
       <VideoIntroSection />
     </div>

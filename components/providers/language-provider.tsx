@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react"
 
-type Language = "en" | "hi" | "mr";
+type Language = "en" | "hi" | "mr"
 
 type Translations = {
   [key: string]: {
-    en: string;
-    hi: string;
-    mr: string;
-  };
-};
+    en: string
+    hi: string
+    mr: string
+  }
+}
 
 const translations: Translations = {
   // Navigation & Header
@@ -71,6 +71,160 @@ const translations: Translations = {
     hi: "सतत विकास के लिए पारदर्शिता, जवाबदेही और नागरिक भागीदारी के माध्यम से ग्रामीण शासन को सशक्त बनाना",
     mr: "शाश्वत विकासासाठी पारदर्शकता, उत्तरदायित्व आणि नागरिकांच्या सहभागातून ग्रामीण प्रशासनाचे सक्षमीकरण",
   },
+
+  // Village Information Dashboard - NEW ADDITIONS
+  villageDashboard: {
+    en: "Village Information Dashboard",
+    hi: "गांव की जानकारी डैशबोर्ड",
+    mr: "गावाची माहिती डॅशबोर्ड",
+  },
+  villageSubtitle: {
+    en: "Comprehensive demographic and infrastructure data",
+    hi: "व्यापक जनसांख्यिकीय और बुनियादी ढांचा डेटा",
+    mr: "सर्वसमावेशक लोकसंख्या आणि पायाभूत सुविधांचा डेटा",
+  },
+  lastUpdated: {
+    en: "Last Updated",
+    hi: "अंतिम अपडेट",
+    mr: "शेवटचे अपडेट",
+  },
+  dataSource: {
+    en: "Data Source: Village Panchayat Records",
+    hi: "डेटा स्रोत: ग्राम पंचायत रिकॉर्ड",
+    mr: "डेटा स्रोत: ग्रामपंचायत नोंदी",
+  },
+
+  // Official Badge
+  officialData: {
+    en: "Official Government Data",
+    hi: "आधिकारिक सरकारी डेटा",
+    mr: "अधिकृत सरकारी डेटा",
+  },
+  verifiedBy: {
+    en: "Verified and updated by Village Panchayat Office",
+    hi: "ग्राम पंचायत कार्यालय द्वारा सत्यापित और अपडेट किया गया",
+    mr: "ग्रामपंचायत कार्यालयाद्वारे सत्यापित आणि अपडेट केले",
+  },
+
+  // Demographics
+  totalPopulation: {
+    en: "Total Population",
+    hi: "कुल जनसंख्या",
+    mr: "एकूण लोकसंख्या",
+  },
+  registeredVoters: {
+    en: "Registered Voters",
+    hi: "पंजीकृत मतदाता",
+    mr: "नोंदणीकृत मतदार",
+  },
+  maleVoters: {
+    en: "Male Voters",
+    hi: "पुरुष मतदाता",
+    mr: "पुरुष मतदार",
+  },
+  femaleVoters: {
+    en: "Female Voters",
+    hi: "महिला मतदाता",
+    mr: "महिला मतदार",
+  },
+  updatedCensus: {
+    en: "Updated as per latest census",
+    hi: "नवीनतम जनगणना के अनुसार अपडेट किया गया",
+    mr: "नवीनतम जनगणनेनुसार अपडेट केले",
+  },
+  electoralRoll: {
+    en: "As per Electoral Roll 2024",
+    hi: "चुनावी नामावली 2024 के अनुसार",
+    mr: "निवडणूक यादी 2024 नुसार",
+  },
+  ofTotalVoters: {
+    en: "% of total voters",
+    hi: "% कुल मतदाताओं का",
+    mr: "% एकूण मतदारांचे",
+  },
+
+  // Infrastructure
+  infrastructureFacilities: {
+    en: "Infrastructure & Facilities",
+    hi: "बुनियादी ढांचा और सुविधाएं",
+    mr: "पायाभूत सुविधा आणि सोयी",
+  },
+  totalLandArea: {
+    en: "Total Land Area",
+    hi: "कुल भूमि क्षेत्र",
+    mr: "एकूण जमीन क्षेत्र",
+  },
+  religiousPlaces: {
+    en: "Religious Places",
+    hi: "धार्मिक स्थल",
+    mr: "धार्मिक स्थळे",
+  },
+  govtOffices: {
+    en: "Govt. Offices",
+    hi: "सरकारी कार्यालय",
+    mr: "सरकारी कार्यालये",
+  },
+  educationalInst: {
+    en: "Educational Inst.",
+    hi: "शैक्षणिक संस्थान",
+    mr: "शैक्षणिक संस्था",
+  },
+
+  // Badges
+  census: {
+    en: "CENSUS",
+    hi: "जनगणना",
+    mr: "जनगणना",
+  },
+  electoral: {
+    en: "ELECTORAL",
+    hi: "चुनावी",
+    mr: "निवडणूक",
+  },
+  male: {
+    en: "MALE",
+    hi: "पुरुष",
+    mr: "पुरुष",
+  },
+  female: {
+    en: "FEMALE",
+    hi: "महिला",
+    mr: "महिला",
+  },
+  surveyed: {
+    en: "SURVEYED",
+    hi: "सर्वेक्षित",
+    mr: "सर्वेक्षण केले",
+  },
+  temples: {
+    en: "TEMPLES",
+    hi: "मंदिर",
+    mr: "मंदिरे",
+  },
+  official: {
+    en: "OFFICIAL",
+    hi: "आधिकारिक",
+    mr: "अधिकृत",
+  },
+  education: {
+    en: "EDUCATION",
+    hi: "शिक्षा",
+    mr: "शिक्षण",
+  },
+
+  // Footer
+  dataVerified: {
+    en: "Data verified by Village Development Officer",
+    hi: "ग्राम विकास अधिकारी द्वारा डेटा सत्यापित",
+    mr: "ग्राम विकास अधिकाऱ्याद्वारे डेटा सत्यापित",
+  },
+  forQueries: {
+    en: "For queries: contact@gidhadi.gov.in",
+    hi: "प्रश्नों के लिए: contact@gidhadi.gov.in",
+    mr: "प्रश्नांसाठी: contact@gidhadi.gov.in",
+  },
+
+  // Existing translations continue...
   submitGrievance: {
     en: "Submit Grievance",
     hi: "शिकायत दर्ज करें",
@@ -81,8 +235,6 @@ const translations: Translations = {
     hi: "सरकारी योजनाएं देखें",
     mr: "सरकारी योजना पहा",
   },
-
-  // Announcements
   latestAnnouncements: {
     en: "Latest Announcements",
     hi: "नवीनतम घोषणाएँ",
@@ -103,8 +255,6 @@ const translations: Translations = {
     hi: "आपातकालीन संपर्क",
     mr: "आपत्कालीन संपर्क",
   },
-
-  // Basic Info
   gramPanchayat: {
     en: "Gidhadi Gram",
     hi: "ग्राम पंचायत",
@@ -120,8 +270,6 @@ const translations: Translations = {
     hi: "जिला, राज्य - 441801",
     mr: "जिल्हा, राज्य - 441801",
   },
-
-  // Footer
   footerDescription: {
     en: "This website is for public information only. It is not affiliated with the Gram Panchayat or any government website, and we share only publicly available information.",
     hi: "यह वेबसाइट केवल सार्वजनिक जानकारी के लिए है। इसका ग्राम पंचायत या किसी सरकारी वेबसाइट से कोई संबंध नहीं है, और हम केवल सार्वजनिक रूप से उपलब्ध जानकारी साझा करते हैं।",
@@ -145,7 +293,7 @@ const translations: Translations = {
   ministryPanchayatiRaj: {
     en: "Ministry of Panchayati Raj",
     hi: "पंचायती राज मंत्रालय",
-    mr: "पंचायती राज मंत्रालय",
+    mr: "पंचायती राज मंत्राल��",
   },
   nationalPortal: {
     en: "National Portal of India",
@@ -167,8 +315,6 @@ const translations: Translations = {
     hi: "सर्वाधिकार सुरक्षित",
     mr: "सर्व हक्क राखीव",
   },
-
-  // About Page
   aboutVillage: {
     en: "About Gidhadi Village",
     hi: "गिधाड़ी गांव के बारे में",
@@ -204,8 +350,6 @@ const translations: Translations = {
     hi: "कम दिखाएं",
     mr: "कमी दाखवा",
   },
-
-  // Schemes Page
   governmentSchemes: {
     en: "Government Schemes",
     hi: "सरकारी योजनाएं",
@@ -241,8 +385,6 @@ const translations: Translations = {
     hi: "और जानें",
     mr: "अधिक जाणून घ्या",
   },
-
-  // Scheme Names
   pmay: {
     en: "Pradhan Mantri Awas Yojana (PMAY)",
     hi: "प्रधानमंत्री आवास योजना",
@@ -303,8 +445,6 @@ const translations: Translations = {
     hi: "3-18 वर्ष आयु के सभी बच्चे",
     mr: "3-18 वर्ष वयोगटातील सर्व मुले",
   },
-
-  // Emergency Contacts
   police: {
     en: "Police",
     hi: "पुलिस",
@@ -320,8 +460,6 @@ const translations: Translations = {
     hi: "एम्बुलेंस",
     mr: "रुग्णवाहिका",
   },
-
-  // Grievance
   grievancePortal: {
     en: "Grievance Portal",
     hi: "शिकायत पोर्टल",
@@ -367,8 +505,6 @@ const translations: Translations = {
     hi: "जमा करें",
     mr: "सबमिट करा",
   },
-
-  // Complaint Types
   waterSupply: {
     en: "Water Supply",
     hi: "पानी की आपूर्ति",
@@ -394,8 +530,6 @@ const translations: Translations = {
     hi: "अन्य",
     mr: "इतर",
   },
-
-  // Gallery
   eventPhotos: {
     en: "Event Photos",
     hi: "कार्यक्रम की तस्वीरें",
@@ -406,8 +540,6 @@ const translations: Translations = {
     hi: "विकास कार्य",
     mr: "विकास कार्य",
   },
-
-  // Documents
   documentsDownloads: {
     en: "Documents & Downloads",
     hi: "दस्तावेज़ और डाउनलोड",
@@ -433,8 +565,6 @@ const translations: Translations = {
     hi: "डाउनलोड",
     mr: "डाउनलोड",
   },
-
-  // Admin
   adminDashboard: {
     en: "Admin Dashboard",
     hi: "एडमिन डैशबोर्ड",
@@ -455,8 +585,6 @@ const translations: Translations = {
     hi: "लॉगिन",
     mr: "लॉगिन",
   },
-
-  // Common Actions
   save: {
     en: "Save",
     hi: "सेव करें",
@@ -497,8 +625,6 @@ const translations: Translations = {
     hi: "त्रुटि",
     mr: "त्रुटी",
   },
-
-  // Status
   pending: {
     en: "Pending",
     hi: "लंबित",
@@ -519,8 +645,6 @@ const translations: Translations = {
     hi: "अस्वीकृत",
     mr: "नाकारले",
   },
-
-  // Dates and Time
   today: {
     en: "Today",
     hi: "आज",
@@ -536,12 +660,10 @@ const translations: Translations = {
     hi: "कल",
     mr: "उद्या",
   },
-
-  // Announcements Content
   covidVaccination: {
     en: "Connecting Gidhadi Village with Information, Updates, and Community Awareness",
-  hi: "गिधाड़ी गांव को जानकारी, अपडेट और सामुदायिक जागरूकता से जोड़ने का प्रयास",
-  mr: "गिधाडी गावाला माहिती, अद्यतने आणि सामुदायिक जनजागृतीने जोडण्याचा प्रयत्न"
+    hi: "गिधाड़ी गांव को जानकारी, अपडेट और सामुदायिक जागरूकता से जोड़ने का प्रयास",
+    mr: "गिधाडी गावाला माहिती, अद्यतने आणि सामुदायिक जनजागृतीने जोडण्याचा प्रयत्न",
   },
   covidVaccinationDesc: {
     en: "🌟 Welcome to Gidhadi Gram Connect – Stay updated with village news, schemes, and events! Join us in building a connected and informed Gidhadi! 🌱📢",
@@ -568,8 +690,6 @@ const translations: Translations = {
     hi: "जीपी हॉल में 11 बजे मासिक ग्राम सभा बैठक।",
     mr: "जीपी हॉलमध्ये 11 वाजता मासिक ग्रामसभा बैठक.",
   },
-
-  // Events
   independenceDay: {
     en: "Independence Day Celebration",
     hi: "स्वतंत्रता दिवस समारोह",
@@ -585,8 +705,6 @@ const translations: Translations = {
     hi: "गांव स्वच्छता अभियान",
     mr: "गाव स्वच्छता मोहीम",
   },
-
-  // Form Validation
   required: {
     en: "This field is required",
     hi: "यह फील्ड आवश्यक है",
@@ -602,52 +720,44 @@ const translations: Translations = {
     hi: "कृपया एक वैध फोन नंबर दर्ज करें",
     mr: "कृपया वैध फोन नंबर टाका",
   },
-
-  // Success Messages
   complaintSubmitted: {
     en: "Your complaint has been submitted successfully. Reference ID: ",
     hi: "आपकी शिकायत सफलतापूर्वक दर्ज की गई है। संदर्भ आईडी: ",
-    mr: "तुमची तक्रार यशस्वीरित्या नोंदवली गेली आहे. संदर्भ आयडी: ",
+    mr: "तुमची तक���रार यशस्वीरित्या नोंदवली गेली आहे. संदर्भ आयडी: ",
   },
   loginSuccessful: {
     en: "Login successful",
     hi: "लॉगिन सफल",
     mr: "लॉगिन यशस्वी",
   },
-};
+}
 
 type LanguageContextType = {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
-};
+  language: Language
+  setLanguage: (lang: Language) => void
+  t: (key: string) => string
+}
 
-const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined
-);
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>("en");
+  const [language, setLanguage] = useState<Language>("en")
 
   const t = (key: string): string => {
     if (!translations[key]) {
-      console.warn(`Translation key "${key}" not found`);
-      return key;
+      console.warn(`Translation key "${key}" not found`)
+      return key
     }
-    return translations[key][language];
-  };
+    return translations[key][language]
+  }
 
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      {children}
-    </LanguageContext.Provider>
-  );
-};
+  return <LanguageContext.Provider value={{ language, setLanguage, t }}>{children}</LanguageContext.Provider>
+}
 
 export const useLanguage = () => {
-  const context = useContext(LanguageContext);
+  const context = useContext(LanguageContext)
   if (context === undefined) {
-    throw new Error("useLanguage must be used within a LanguageProvider");
+    throw new Error("useLanguage must be used within a LanguageProvider")
   }
-  return context;
-};
+  return context
+}
