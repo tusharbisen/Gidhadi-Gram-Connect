@@ -44,14 +44,14 @@ export function GoogleMap({
               className="flex items-center gap-1 px-3 py-1.5 text-sm bg-sky-100 text-sky-700 rounded-lg hover:bg-sky-200 transition-colors"
             >
               <Navigation className="w-4 h-4" />
-              {t("getDirections")}
+              {t("Get Directions")}
             </button>
             <button
               onClick={() => setIsFullscreen(true)}
               className="flex items-center gap-1 px-3 py-1.5 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
             >
               <Maximize2 className="w-4 h-4" />
-              {t("fullscreen")}
+              {t("Fullscreen")}
             </button>
           </div>
         </div>
