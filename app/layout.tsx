@@ -9,15 +9,20 @@ import AnnouncementMarquee from "@/components/home/announcement-marquee"
 
 const inter = Inter({ subsets: ["latin"] })
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Gidhadi Gram Connect",
   description: "Gidhadi Gram Connect is a Public Information Awareness Website",
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-32x32.png',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      {
+        url: '/favicon.png',
+        sizes: '512x512',
+        type: 'image/png',
+      },
+    ],
   },
 }
+
 
 export default function RootLayout({
   children,
