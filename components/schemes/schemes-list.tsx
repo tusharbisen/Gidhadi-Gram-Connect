@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -16,9 +15,10 @@ import {
   Calendar,
   IndianRupee,
   Languages,
+  X,
 } from "lucide-react"
 
-// Sample scheme data
+// Sample scheme data with eligibility criteria
 const schemes = [
   {
     id: 1,
@@ -29,6 +29,14 @@ const schemes = [
     benefits: "₹6,000/year",
     deadline: "Ongoing",
     eligibility: "Small & marginal farmers",
+    eligibilityCriteria: [
+      "Applicable to small & marginal farmers",
+      "Farmer should own less than 2 hectares of land",
+      "Must be a citizen of India",
+      "Government employees and taxpayers are not eligible",
+      "Aadhaar and bank account linking is mandatory",
+    ],
+    applyLink: "https://pmkisan.gov.in",
   },
   {
     id: 2,
@@ -39,6 +47,14 @@ const schemes = [
     benefits: "₹1.5 lakh/year",
     deadline: "31st March 2024",
     eligibility: "BPL families",
+    eligibilityCriteria: [
+      "Family must be Below Poverty Line (BPL)",
+      "Annual family income should be less than ₹1 lakh",
+      "Must be a resident of Maharashtra",
+      "Aadhaar card is mandatory for all family members",
+      "Valid ration card required",
+    ],
+    applyLink: "https://www.jeevandayee.gov.in",
   },
   {
     id: 3,
@@ -49,6 +65,14 @@ const schemes = [
     benefits: "₹5,000",
     deadline: "Ongoing",
     eligibility: "Pregnant women",
+    eligibilityCriteria: [
+      "Pregnant and lactating mothers",
+      "Age should be 19 years or above",
+      "First living child only",
+      "Must register pregnancy at Anganwadi/Health facility",
+      "Bank account and Aadhaar linking required",
+    ],
+    applyLink: "https://pmmvy.wcd.gov.in",
   },
   {
     id: 4,
@@ -59,6 +83,14 @@ const schemes = [
     benefits: "₹75,000 total",
     deadline: "Ongoing",
     eligibility: "Girl children",
+    eligibilityCriteria: [
+      "Applicable for girl children born after 1st April 2023",
+      "Family income should be less than ₹1 lakh per annum",
+      "Must be a resident of Maharashtra",
+      "Yellow or Orange ration card holders eligible",
+      "Bank account in girl child's name required",
+    ],
+    applyLink: "https://womenchild.maharashtra.gov.in",
   },
   {
     id: 5,
@@ -69,6 +101,14 @@ const schemes = [
     benefits: "₹2,500/month",
     deadline: "15th October 2024",
     eligibility: "Merit students",
+    eligibilityCriteria: [
+      "Students pursuing professional courses",
+      "Minimum 60% marks in 12th standard",
+      "Family income less than ₹6 lakh per annum",
+      "Age limit: 18-25 years",
+      "Valid Aadhaar and bank account required",
+    ],
+    applyLink: "https://scholarships.gov.in",
   },
   {
     id: 6,
@@ -79,6 +119,14 @@ const schemes = [
     benefits: "₹309/day",
     deadline: "Ongoing",
     eligibility: "Rural households",
+    eligibilityCriteria: [
+      "Adult members of rural households",
+      "Must be willing to do unskilled manual work",
+      "Job card registration required",
+      "Minimum age: 18 years",
+      "Valid address proof and bank account needed",
+    ],
+    applyLink: "https://nrega.nic.in",
   },
   {
     id: 7,
@@ -89,6 +137,14 @@ const schemes = [
     benefits: "₹1.2 lakh",
     deadline: "31st March 2024",
     eligibility: "Homeless families",
+    eligibilityCriteria: [
+      "Families without pucca house",
+      "Rural area residents only",
+      "Not availed housing scheme benefits before",
+      "Annual income less than ₹1 lakh",
+      "Valid documents and bank account required",
+    ],
+    applyLink: "https://pmayg.nic.in",
   },
   {
     id: 8,
@@ -99,6 +155,104 @@ const schemes = [
     benefits: "50% subsidy",
     deadline: "30th November 2024",
     eligibility: "All farmers",
+    eligibilityCriteria: [
+      "Registered farmers in Maharashtra",
+      "Valid land ownership documents",
+      "Minimum 0.5 hectare land holding",
+      "No previous subsidy for same purpose",
+      "Bank account and Aadhaar linking mandatory",
+    ],
+    applyLink: "https://krishi.maharashtra.gov.in",
+  },
+  {
+    id: 9,
+    name: "e-Shram Card",
+    category: "Employment",
+    type: "Central",
+    description: "Registration portal for unorganized sector workers",
+    benefits: "Insurance + job mapping + social welfare",
+    deadline: "Ongoing",
+    eligibility: "Unorganized sector workers",
+    eligibilityCriteria: [
+      "Unorganized sector workers aged 16-59 years",
+      "Should not be a member of EPFO/ESIC/NPS",
+      "Must have Aadhaar card and mobile number",
+      "Bank account with Aadhaar linking required",
+      "Valid address proof needed",
+    ],
+    applyLink: "https://eshram.gov.in",
+  },
+  {
+    id: 10,
+    name: "Pradhan Mantri Garib Kalyan Anna Yojana (PMGKAY)",
+    category: "Rural Development",
+    type: "Central",
+    description: "Free food grains distribution scheme",
+    benefits: "Free food grains",
+    deadline: "Ongoing",
+    eligibility: "Ration card holders",
+    eligibilityCriteria: [
+      "Valid ration card holders",
+      "Beneficiaries under National Food Security Act",
+      "Automatic coverage through Public Distribution System",
+      "No separate application required",
+      "Available at designated fair price shops",
+    ],
+    applyLink: "Automatically via PDS",
+  },
+  {
+    id: 11,
+    name: "Sukanya Samriddhi Yojana",
+    category: "Women & Children",
+    type: "Central",
+    description: "Savings scheme for girl child education and marriage",
+    benefits: "High interest savings + tax benefit",
+    deadline: "Ongoing",
+    eligibility: "Parents of girl child below 10 years",
+    eligibilityCriteria: [
+      "Girl child should be below 10 years of age",
+      "Maximum 2 accounts per family allowed",
+      "Minimum deposit ₹250 per year",
+      "Account can be opened by parents/legal guardian",
+      "Valid birth certificate and address proof required",
+    ],
+    applyLink: "At post offices and banks",
+  },
+  {
+    id: 12,
+    name: "Ayushman Bharat – PMJAY",
+    category: "Health & Insurance",
+    type: "Central",
+    description: "World's largest health insurance scheme",
+    benefits: "Free health insurance up to ₹5 lakh/year",
+    deadline: "Ongoing",
+    eligibility: "Low-income families listed in SECC 2011",
+    eligibilityCriteria: [
+      "Families listed in Socio-Economic Caste Census (SECC) 2011",
+      "Rural families with specific deprivation criteria",
+      "Urban families in occupational categories",
+      "No premium payment required",
+      "Cashless treatment at empaneled hospitals",
+    ],
+    applyLink: "https://pmjay.gov.in",
+  },
+  {
+    id: 13,
+    name: "Pandit Deendayal Upadhyay Grameen Kaushalya Yojana",
+    category: "Education & Youth",
+    type: "Central",
+    description: "Skill development program for rural youth",
+    benefits: "Skill training and placement",
+    deadline: "Ongoing",
+    eligibility: "Rural youth (15–35 yrs) below poverty line",
+    eligibilityCriteria: [
+      "Rural youth aged between 15-35 years",
+      "Family should be below poverty line",
+      "Minimum educational qualification: Class 5th pass",
+      "Should be willing to migrate for employment",
+      "Valid Aadhaar and bank account required",
+    ],
+    applyLink: "https://ddugky.gov.in",
   },
 ]
 
@@ -115,9 +269,35 @@ const categories = [
 export default function GidhadiGramConnect() {
   const [activeCategory, setActiveCategory] = useState("All")
   const [language, setLanguage] = useState("English")
+  const [showModal, setShowModal] = useState(false)
+  const [selectedScheme, setSelectedScheme] = useState(null)
 
   const filteredSchemes =
     activeCategory === "All" ? schemes : schemes.filter((scheme) => scheme.category === activeCategory)
+
+  const handleCheckEligibility = (scheme) => {
+    setSelectedScheme(scheme)
+    setShowModal(true)
+  }
+
+  const closeModal = () => {
+    setShowModal(false)
+    setSelectedScheme(null)
+  }
+
+  const handleApplyNow = (applyLink) => {
+    if (applyLink && applyLink !== "Automatically via PDS" && applyLink !== "At post offices and banks") {
+      window.open(applyLink, "_blank", "noopener,noreferrer")
+    } else if (applyLink === "At post offices and banks") {
+      alert("Please visit your nearest post office or bank to apply for this scheme.")
+    } else if (applyLink === "Automatically via PDS") {
+      alert(
+        "This scheme is automatically available through the Public Distribution System. No separate application required.",
+      )
+    } else {
+      alert("Application link will be available soon. Please check back later.")
+    }
+  }
 
   return (
     <div className="bg-gradient-to-br from-sky-50 to-blue-50">
@@ -136,12 +316,56 @@ export default function GidhadiGramConnect() {
               size="lg"
               variant="outline"
               className="border-white text-white hover:bg-white hover:text-sky-600 bg-transparent"
+              onClick={() => handleCheckEligibility(schemes[0])}
             >
               Check Eligibility
             </Button>
           </div>
         </div>
       </section>
+
+      {/* Eligibility Modal */}
+      {showModal && selectedScheme && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative max-h-[80vh] overflow-y-auto">
+            <button
+              className="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition-colors"
+              onClick={closeModal}
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="pr-8">
+              <h2 className="text-xl font-bold text-sky-700 mb-2">{selectedScheme.name}</h2>
+              <Badge
+                variant={selectedScheme.type === "Central" ? "default" : "secondary"}
+                className={
+                  selectedScheme.type === "Central"
+                    ? "bg-blue-100 text-blue-800 mb-4"
+                    : "bg-orange-100 text-orange-800 mb-4"
+                }
+              >
+                {selectedScheme.type} Scheme
+              </Badge>
+              <h3 className="font-semibold text-gray-800 mb-3">Eligibility Criteria:</h3>
+              <ul className="list-disc list-inside text-gray-700 space-y-2">
+                {selectedScheme.eligibilityCriteria.map((criteria, index) => (
+                  <li key={index} className="text-sm leading-relaxed">
+                    {criteria}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 p-3 bg-sky-50 rounded-lg">
+                <p className="text-sm text-sky-800">
+                  <strong>Benefits:</strong> {selectedScheme.benefits}
+                </p>
+                <p className="text-sm text-sky-800 mt-1">
+                  <strong>Deadline:</strong> {selectedScheme.deadline}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -197,10 +421,19 @@ export default function GidhadiGramConnect() {
                     </div>
                   </CardContent>
                   <CardFooter className="flex gap-2 pt-0">
-                    <Button variant="outline" size="sm" className="flex-1 bg-transparent">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 bg-transparent"
+                      onClick={() => handleCheckEligibility(scheme)}
+                    >
                       Check Eligibility
                     </Button>
-                    <Button size="sm" className="flex-1 bg-sky-600 hover:bg-sky-700">
+                    <Button
+                      size="sm"
+                      className="flex-1 bg-sky-600 hover:bg-sky-700"
+                      onClick={() => handleApplyNow(scheme.applyLink)}
+                    >
                       Apply Now
                     </Button>
                   </CardFooter>
