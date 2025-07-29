@@ -61,7 +61,7 @@ export default function VideoIntroSection() {
                 src="https://res.cloudinary.com/dy1w6zqom/video/upload/v1753786003/Gidhadi_Gram_connect_1_sbwhpq.mp4"
                 type="video/mp4"
               />
-              <source src="/videos/gidhadi-gram-intro.webm" type="video/webm" />
+              <source src="https://res.cloudinary.com/dy1w6zqom/video/upload/v1753786003/Gidhadi_Gram_connect_1_sbwhpq.mp4" type="video/webm" />
               Your browser does not support the video tag.
             </video>
 
