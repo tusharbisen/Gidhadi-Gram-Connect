@@ -1,13 +1,13 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
-import Header from "@/components/layout/header"
-import Footer from "@/components/layout/footer"
-import { LanguageProvider } from "@/components/providers/language-provider"
-import AnnouncementMarquee from "@/components/home/announcement-marquee"
+import type React from "react";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
+import { LanguageProvider } from "@/components/providers/language-provider";
+import AnnouncementMarquee from "@/components/home/announcement-marquee";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Gidhadi Gram Connect",
@@ -15,19 +15,18 @@ export const metadata = {
   icons: {
     icon: [
       {
-        url: '/favicon.png',
-        sizes: '512x512',
-        type: 'image/png',
+        url: "/favicon.png",
+        sizes: "512x512",
+        type: "image/png",
       },
     ],
   },
-}
-
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -42,5 +41,5 @@ export default function RootLayout({
         </LanguageProvider>
       </body>
     </html>
-  )
+  );
 }
