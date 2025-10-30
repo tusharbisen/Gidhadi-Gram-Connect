@@ -1,17 +1,18 @@
+
 "use client";
 
 import { useLanguage } from "@/components/providers/language-provider";
 import { Marquee } from "@/components/ui/marquee";
+import { memo } from "react";
 
 const AnnouncementMarquee = () => {
   const { t } = useLanguage();
 
-  // Latest announcement using translation keys
-  const latestAnnouncement = {
-    text: t("covidVaccinationDesc"),
-  };
+  // Memoize to prevent unnecessary re-renders
+  const announcement = t("covidVaccinationDesc");
 
-  return <Marquee text={latestAnnouncement.text} />;
+  return <Marquee text={announcement} />;
 };
 
-export default AnnouncementMarquee;
+// Memoize the component to prevent re-renders when parent updates
+export default memo(AnnouncementMarquee);

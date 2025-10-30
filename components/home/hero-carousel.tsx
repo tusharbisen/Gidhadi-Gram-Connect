@@ -1,9 +1,10 @@
+
 "use client";
 
 import { useLanguage } from "@/components/providers/language-provider";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 
 const carouselSlides = [
@@ -44,6 +45,15 @@ const carouselSlides = [
   { images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750698602/35_oknzox.png"] },
 ];
 
+// Helper function to optimize Cloudinary URLs
+const optimizeImageUrl = (url: string, width: number = 1920, quality: string = "auto") => {
+  // Add Cloudinary transformations for optimization
+  return url.replace(
+    '/upload/',
+    `/upload/f_auto,q_${quality},w_${width},c_limit/`
+  );
+};
+
 const HeroCarousel = () => {
   const { t, language } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -51,32 +61,42 @@ const HeroCarousel = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const currentSlideData = carouselSlides[currentSlide];
+  
+  // Calculate which slides to render (current, previous, next)
+  const slidesToRender = useMemo(() => {
+    const prev = (currentSlide - 1 + carouselSlides.length) % carouselSlides.length;
+    const next = (currentSlide + 1) % carouselSlides.length;
+    return [prev, currentSlide, next];
+  }, [currentSlide]);
 
+  // Single unified effect for auto-advance
   useEffect(() => {
-    if (isAutoPlaying) {
-      const interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
-      }, 6000);
-      return () => clearInterval(interval);
-    }
+    if (!isAutoPlaying) return;
+    
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
+      setCurrentImageIndex(0);
+    }, 6000);
+    
+    return () => clearInterval(interval);
   }, [isAutoPlaying]);
 
+  // Separate effect for image cycling within a slide
   useEffect(() => {
-    const slideData = carouselSlides[currentSlide];
+    if (currentSlideData.images.length <= 1) return;
+    
     const imageInterval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % slideData.images.length);
+      setCurrentImageIndex((prev) => (prev + 1) % currentSlideData.images.length);
     }, 3000);
+    
     return () => clearInterval(imageInterval);
-  }, [currentSlide]);
-
-  useEffect(() => {
-    setCurrentImageIndex(0);
-  }, [currentSlide]);
+  }, [currentSlide, currentSlideData.images.length]);
 
   const nextSlide = () => {
     setIsAutoPlaying(false);
     setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
-    setTimeout(() => setIsAutoPlaying(true), 25000);
+    setCurrentImageIndex(0);
+    setTimeout(() => setIsAutoPlaying(true), 15000);
   };
 
   const prevSlide = () => {
@@ -84,50 +104,58 @@ const HeroCarousel = () => {
     setCurrentSlide(
       (prev) => (prev - 1 + carouselSlides.length) % carouselSlides.length
     );
+    setCurrentImageIndex(0);
     setTimeout(() => setIsAutoPlaying(true), 15000);
   };
 
   return (
     <div className="relative mb-8 md:mb-12 overflow-hidden rounded-lg shadow-xl border-2">
-      {carouselSlides.map((slide, slideIndex) => (
-        <div
-          key={slideIndex}
-          className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-            slideIndex === currentSlide ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          {slide.images.map((image, imageIndex) => (
-            <div
-              key={imageIndex}
-              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                slideIndex === currentSlide && imageIndex === currentImageIndex
-                  ? "opacity-100"
-                  : "opacity-0"
-              }`}
-            >
-              <Image
-                src={image || "/placeholder.svg"}
-                alt=""
-                fill
-                className="object-contain"
-                priority={slideIndex === 0 && imageIndex === 0}
-              />
-            </div>
-          ))}
-          <div className="absolute inset-0 bg-black/10" />
-        </div>
-      ))}
+      {/* Only render current, previous, and next slides */}
+      {carouselSlides.map((slide, slideIndex) => {
+        // Skip rendering slides that aren't nearby
+        if (!slidesToRender.includes(slideIndex)) return null;
+        
+        return (
+          <div
+            key={slideIndex}
+            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+              slideIndex === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
+          >
+            {slide.images.map((image, imageIndex) => (
+              <div
+                key={imageIndex}
+                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                  slideIndex === currentSlide && imageIndex === currentImageIndex
+                    ? "opacity-100"
+                    : "opacity-0"
+                }`}
+              >
+                <Image
+                  src={optimizeImageUrl(image)}
+                  alt={`Slide ${slideIndex + 1}`}
+                  fill
+                  className="object-contain"
+                  priority={slideIndex === 0 && imageIndex === 0}
+                  loading={slideIndex === 0 && imageIndex === 0 ? "eager" : "lazy"}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                  quality={85}
+                />
+              </div>
+            ))}
+            <div className="absolute inset-0 bg-black/10" />
+          </div>
+        );
+      })}
 
       <Button
         variant="ghost"
         size="icon"
         className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-blue-400 text-white border-white/20 h-8 w-8 md:h-10 md:w-10"
         onClick={prevSlide}
-        onMouseEnter={() => setIsAutoPlaying(false)}
-        onMouseLeave={() => setIsAutoPlaying(true)}
+        aria-label="Previous slide"
       >
         <ChevronLeft className="h-4 w-4 md:h-6 md:w-6" />
-        <span className="sr-only">Previous slide</span>
       </Button>
 
       <Button
@@ -135,25 +163,27 @@ const HeroCarousel = () => {
         size="icon"
         className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-blue-400 text-white border-white/20 h-8 w-8 md:h-10 md:w-10"
         onClick={nextSlide}
-        onMouseEnter={() => setIsAutoPlaying(false)}
-        onMouseLeave={() => setIsAutoPlaying(true)}
+        aria-label="Next slide"
       >
         <ChevronRight className="h-4 w-4 md:h-6 md:w-6" />
-        <span className="sr-only">Next slide</span>
       </Button>
 
-      <div className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20 flex space-x-1">
-        {currentSlideData.images.map((_, index) => (
-          <div
-            key={index}
-            className={`w-1 h-1 md:w-1.5 md:h-1.5 rounded-full transition-all duration-300 ${
-              index === currentImageIndex ? "bg-white" : "bg-white/50"
-            }`}
-          />
-        ))}
-      </div>
+      {/* Slide indicators */}
+      {currentSlideData.images.length > 1 && (
+        <div className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20 flex space-x-1">
+          {currentSlideData.images.map((_, index) => (
+            <div
+              key={index}
+              className={`w-1 h-1 md:w-1.5 md:h-1.5 rounded-full transition-all duration-300 ${
+                index === currentImageIndex ? "bg-white" : "bg-white/50"
+              }`}
+            />
+          ))}
+        </div>
+      )}
 
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
+      {/* Progress bar */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 z-20">
         <div
           className="h-full bg-white transition-all duration-100"
           style={{
@@ -170,3 +200,4 @@ const HeroCarousel = () => {
 };
 
 export default HeroCarousel;
+
