@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useLanguage } from "@/components/providers/language-provider";
@@ -45,13 +44,20 @@ const carouselSlides = [
   { images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750698602/35_oknzox.png"] },
 ];
 
-// Helper function to optimize Cloudinary URLs
-const optimizeImageUrl = (url: string, width: number = 1920, quality: string = "auto") => {
+// Helper function to optimize Cloudinary URLs - FIXED VERSION
+const optimizeImageUrl = (url: string, width: number = 1920, quality: string = "auto"): string => {
+  // Check if it's a Cloudinary URL
+  if (!url.includes('cloudinary.com')) {
+    return url;
+  }
+  
   // Add Cloudinary transformations for optimization
-  return url.replace(
+  const transformedUrl = url.replace(
     '/upload/',
     `/upload/f_auto,q_${quality},w_${width},c_limit/`
   );
+  
+  return transformedUrl;
 };
 
 const HeroCarousel = () => {
@@ -200,4 +206,3 @@ const HeroCarousel = () => {
 };
 
 export default HeroCarousel;
-
