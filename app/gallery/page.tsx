@@ -1,6 +1,5 @@
 import PhotoGallery from "@/components/gallery/photo-gallery";
 import type { Metadata } from "next";
-import { PageShell } from "@/components/layout/page-shell";
 
 export const metadata: Metadata = {
   title: "Gallery - Gram Panchayat Gidhadi",
@@ -8,9 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function GalleryPage() {
-  return (
-    <PageShell titleKey="gallery" fallbackTitle="Gallery">
-      <PhotoGallery />
-    </PageShell>
-  );
+  return <PhotoGallery />;
 }

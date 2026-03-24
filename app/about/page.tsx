@@ -1,6 +1,5 @@
 import AboutUs from "@/components/about/about-us";
 import type { Metadata } from "next";
-import { PageShell } from "@/components/layout/page-shell";
 
 export const metadata: Metadata = {
   title: "About Us - Gram Panchayat Gidhadi",
@@ -9,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return (
-    <PageShell titleKey="about" fallbackTitle="About Us">
-      <AboutUs />
-    </PageShell>
-  );
+  return <AboutUs />;
 }

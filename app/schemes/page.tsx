@@ -1,6 +1,5 @@
 import SchemesList from "@/components/schemes/schemes-list";
 import type { Metadata } from "next";
-import { PageShell } from "@/components/layout/page-shell";
 
 export const metadata: Metadata = {
   title: "Schemes & Services - Gram Panchayat Gidhadi",
@@ -9,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function SchemesPage() {
-  return (
-    <PageShell titleKey="schemes" fallbackTitle="Schemes & Services">
-      <SchemesList />
-    </PageShell>
-  );
+  return <SchemesList />;
 }

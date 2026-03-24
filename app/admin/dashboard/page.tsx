@@ -1,6 +1,5 @@
 import AdminDashboard from "@/components/admin/admin-dashboard";
 import type { Metadata } from "next";
-import { PageShell } from "@/components/layout/page-shell";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard - Gram Panchayat Gidhadi",
@@ -8,9 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function AdminDashboardPage() {
-  return (
-    <PageShell titleKey="adminDashboard" fallbackTitle="Admin Dashboard">
-      <AdminDashboard />
-    </PageShell>
-  );
+  return <AdminDashboard />;
 }
