@@ -1,165 +1,210 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+"use client";
+
+import Image from "next/image";
+import { useMemo } from "react";
+import { useLanguage } from "@/components/providers/language-provider";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  Users,
-  Target,
-  Heart,
-  Shield,
+  CheckCircle2,
   Globe,
-  Phone,
+  Heart,
   Mail,
   MapPin,
+  Phone,
+  Shield,
+  Sparkles,
   Star,
+  Target,
+  Users,
 } from "lucide-react";
-import Image from "next/image";
+
+type TeamMember = {
+  name: string;
+  designation: string;
+  contact: string;
+  image: string;
+  role: Record<"en" | "hi" | "mr", string>;
+  responsibility: Record<"en" | "hi" | "mr", string>;
+  skills: string[];
+};
+
+const teamMembers: TeamMember[] = [
+  {
+    name: "Tejas Bisen",
+    designation: "Software Engineer",
+    contact: "+91 98343 39517",
+    image: "/tejas.jpg",
+    role: {
+      en: "Project Coordinator & Full Stack Developer",
+      hi: "प्रोजेक्ट कोऑर्डिनेटर और फुल स्टैक डेवलपर",
+      mr: "प्रकल्प समन्वयक आणि फुल स्टॅक डेव्हलपर",
+    },
+    responsibility: {
+      en: "Leading project coordination, backend development, and community liaison.",
+      hi: "प्रोजेक्ट समन्वय, बैकएंड विकास और समुदाय समन्वय का नेतृत्व।",
+      mr: "प्रकल्प समन्वय, बॅकएंड विकास आणि समुदाय समन्वय यांचे नेतृत्व.",
+    },
+    skills: ["Leadership", "Project Management", "React.js", "Java", "Spring Boot"],
+  },
+  {
+    name: "Tushar Bisen",
+    designation: "Frontend Developer",
+    contact: "+91 91683 83674",
+    image: "/tushar.jpg",
+    role: {
+      en: "Team Lead & Frontend Developer",
+      hi: "टीम लीड और फ्रंटेंड डेवलपर",
+      mr: "टीम लीड आणि फ्रंटेंड डेव्हलपर",
+    },
+    responsibility: {
+      en: "Leading UI development and managing village news, events, and content updates.",
+      hi: "यूआई विकास और गांव के समाचार, कार्यक्रम तथा सामग्री अपडेट का प्रबंधन।",
+      mr: "यूआय विकास तसेच गावाच्या बातम्या, कार्यक्रम आणि सामग्री अद्यतनांचे व्यवस्थापन.",
+    },
+    skills: ["HTML", "CSS", "JavaScript", "Next.js", "Tailwind CSS"],
+  },
+  {
+    name: "Pankaj Meshram",
+    designation: "UI/UX Designer",
+    contact: "+91 8805920106",
+    image: "/pnk.jpg",
+    role: {
+      en: "Platform UI Designer",
+      hi: "प्लेटफ़ॉर्म यूआई डिज़ाइनर",
+      mr: "प्लॅटफॉर्म यूआय डिझायनर",
+    },
+    responsibility: {
+      en: "Designing user-friendly interfaces and improving the platform experience.",
+      hi: "उपयोगकर्ता-अनुकूल इंटरफेस बनाना और प्लेटफ़ॉर्म अनुभव बेहतर करना।",
+      mr: "वापरकर्ता-अनुकूल इंटरफेस डिझाइन करणे आणि प्लॅटफॉर्म अनुभव सुधारणे.",
+    },
+    skills: ["UI/UX", "Figma", "Responsive Design", "User Research"],
+  },
+];
+
+function SectionDivider() {
+  return (
+    <div className="flex items-center gap-3 my-2">
+      <div className="h-px flex-1 bg-gradient-to-r from-transparent to-emerald-200" />
+      <Sparkles className="h-3 w-3 text-emerald-400" />
+      <div className="h-px flex-1 bg-gradient-to-l from-transparent to-emerald-200" />
+    </div>
+  );
+}
 
 export default function AboutUs() {
-  const teamMembers = [
-    {
-      name: "तेजस बिसेन (Tejas Bisen)",
-      role: "Project Coordinator & Full Stack Developer",
-      designation: "Software Engineer",
-      responsibility:
-        "Leading project coordination, backend development, and community liaison",
-      contact: "+91 98343 39517",
-      skills: [
-        "Leadership",
-        "Project Management",
-        "React.js",
-        "Java",
-        "Spring Boot",
-        "Go Programming",
-        "API Development",
-        "Database Design",
-      ],
-      image: "/tejas.jpg",
-    },
-    {
-      name: "तुषार बिसेन (Tushar Bisen)",
-      role: "Team Lead & Frontend Developer",
-      designation: "Frontend Developer",
-      responsibility:"Leading the UI development and managing village news, events, and content updates",
-      contact: "+91 91683 83674",
-      skills: [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "React.js",
-        "Next.js",
-        "Tailwind CSS",
-        "Responsive Design",
-      ],
-      image: "/tushar.jpg",
-    },
-    {
-      name: "पंकज मेश्राम (Pankaj Meshram)",
-      role: "Platform UI Designer",
-      designation: "UI/UX Designer",
-      responsibility:
-        "Designing user-friendly interfaces and enhancing platform aesthetics",
-      contact: "+91 8805920106",
-      skills: ["UI/UX Design", "Figma", "Responsive Design", "User Research"],
-      image: "/pnk.jpg",
-    },
-  ];
-  
+  const { language, t } = useLanguage();
 
-  const missionPoints = [
-    "Provide easy access to important village information and government schemes",
-    "Create a digital platform for villagers to stay connected and informed",
-    "Promote transparency in local governance and community activities",
-    "Support local businesses and farmers through digital visibility",
-    "Bridge the digital divide by making technology accessible to all villagers",
+  const missionPoints = useMemo(
+    () => [
+      t("aboutMission1"),
+      t("aboutMission2"),
+      t("aboutMission3"),
+      t("aboutMission4"),
+      t("aboutMission5"),
+    ],
+    [t]
+  );
+
+  const stats = [
+    { value: teamMembers.length, label: t("teamMembersLabel") },
+    { value: "24/7", label: t("supportLabel") },
+    { value: "100%", label: t("dedicatedLabel") },
+    { value: "∞", label: t("communityLoveLabel") },
+  ];
+
+  const contactCards = [
+    {
+      icon: <MapPin className="h-5 w-5" />,
+      title: t("visitUs"),
+      lines: ["Village Gidhadi", "Maharashtra, India"],
+    },
+    {
+      icon: <Phone className="h-5 w-5" />,
+      title: t("callUs"),
+      lines: ["+91 9168383674", t("monSatHours")],
+    },
+    {
+      icon: <Mail className="h-5 w-5" />,
+      title: t("emailUs"),
+      lines: ["gidhadigramconnect@gmail.com", t("replyWithin24Hours")],
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white">
-      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 max-w-7xl">
-        {/* Logo and Header */}
-        <div className="text-center mb-6 sm:mb-8 md:mb-12">
-          <div className="flex justify-center mb-4 sm:mb-6">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 bg-sky-100 rounded-full flex items-center justify-center border-2 sm:border-4 border-sky-200 shadow-lg">
-              <Image
-                src="/logo.png"
-                alt="Gidhadi Gram Connect Logo"
-                width={250}
-                height={250}
-                className="w-full h-full object-contain"
-              />
+    <div className="mx-auto max-w-6xl bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+        <div className="mb-10 text-center sm:mb-14">
+          <div className="mb-5 flex justify-center sm:mb-6">
+            <div className="relative">
+              <div className="absolute inset-0 scale-110 rounded-full bg-emerald-200 opacity-60 blur-xl" />
+              <div className="relative flex h-20 w-20 items-center justify-center rounded-full border-4 border-emerald-200 bg-white shadow-xl sm:h-24 sm:w-24 md:h-28 md:w-28">
+                <Image
+                  src="/logo.png"
+                  alt="Gidhadi Gram Connect Logo"
+                  width={220}
+                  height={220}
+                  className="h-4/5 w-4/5 object-contain"
+                />
+              </div>
             </div>
           </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-sky-800 mb-3 sm:mb-4 px-2 leading-tight">
-            About Gidhadi Gram Connect
+
+          <h1 className="mb-3 text-2xl font-extrabold leading-tight tracking-tight text-gray-800 sm:text-3xl md:text-4xl lg:text-5xl">
+            {t("aboutHeroTitle")}
           </h1>
-          <div className="w-12 sm:w-16 md:w-24 h-0.5 sm:h-1 bg-sky-600 mx-auto rounded-full"></div>
+          <p className="mx-auto max-w-2xl text-sm leading-relaxed text-gray-500 sm:text-base">
+            {t("aboutHeroSubtitle")}
+          </p>
         </div>
 
-        {/* Introduction Section */}
-        <Card className="mb-4 sm:mb-6 md:mb-8 border-sky-200 shadow-lg">
-          <CardHeader className="bg-sky-100 p-3 sm:p-4 md:p-6">
-            <CardTitle className="flex flex-col sm:flex-row items-center gap-2 text-base sm:text-lg md:text-xl lg:text-2xl text-sky-800">
-              <Globe className="h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0" />
-              <span className="text-center sm:text-left leading-tight">
-                Welcome to Our Digital Village
-              </span>
+        <Card className="mb-6 overflow-hidden border border-emerald-100 shadow-lg sm:mb-8">
+          <CardHeader className="bg-gradient-to-r from-emerald-600 to-teal-600 p-4 text-white sm:p-6">
+            <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl">
+              <Globe className="h-5 w-5 flex-shrink-0" />
+              {t("aboutWelcomeTitle")}
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-3 sm:p-4 md:p-6">
-            <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-700 mb-3 sm:mb-4">
-              <strong>Gidhadi Gram Connect</strong> is a community-driven
-              digital platform created by and for the people of Gidhadi village.
-              Our website serves as a bridge between traditional village life
-              and modern digital convenience, making important information
-              easily accessible to every villager.
+          <CardContent className="space-y-4 bg-white p-4 sm:p-6">
+            <p className="text-sm leading-relaxed text-gray-600 sm:text-base">
+              {t("aboutIntro1")}
             </p>
-            <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-700">
-              Whether you're looking for government scheme updates, local news,
-              community events, or want to connect with fellow villagers, this
-              platform is designed to serve our entire community with simplicity
-              and trust at its core.
+            <p className="text-sm leading-relaxed text-gray-600 sm:text-base">
+              {t("aboutIntro2")}
             </p>
           </CardContent>
         </Card>
 
-        {/* Vision and Mission */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8 md:mb-12">
-          {/* Vision */}
-          <Card className="border-sky-200 shadow-lg">
-            <CardHeader className="bg-sky-100 p-3 sm:p-4 md:p-6">
-              <CardTitle className="flex flex-col sm:flex-row items-center gap-2 text-base sm:text-lg md:text-xl text-sky-800">
-                <Target className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-                <span className="leading-tight">Our Vision</span>
+        <div className="mb-8 grid grid-cols-1 gap-5 sm:mb-10 sm:gap-6 lg:grid-cols-2">
+          <Card className="overflow-hidden border border-emerald-100 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-4 text-white sm:p-5">
+              <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg">
+                <Target className="h-5 w-5 flex-shrink-0" />
+                {t("aboutVisionTitle")}
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-3 sm:p-4 md:p-6">
-              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-700 italic">
-                "To create a digitally empowered Gidhadi village where every
-                resident has easy access to information, opportunities, and
-                community connections, fostering growth, transparency, and unity
-                in our beloved village."
-              </p>
+            <CardContent className="bg-white p-4 sm:p-6">
+              <div className="border-l-4 border-emerald-400 pl-4">
+                <p className="text-sm italic leading-relaxed text-gray-600 sm:text-base">
+                  {t("aboutVisionText")}
+                </p>
+              </div>
             </CardContent>
           </Card>
 
-          {/* Mission */}
-          <Card className="border-sky-300 shadow-lg">
-            <CardHeader className="bg-sky-200 p-3 sm:p-4 md:p-6">
-              <CardTitle className="flex flex-col sm:flex-row items-center gap-2 text-base sm:text-lg md:text-xl text-sky-800">
-                <Heart className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-                <span className="leading-tight">Our Mission</span>
+          <Card className="overflow-hidden border border-teal-100 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-teal-500 to-teal-600 p-4 text-white sm:p-5">
+              <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg">
+                <Heart className="h-5 w-5 flex-shrink-0" />
+                {t("aboutMissionTitle")}
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-3 sm:p-4 md:p-6">
-              <ul className="space-y-2 sm:space-y-3">
-                {missionPoints.map((point, index) => (
-                  <li key={index} className="flex items-start gap-2 sm:gap-3">
-                    <Badge
-                      variant="outline"
-                      className="mt-0.5 sm:mt-1 text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 bg-sky-50 text-sky-700 border-sky-300 flex-shrink-0"
-                    >
-                      {index + 1}
-                    </Badge>
-                    <span className="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed">
+            <CardContent className="bg-white p-4 sm:p-6">
+              <ul className="space-y-3">
+                {missionPoints.map((point) => (
+                  <li key={point} className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-teal-500" />
+                    <span className="text-xs leading-relaxed text-gray-600 sm:text-sm">
                       {point}
                     </span>
                   </li>
@@ -169,94 +214,81 @@ export default function AboutUs() {
           </Card>
         </div>
 
-        {/* Team Section */}
-        <Card className="mb-4 sm:mb-6 md:mb-8 border-sky-200 shadow-lg">
-          <CardHeader className="bg-sky-100 p-3 sm:p-4 md:p-6">
-            <CardTitle className="flex flex-col sm:flex-row items-center gap-2 text-base sm:text-lg md:text-xl lg:text-2xl text-sky-800">
-              <Users className="h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0" />
-              <span className="leading-tight">Our Dedicated Team</span>
+        <Card className="mb-6 overflow-hidden border border-emerald-100 shadow-lg sm:mb-8">
+          <CardHeader className="bg-gradient-to-r from-emerald-600 to-teal-600 p-4 text-white sm:p-6">
+            <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl">
+              <Users className="h-5 w-5 flex-shrink-0" />
+              {t("aboutTeamTitle")}
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-3 sm:p-4 md:p-6">
-            <p className="text-gray-700 mb-4 sm:mb-6 text-center text-xs sm:text-sm md:text-base leading-relaxed">
-              Meet the passionate volunteers who work tirelessly to keep our
-              village connected and informed.
+          <CardContent className="bg-white p-4 sm:p-6">
+            <p className="mb-6 text-center text-xs leading-relaxed text-gray-500 sm:text-sm">
+              {t("aboutTeamSubtitle")}
             </p>
 
-            {/* Team Members Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
-              {teamMembers.map((member, index) => (
+            <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {teamMembers.map((member) => (
                 <Card
-                  key={index}
-                  className="border-sky-200 shadow-md hover:shadow-lg transition-shadow duration-300 bg-gradient-to-br from-white to-sky-50"
+                  key={member.contact}
+                  className="group border border-emerald-100 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                 >
-                  <CardContent className="p-3 sm:p-4 md:p-6">
-                    <div className="space-y-3 sm:space-y-4">
-                      {/* Profile Image and Basic Info */}
-                      <div className="flex flex-col items-center text-center space-y-2 sm:space-y-3">
+                  <CardContent className="p-4 sm:p-5 md:p-6">
+                    <div className="space-y-4">
+                      <div className="flex flex-col items-center gap-3 text-center">
                         <div className="relative">
-                          <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 sm:border-4 border-sky-200 shadow-lg bg-sky-100">
+                          <div className="h-20 w-20 overflow-hidden rounded-full border-4 border-emerald-100 bg-emerald-50 shadow-md ring-2 ring-emerald-300 ring-offset-2 sm:h-24 sm:w-24">
                             <Image
-                              src={member.image || `/placeholder.svg?height=96&width=96&text=${member.name.split(" ")[0]}`}
+                              src={member.image}
                               alt={`${member.name} profile picture`}
                               width={96}
                               height={96}
-                              className="w-full h-full object-cover"
+                              className="h-full w-full object-cover"
                             />
                           </div>
-                          <div className="absolute -bottom-0.5 -right-0.5 sm:-bottom-1 sm:-right-1 w-5 h-5 sm:w-6 sm:h-6 bg-sky-500 rounded-full border-2 border-white flex items-center justify-center">
-                            <Star className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-white" />
-                          </div>
+                          <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-emerald-500 shadow">
+                            <Star className="h-3 w-3 fill-white text-white" />
+                          </span>
                         </div>
 
-                        <div className="space-y-1">
-                          <h3 className="font-bold text-gray-800 text-xs sm:text-sm md:text-base leading-tight px-2">
+                        <div className="space-y-1.5">
+                          <h3 className="text-sm font-bold leading-snug text-gray-800 sm:text-base">
                             {member.name}
                           </h3>
-                          <Badge
-                            variant="secondary"
-                            className="bg-sky-100 text-sky-800 text-[10px] sm:text-xs"
-                          >
-                            {member.role}
+                          <Badge className="border border-emerald-200 bg-emerald-50 text-[11px] font-medium text-emerald-700">
+                            {member.designation}
                           </Badge>
                         </div>
                       </div>
 
-                      {/* Designation */}
-                      <div className="bg-sky-50 rounded-lg p-2 sm:p-3 border border-sky-100">
-                        <div className="text-center">
-                          <span className="text-[10px] sm:text-xs font-medium text-sky-600 uppercase tracking-wide block mb-1">
-                            Designation
-                          </span>
-                          <p className="text-xs sm:text-sm font-medium text-gray-800 leading-snug">
-                            {member.designation}
-                          </p>
-                        </div>
-                      </div>
+                      <SectionDivider />
 
-                      {/* Responsibility */}
-                      <div className="space-y-1.5 sm:space-y-2">
-                        <span className="text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-wide flex items-center gap-1">
-                          <Target className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
-                          Responsibility
-                        </span>
-                        <p className="text-xs sm:text-sm text-gray-700 leading-relaxed bg-gray-50 p-2 sm:p-3 rounded-lg border">
-                          {member.responsibility}
+                      <div className="rounded-lg border border-emerald-100 bg-emerald-50 px-3 py-2 text-center">
+                        <p className="text-xs font-medium leading-snug text-emerald-700">
+                          {member.role[language]}
                         </p>
                       </div>
 
-                      {/* Skills */}
-                      <div className="space-y-1.5 sm:space-y-2">
-                        <span className="text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-wide flex items-center gap-1">
-                          <Star className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
-                          Skills
+                      <div className="space-y-1.5">
+                        <span className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-gray-400 sm:text-xs">
+                          <Target className="h-3 w-3 text-emerald-500" />
+                          {t("responsibility")}
                         </span>
-                        <div className="flex flex-wrap gap-1 sm:gap-1.5">
-                          {member.skills.map((skill, skillIndex) => (
+                        <p className="rounded-lg border border-gray-100 bg-gray-50 p-2.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
+                          {member.responsibility[language]}
+                        </p>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <span className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-gray-400 sm:text-xs">
+                          <Star className="h-3 w-3 text-emerald-500" />
+                          {t("skills")}
+                        </span>
+                        <div className="flex flex-wrap gap-1">
+                          {member.skills.map((skill) => (
                             <Badge
-                              key={skillIndex}
+                              key={skill}
                               variant="outline"
-                              className="text-[10px] sm:text-xs bg-sky-50 text-sky-700 border-sky-300 hover:bg-sky-100 transition-colors"
+                              className="border-emerald-200 bg-white text-[10px] text-emerald-700 sm:text-xs"
                             >
                               {skill}
                             </Badge>
@@ -264,12 +296,14 @@ export default function AboutUs() {
                         </div>
                       </div>
 
-                      {/* Contact */}
-                      <div className="pt-2 sm:pt-3 border-t border-sky-100">
-                        <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-gray-600 bg-sky-50 p-2 sm:p-3 rounded-lg">
-                          <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-sky-600 flex-shrink-0" />
-                          <span className="font-medium">{member.contact}</span>
-                        </div>
+                      <div className="border-t border-emerald-100 pt-3">
+                        <a
+                          href={`tel:${member.contact.replace(/\s/g, "")}`}
+                          className="flex items-center justify-center gap-2 rounded-lg border border-emerald-100 bg-emerald-50 p-2.5 text-xs font-medium text-emerald-700 transition-colors hover:bg-emerald-100 sm:text-sm"
+                        >
+                          <Phone className="h-3.5 w-3.5 flex-shrink-0" />
+                          {member.contact}
+                        </a>
                       </div>
                     </div>
                   </CardContent>
@@ -277,119 +311,83 @@ export default function AboutUs() {
               ))}
             </div>
 
-            {/* Team Stats */}
-            <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-              <div className="text-center p-3 sm:p-4 bg-sky-50 rounded-lg border border-sky-100">
-                <div className="text-xl sm:text-2xl font-bold text-sky-600">
-                  {teamMembers.length}
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+              {stats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-xl border border-emerald-100 bg-gradient-to-br from-emerald-50 to-teal-50 p-4 text-center shadow-sm"
+                >
+                  <div className="text-2xl font-extrabold tracking-tight text-emerald-600 sm:text-3xl">
+                    {stat.value}
+                  </div>
+                  <div className="mt-1 text-[10px] font-medium uppercase tracking-widest text-gray-500 sm:text-xs">
+                    {stat.label}
+                  </div>
                 </div>
-                <div className="text-[10px] sm:text-xs text-gray-600 uppercase tracking-wide mt-1">
-                  Team Members
-                </div>
-              </div>
-              <div className="text-center p-3 sm:p-4 bg-sky-50 rounded-lg border border-sky-100">
-                <div className="text-xl sm:text-2xl font-bold text-sky-600">24/7</div>
-                <div className="text-[10px] sm:text-xs text-gray-600 uppercase tracking-wide mt-1">
-                  Support
-                </div>
-              </div>
-              <div className="text-center p-3 sm:p-4 bg-sky-50 rounded-lg border border-sky-100">
-                <div className="text-xl sm:text-2xl font-bold text-sky-600">100%</div>
-                <div className="text-[10px] sm:text-xs text-gray-600 uppercase tracking-wide mt-1">
-                  Dedicated
-                </div>
-              </div>
-              <div className="text-center p-3 sm:p-4 bg-sky-50 rounded-lg border border-sky-100">
-                <div className="text-xl sm:text-2xl font-bold text-sky-600">∞</div>
-                <div className="text-[10px] sm:text-xs text-gray-600 uppercase tracking-wide mt-1">
-                  Community Love
-                </div>
-              </div>
+              ))}
             </div>
           </CardContent>
         </Card>
 
-        {/* Contact Information */}
-        <Card className="mb-4 sm:mb-6 md:mb-8 border-sky-200 shadow-lg">
-          <CardHeader className="bg-sky-100 p-3 sm:p-4 md:p-6">
-            <CardTitle className="flex flex-col sm:flex-row items-center gap-2 text-base sm:text-lg md:text-xl text-sky-800">
-              <Mail className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-              <span className="leading-tight">Get in Touch</span>
+        <Card className="mb-6 overflow-hidden border border-emerald-100 shadow-lg sm:mb-8">
+          <CardHeader className="bg-gradient-to-r from-emerald-600 to-teal-600 p-4 text-white sm:p-6">
+            <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl">
+              <Mail className="h-5 w-5 flex-shrink-0" />
+              {t("getInTouch")}
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-3 sm:p-4 md:p-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 text-center">
-              <div className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-sky-50 rounded-lg">
-                <MapPin className="h-6 w-6 sm:h-8 sm:w-8 text-sky-600" />
-                <h3 className="font-semibold text-gray-800 text-sm sm:text-base">Visit Us</h3>
-                <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
-                  Village Gidhadi
-                  <br />
-                  
-                </p>
-              </div>
-              <div className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-sky-50 rounded-lg">
-                <Phone className="h-6 w-6 sm:h-8 sm:w-8 text-sky-600" />
-                <h3 className="font-semibold text-gray-800 text-sm sm:text-base">Call Us</h3>
-                <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
-                  +91 9168383674
-                  <br />
-                  Mon-Sat: 9AM-6PM
-                </p>
-              </div>
-              <div className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-sky-50 rounded-lg sm:col-span-2 lg:col-span-1">
-                <Mail className="h-6 w-6 sm:h-8 sm:w-8 text-sky-600" />
-                <h3 className="font-semibold text-gray-800 text-sm sm:text-base">Email Us</h3>
-                <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
-                  gidhadigramconnect@gmail.com
-                  <br />
-                  We reply within 24 hours
-                </p>
-              </div>
+          <CardContent className="bg-white p-4 sm:p-6">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
+              {contactCards.map((item) => (
+                <div
+                  key={item.title}
+                  className="flex flex-col items-center gap-3 rounded-xl border border-emerald-100 bg-gradient-to-br from-emerald-50 to-teal-50 p-4 text-center shadow-sm"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-sm font-semibold text-gray-800 sm:text-base">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs leading-relaxed text-gray-500 sm:text-sm">
+                    {item.lines.map((line, index) => (
+                      <span key={`${item.title}-${index}`}>
+                        {line}
+                        {index < item.lines.length - 1 && <br />}
+                      </span>
+                    ))}
+                  </p>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>
 
-        {/* Disclaimer */}
-        <Card className="border-amber-200 shadow-lg mb-4 sm:mb-6 md:mb-8">
-          <CardHeader className="bg-amber-50 p-3 sm:p-4 md:p-6">
-            <CardTitle className="flex flex-col sm:flex-row items-center gap-2 text-base sm:text-lg md:text-xl text-amber-800">
-              <Shield className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-              <span className="leading-tight">Important Disclaimer</span>
+        <Card className="mb-6 overflow-hidden border border-amber-200 shadow-lg sm:mb-8">
+          <CardHeader className="bg-gradient-to-r from-amber-400 to-orange-400 p-4 text-white sm:p-6">
+            <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl">
+              <Shield className="h-5 w-5 flex-shrink-0" />
+              {t("importantDisclaimer")}
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-3 sm:p-4 md:p-6">
-            <div className="bg-yellow-50 border-l-2 sm:border-l-4 border-yellow-400 p-3 sm:p-4 rounded-r-lg">
-              <p className="text-gray-700 leading-relaxed text-xs sm:text-sm md:text-base">
-                <strong>Please Note:</strong> Gidhadi Gram Connect is an{" "}
-                <strong>unofficial community website</strong> created for public
-                awareness and community benefit. This platform is not affiliated
-                with any government body or official administrative office. All
-                information provided here is for informational purposes only and
-                should be verified with official sources when necessary.
-              </p>
-              <p className="text-gray-700 leading-relaxed mt-2 sm:mt-3 text-xs sm:text-sm md:text-base">
-                Our goal is to serve our community with accurate and helpful
-                information. For official government services and documentation,
-                please visit the appropriate government offices or official
-                websites.
-              </p>
-            </div>
+          <CardContent className="space-y-3 bg-amber-50 p-4 sm:p-6">
+            <p className="text-xs leading-relaxed text-gray-700 sm:text-sm md:text-base">
+              <strong>{t("pleaseNote")}</strong> {t("aboutDisclaimer1")}
+            </p>
+            <p className="text-xs leading-relaxed text-gray-700 sm:text-sm md:text-base">
+              {t("aboutDisclaimer2")}
+            </p>
           </CardContent>
         </Card>
 
-        {/* Footer Message */}
-        <div className="text-center p-3 sm:p-4 md:p-6 bg-sky-50 rounded-lg border border-sky-200">
-          <h3 className="text-base sm:text-lg md:text-xl font-semibold text-sky-800 mb-2 leading-tight">
-            Together We Grow
+        <div className="rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 p-6 text-center shadow-lg sm:p-8">
+          <h3 className="mb-2 text-lg font-bold text-white sm:text-xl md:text-2xl">
+            {t("togetherWeGrow")}
           </h3>
-          <p className="text-gray-700 text-xs sm:text-sm md:text-base leading-relaxed">
-            Thank you for being part of the Gidhadi Gram Connect community. Your
-            participation and feedback help us serve our village better every
-            day.
+          <p className="mx-auto max-w-2xl text-xs leading-relaxed text-emerald-100 sm:text-sm md:text-base">
+            {t("aboutFooterMessage")}
           </p>
         </div>
-      </div>
     </div>
   );
 }

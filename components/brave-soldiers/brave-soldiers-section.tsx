@@ -1,8 +1,11 @@
+ "use client";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Star, Shield, Award } from "lucide-react";
 import Image from "next/image";
+import { useLanguage } from "@/components/providers/language-provider";
 
 const soldiersData = [
   {
@@ -26,6 +29,8 @@ const soldiersData = [
 ];
 
 export default function BraveSoldiersSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="py-16 px-4 bg-gradient-to-b from-slate-50 to-white rounded-2xl border-2 mt-4 border-sky-700">
       <div className="max-w-6xl mx-auto">
@@ -36,14 +41,14 @@ export default function BraveSoldiersSection() {
               <Shield className="h-8 w-8 text-white" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-              Our Brave Soldiers
+              {t("brave_soldiers_title")}
             </h2>
             <div className="bg-gradient-to-r from-orange-600 to-amber-600 p-2 rounded-full shadow-lg">
               <Shield className="h-8 w-8 text-white" />
             </div>
           </div>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto font-medium">
-            Honoring Their Service and Sacrifice
+            {t("brave_soldiers_subtitle")}
           </p>
           <div className="w-32 h-2 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 mx-auto mt-4 rounded-full shadow-md"></div>
 
@@ -88,7 +93,9 @@ export default function BraveSoldiersSection() {
                         : "bg-slate-700 hover:bg-slate-800 group-hover:bg-amber-700"
                     } text-white font-bold px-4 py-2 text-xs uppercase tracking-wider shadow-lg group-hover:shadow-xl transition-all duration-300`}
                   >
-                    {soldier.status}
+                    {soldier.status === "Currently Serving"
+                      ? t("currently_serving")
+                      : t("retired")}
                   </Badge>
                 </div>
 
@@ -155,7 +162,7 @@ export default function BraveSoldiersSection() {
                       <Shield className="h-4 w-4 text-white" />
                     </div>
                     <span className="text-sm font-bold text-amber-800 group-hover:text-amber-900 uppercase tracking-wider transition-colors duration-300">
-                      Proud Son of Gidhadi
+                      {t("proud_son")}
                     </span>
                   </div>
                 </div>
@@ -170,11 +177,10 @@ export default function BraveSoldiersSection() {
         <div className="text-center mt-12">
           <div className="bg-slate-100 rounded-2xl p-8 max-w-2xl mx-auto">
             <h3 className="text-xl font-semibold text-slate-800 mb-3">
-              Know a Brave Soldier from Our Village?
+              {t("know_a_soldier")}
             </h3>
             <p className="text-slate-600 mb-6">
-              Help us honor more heroes by sharing their stories with our
-              community.
+              {t("know_a_soldier_desc")}
             </p>
             <a
               href="https://docs.google.com/forms/d/1K2xP06egTSRr2BLvb86nmP20vs_z_jTreOHxbUrwk3A/edit"
@@ -185,7 +191,7 @@ export default function BraveSoldiersSection() {
                 size="lg"
                 className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-medium px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                Share Your Story
+                {t("share_your_story")}
               </Button>
             </a>
           </div>
@@ -194,3 +200,6 @@ export default function BraveSoldiersSection() {
     </section>
   );
 }
+
+
+ 

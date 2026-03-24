@@ -119,7 +119,7 @@ const NoticeBoard = () => {
       <CardHeader>
         <CardTitle className="flex items-center">
           <AlertTriangle className="mr-2 h-5 w-5 text-gov-orange" />
-          Official Notice Board
+          {t("officialNoticeBoard")}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -137,7 +137,7 @@ const NoticeBoard = () => {
                   <div className="flex-1">
                     <div className="flex items-center space-x-2 mb-1">
                       <h3 className="font-semibold text-gray-900">{notice.title[language]}</h3>
-                      {notice.urgent && <Badge variant="destructive">URGENT</Badge>}
+                      {notice.urgent && <Badge variant="destructive">{t("urgent")}</Badge>}
                     </div>
                     <p className="text-sm text-gray-600 leading-relaxed">{notice.description[language]}</p>
                   </div>
@@ -159,7 +159,7 @@ const NoticeBoard = () => {
                 <div className="flex items-center space-x-2">
                   <Button variant="outline" size="sm">
                     <Eye className="mr-1 h-4 w-4" />
-                    View
+                    {t("view")}
                   </Button>
                   <Button variant="outline" size="sm">
                     <Download className="mr-1 h-4 w-4" />
@@ -173,7 +173,7 @@ const NoticeBoard = () => {
 
         <div className="mt-6 text-center">
           <Button variant="outline">
-            View All Notices
+            {t("viewAllNotices")}
             <FileText className="ml-2 h-4 w-4" />
           </Button>
         </div>

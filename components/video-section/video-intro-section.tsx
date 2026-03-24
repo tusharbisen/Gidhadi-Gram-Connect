@@ -1,277 +1,210 @@
-// "use client";
-
-// import { useState } from "react";
-// import { Play, Pause, Volume2, VolumeX } from "lucide-react";
-// import { Button } from "@/components/ui/button";
-
-// export default function VideoIntroSection() {
-//   const [isPlaying, setIsPlaying] = useState(false);
-//   const [isMuted, setIsMuted] = useState(false);
-
-//   const handlePlayPause = () => {
-//     const video = document.getElementById("intro-video") as HTMLVideoElement;
-//     if (video) {
-//       if (isPlaying) {
-//         video.pause();
-//       } else {
-//         video.play();
-//       }
-//       setIsPlaying(!isPlaying);
-//     }
-//   };
-
-//   const handleMuteToggle = () => {
-//     const video = document.getElementById("intro-video") as HTMLVideoElement;
-//     if (video) {
-//       video.muted = !isMuted;
-//       setIsMuted(!isMuted);
-//     }
-//   };
-
-//   return (
-//     <section className="w-full py-12 md:py-16 lg:py-20 bg-gradient-to-br from-sky-50 to-blue-50 mt-5 rounded-2xl border-2 border-sky-700">
-//       <div className="container mx-auto px-4 md:px-6">
-//         {/* Section Header */}
-//         <div className="text-center mb-8 md:mb-12">
-//           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-//             "गिधाडी ग्राम कनेक्ट म्हणजे काय?"
-//           </h2>
-//           <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-sky-700 mb-6">
-//             What is Gidhadi Gram?
-//           </h3>
-//           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-//             Discover how our village community connects, grows, and thrives
-//             together through digital innovation and traditional values.
-//           </p>
-//         </div>
-
-//         {/* Video Container */}
-//         <div className="max-w-5xl mx-auto">
-//           <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl">
-//             {/* Video Element */}
-//             <video
-//               id="intro-video"
-//               className="w-full h-auto aspect-video"
-//               poster="/thumbel.png"
-//               onPlay={() => setIsPlaying(true)}
-//               onPause={() => setIsPlaying(false)}
-//               onEnded={() => setIsPlaying(false)}
-//             >
-//               <source
-//                 src="https://res.cloudinary.com/dy1w6zqom/video/upload/v1753786003/Gidhadi_Gram_connect_1_sbwhpq.mp4"
-//                 type="video/mp4"
-//               />
-//               <source src="https://res.cloudinary.com/dy1w6zqom/video/upload/v1753786003/Gidhadi_Gram_connect_1_sbwhpq.mp4" type="video/webm" />
-//               Your browser does not support the video tag.
-//             </video>
-
-//             {/* Custom Video Controls Overlay */}
-//             <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center group">
-//               <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-//                 <Button
-//                   onClick={handlePlayPause}
-//                   size="lg"
-//                   className="bg-white bg-opacity-90 hover:bg-opacity-100 text-black rounded-full p-4"
-//                 >
-//                   {isPlaying ? (
-//                     <Pause className="h-6 w-6" />
-//                   ) : (
-//                     <Play className="h-6 w-6 ml-1" />
-//                   )}
-//                 </Button>
-//                 <Button
-//                   onClick={handleMuteToggle}
-//                   size="lg"
-//                   variant="outline"
-//                   className="bg-white bg-opacity-90 hover:bg-opacity-100 text-black rounded-full p-4"
-//                 >
-//                   {isMuted ? (
-//                     <VolumeX className="h-5 w-5" />
-//                   ) : (
-//                     <Volume2 className="h-5 w-5" />
-//                   )}
-//                 </Button>
-//               </div>
-//             </div>
-
-//             {/* Play Button for Initial State */}
-//             {!isPlaying && (
-//               <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
-//                 <Button
-//                   onClick={handlePlayPause}
-//                   size="lg"
-//                   className="bg-sky-600 hover:bg-sky-700 text-white rounded-full p-6 shadow-lg transform hover:scale-105 transition-all duration-200"
-//                 >
-//                   <Play className="h-8 w-8 ml-1" />
-//                 </Button>
-//               </div>
-//             )}
-//           </div>
-
-//           {/* Video Description */}
-//           <div className="mt-8 text-center">
-//             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-//               <div className="bg-white p-6 rounded-xl shadow-lg">
-//                 <h4 className="text-xl font-semibold text-sky-700 mb-3">
-//                   🏘️ Community Connection
-//                 </h4>
-//                 <p className="text-gray-600">
-//                   Connecting villagers, sharing resources, and building stronger
-//                   community bonds
-//                 </p>
-//               </div>
-//               <div className="bg-white p-6 rounded-xl shadow-lg">
-//                 <h4 className="text-xl font-semibold text-sky-600 mb-3">
-//                   💼 Local Services
-//                 </h4>
-//                 <p className="text-gray-600">
-//                   Access to local businesses, government services, and essential
-//                   information
-//                 </p>
-//               </div>
-//               <div className="bg-white p-6 rounded-xl shadow-lg">
-//                 <h4 className="text-xl font-semibold text-sky-800 mb-3">
-//                   📱 Digital Innovation
-//                 </h4>
-//                 <p className="text-gray-600">
-//                   Modern technology meeting traditional village life for better
-//                   living
-//                 </p>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Call to Action */}
-//         <div className="text-center mt-12">
-//           <Button
-//             size="lg"
-//             className="bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 text-lg rounded-full shadow-lg transform hover:scale-105 transition-all duration-200"
-//           >
-//             Join Gidhadi Gram Community
-//           </Button>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
-
 "use client";
 
-import { useState, useRef } from "react";
-import { Play, Pause, Volume2, VolumeX } from "lucide-react";
+import { useState, useRef, useCallback } from "react";
+import { Play, Pause, Volume2, VolumeX, Users, Briefcase, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/components/providers/language-provider";
+
+// ─── Constants ────────────────────────────────────────────────────────────────
+
+const VIDEO_SRC =
+  "https://res.cloudinary.com/dy1w6zqom/video/upload/v1753786003/Gidhadi_Gram_connect_1_sbwhpq.mp4";
+
+const FEATURE_CARDS = [
+  {
+    icon: Users,
+    emoji: "🏘️",
+    titleKey: "featureCommunity",
+    descKey: "featureCommunityDesc",
+    fallbackTitle: "Community Connection",
+    fallbackDesc:
+      "Connecting villagers, sharing resources, and building stronger community bonds.",
+    color: "text-emerald-700",
+  },
+  {
+    icon: Briefcase,
+    emoji: "💼",
+    titleKey: "featureServices",
+    descKey: "featureServicesDesc",
+    fallbackTitle: "Local Services",
+    fallbackDesc:
+      "Access to local businesses, government services, and essential information.",
+    color: "text-teal-700",
+  },
+  {
+    icon: Smartphone,
+    emoji: "📱",
+    titleKey: "featureDigital",
+    descKey: "featureDigitalDesc",
+    fallbackTitle: "Digital Innovation",
+    fallbackDesc:
+      "Modern technology meeting traditional village life for better living.",
+    color: "text-emerald-800",
+  },
+] as const;
+
+// ─── Component ────────────────────────────────────────────────────────────────
 
 export default function VideoIntroSection() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true); // start muted for mobile autoplay
+  const { t } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const handlePlayPause = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play().catch((err) => {
-          console.warn("Play prevented:", err);
-        });
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true); // start muted for mobile autoplay policy
+  const [showControls, setShowControls] = useState(false);
 
-  const handleMuteToggle = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
+  const handlePlayPause = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isPlaying) {
+      video.pause();
+    } else {
+      video.play().catch((err) => {
+        // Autoplay was blocked — user interaction needed
+        console.warn("Play prevented:", err);
+      });
     }
-  };
+  }, [isPlaying]);
+
+  const handleMuteToggle = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const next = !isMuted;
+    video.muted = next;
+    setIsMuted(next);
+  }, [isMuted]);
 
   return (
-    <section className="w-full py-12 md:py-16 lg:py-20 bg-gradient-to-br from-sky-50 to-blue-50 mt-5 rounded-2xl border-2 border-sky-700">
-      <div className="container mx-auto px-4 md:px-6">
-        {/* Section Header */}
-        <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+    <section className="w-full py-10 sm:py-14 md:py-20 bg-gradient-to-br from-emerald-50 via-white to-teal-50 mt-5 rounded-2xl border border-emerald-200 shadow-sm">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* ── Section Header ───────────────────────────────────────────── */}
+        <div className="text-center mb-8 sm:mb-10 md:mb-12">
+          <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-emerald-500 mb-2">
+            Village · Gram · गाव
+          </p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-800 mb-3 leading-tight tracking-tight">
             "गिधाडी ग्राम कनेक्ट म्हणजे काय?"
           </h2>
-          <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-sky-700 mb-6">
-            What is Gidhadi Gram?
+          <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-emerald-600 mb-4">
+            {t("whatIsGidhadiGramTitle")}
           </h3>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discover how our village community connects, grows, and thrives
-            together through digital innovation and traditional values.
+          <p className="text-sm sm:text-base md:text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
+            {t("whatIsGidhadiGramSubtitle")}
           </p>
+          <div className="mt-4 flex items-center justify-center gap-2">
+            <div className="h-1 w-8 rounded-full bg-emerald-300" />
+            <div className="h-1 w-16 rounded-full bg-emerald-500" />
+            <div className="h-1 w-8 rounded-full bg-emerald-300" />
+          </div>
         </div>
 
-        {/* Video Container */}
-        <div className="max-w-5xl mx-auto">
-          <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl">
-            {/* Video Element */}
+        {/* ── Video Player ─────────────────────────────────────────────── */}
+        <div className="max-w-4xl mx-auto">
+          <div
+            className="relative bg-black rounded-2xl overflow-hidden shadow-2xl ring-1 ring-emerald-200"
+            onMouseEnter={() => setShowControls(true)}
+            onMouseLeave={() => setShowControls(false)}
+            onTouchStart={() => setShowControls((v) => !v)}
+          >
+            {/* Video */}
             <video
               ref={videoRef}
-              id="intro-video"
-              className="w-full h-auto aspect-video"
+              className="w-full aspect-video"
               poster="/thumbel.png"
               muted={isMuted}
               playsInline
-              autoPlay
-              controls={false}
+              preload="metadata"
               onPlay={() => setIsPlaying(true)}
               onPause={() => setIsPlaying(false)}
               onEnded={() => setIsPlaying(false)}
+              aria-label="Gidhadi Gram Connect introduction video"
             >
-              <source
-                src="https://res.cloudinary.com/dy1w6zqom/video/upload/v1753786003/Gidhadi_Gram_connect_1_sbwhpq.mp4"
-                type="video/mp4"
-              />
+              <source src={VIDEO_SRC} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
-            {/* Custom Video Controls Overlay */}
-            <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center group">
-              <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <Button
+            {/* Hover/touch overlay controls */}
+            <div
+              className={`absolute inset-0 bg-black/20 flex items-end justify-start p-3 sm:p-4 transition-opacity duration-300 ${
+                showControls && isPlaying ? "opacity-100" : "opacity-0 pointer-events-none"
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                <button
                   onClick={handlePlayPause}
-                  size="lg"
-                  className="bg-white bg-opacity-90 hover:bg-opacity-100 text-black rounded-full p-4"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center text-gray-800 shadow transition-transform hover:scale-105"
+                  aria-label={isPlaying ? "Pause video" : "Play video"}
                 >
                   {isPlaying ? (
-                    <Pause className="h-6 w-6" />
+                    <Pause className="h-4 w-4 sm:h-5 sm:w-5" />
                   ) : (
-                    <Play className="h-6 w-6 ml-1" />
+                    <Play className="h-4 w-4 sm:h-5 sm:w-5 ml-0.5" />
                   )}
-                </Button>
-                <Button
+                </button>
+                <button
                   onClick={handleMuteToggle}
-                  size="lg"
-                  variant="outline"
-                  className="bg-white bg-opacity-90 hover:bg-opacity-100 text-black rounded-full p-4"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center text-gray-800 shadow transition-transform hover:scale-105"
+                  aria-label={isMuted ? "Unmute video" : "Mute video"}
                 >
                   {isMuted ? (
-                    <VolumeX className="h-5 w-5" />
+                    <VolumeX className="h-4 w-4 sm:h-5 sm:w-5" />
                   ) : (
-                    <Volume2 className="h-5 w-5" />
+                    <Volume2 className="h-4 w-4 sm:h-5 sm:w-5" />
                   )}
-                </Button>
+                </button>
               </div>
             </div>
 
-            {/* Play Button for Initial State */}
+            {/* Centre play button — visible when paused */}
             {!isPlaying && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
-                <Button
+              <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                <button
                   onClick={handlePlayPause}
-                  size="lg"
-                  className="bg-sky-600 hover:bg-sky-700 text-white rounded-full p-6 shadow-lg transform hover:scale-105 transition-all duration-200"
+                  className="w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl flex items-center justify-center transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-400"
+                  aria-label="Play video"
                 >
-                  <Play className="h-8 w-8 ml-1" />
-                </Button>
+                  <Play className="h-6 w-6 sm:h-7 sm:w-7 ml-1" />
+                </button>
               </div>
             )}
           </div>
+
+          {/* ── Feature Cards ───────────────────────────────────────────── */}
+          <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            {FEATURE_CARDS.map(
+              ({ icon: Icon, emoji, titleKey, descKey, fallbackTitle, fallbackDesc, color }) => (
+                <div
+                  key={titleKey}
+                  className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow p-4 sm:p-5 text-center"
+                >
+                  <div className="text-2xl mb-2" aria-hidden="true">
+                    {emoji}
+                  </div>
+                  <h4 className={`text-sm sm:text-base font-bold mb-1.5 ${color}`}>
+                    {t(titleKey) !== titleKey ? t(titleKey) : fallbackTitle}
+                  </h4>
+                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                    {t(descKey) !== descKey ? t(descKey) : fallbackDesc}
+                  </p>
+                </div>
+              )
+            )}
+          </div>
         </div>
+
+        {/* ── CTA ─────────────────────────────────────────────────────── */}
+        <div className="text-center mt-8 sm:mt-10">
+          <Button
+            size="lg"
+            className="bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white px-7 sm:px-9 py-2.5 sm:py-3 text-sm sm:text-base font-semibold rounded-full shadow-lg hover:shadow-emerald-200 transition-all duration-200 hover:scale-105"
+          >
+            {t("joinCommunityBtn") !== "joinCommunityBtn"
+              ? t("joinCommunityBtn")
+              : "Join Gidhadi Gram Community"}
+          </Button>
+        </div>
+
       </div>
     </section>
   );

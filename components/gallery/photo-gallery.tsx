@@ -1,15 +1,57 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useLanguage } from "@/components/providers/language-provider"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { X, ChevronLeft, ChevronRight, Calendar, Tag } from "lucide-react"
-import Image from "next/image"
+import { useState, useCallback, useEffect } from "react";
+import { useLanguage } from "@/components/providers/language-provider";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { X, ChevronLeft, ChevronRight, Calendar, Tag, Images } from "lucide-react";
+import Image from "next/image";
 
-const galleryItems = [
+// ─────────────────────────────────────────────
+// HOW TO ADD IMAGES FROM CLOUDINARY:
+//
+// 1. Go to your Cloudinary dashboard → Media Library
+// 2. Upload your images
+// 3. Click on any image → copy its "Public ID"
+//    e.g. "gidhadi/independence-day-2023"
+// 4. Replace the `cloudinaryId` values below with your real Public IDs
+//
+// The helper `cldUrl()` auto-builds optimised URLs.
+// ─────────────────────────────────────────────
+
+const CLOUD_NAME = "YOUR_CLOUD_NAME"; // 👈 Replace with your Cloudinary cloud name
+
+const cldUrl = (publicId: string, width = 800, quality = "auto") =>
+  `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_${quality},w_${width}/${publicId}`;
+
+const cldThumb = (publicId: string, size = 400) =>
+  `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_auto,w_${size},h_${size},c_fill,g_auto/${publicId}`;
+
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+type Language = "en" | "hi" | "mr";
+
+interface GalleryItem {
+  id: number;
+  title: Record<Language, string>;
+  category: string;
+  date: string;
+  cloudinaryId: string;
+}
+
+interface Category {
+  key: string;
+  label: string;
+}
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+
+const galleryItems: GalleryItem[] = [
   {
     id: 1,
     title: {
@@ -19,8 +61,7 @@ const galleryItems = [
     },
     category: "events",
     date: "2023-08-15",
-    image: "/image1.jpg",
-    thumbnail:"/image4.jpg",
+    cloudinaryId: "gidhadi/sample1",
   },
   {
     id: 2,
@@ -31,8 +72,7 @@ const galleryItems = [
     },
     category: "environment",
     date: "2023-07-05",
-    image: "/image2.jpg",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    cloudinaryId: "gidhadi/sample2",
   },
   {
     id: 3,
@@ -43,8 +83,7 @@ const galleryItems = [
     },
     category: "development",
     date: "2023-06-20",
-    image: "/image3.jpg",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    cloudinaryId: "gidhadi/sample3",
   },
   {
     id: 4,
@@ -55,8 +94,7 @@ const galleryItems = [
     },
     category: "meetings",
     date: "2023-06-25",
-    image: "image4.jpg",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    cloudinaryId: "gidhadi/sample4",
   },
   {
     id: 5,
@@ -67,8 +105,7 @@ const galleryItems = [
     },
     category: "development",
     date: "2023-05-15",
-    image: "/image1.jpg",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    cloudinaryId: "gidhadi/sample5",
   },
   {
     id: 6,
@@ -79,8 +116,7 @@ const galleryItems = [
     },
     category: "social",
     date: "2023-05-10",
-    image: "image2.jpg",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    cloudinaryId: "gidhadi/sample6",
   },
   {
     id: 7,
@@ -91,8 +127,7 @@ const galleryItems = [
     },
     category: "environment",
     date: "2023-04-22",
-    image: "/image3.jpg",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    cloudinaryId: "gidhadi/sample7",
   },
   {
     id: 8,
@@ -103,195 +138,281 @@ const galleryItems = [
     },
     category: "development",
     date: "2023-04-10",
-    image: "/image4.jpg",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    cloudinaryId: "gidhadi/sample8",
   },
-]
+];
+
+// ─── Category config ──────────────────────────────────────────────────────────
+
+const CATEGORY_STYLES: Record<string, { color: string; bg: string }> = {
+  events:      { color: "text-blue-700",    bg: "bg-blue-100" },
+  development: { color: "text-green-700",   bg: "bg-green-100" },
+  environment: { color: "text-emerald-700", bg: "bg-emerald-100" },
+  meetings:    { color: "text-purple-700",  bg: "bg-purple-100" },
+  social:      { color: "text-pink-700",    bg: "bg-pink-100" },
+  default:     { color: "text-gray-700",    bg: "bg-gray-100" },
+};
+
+const getCategoryStyle = (category: string) =>
+  CATEGORY_STYLES[category] ?? CATEGORY_STYLES.default;
+
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+interface GalleryCardProps {
+  item: GalleryItem;
+  lang: Language;
+  index: number;
+  onOpen: (item: GalleryItem, index: number) => void;
+}
+
+function GalleryCard({ item, lang, index, onOpen }: GalleryCardProps) {
+  const { color, bg } = getCategoryStyle(item.category);
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={() => onOpen(item, index)}
+      onKeyDown={(e) => e.key === "Enter" && onOpen(item, index)}
+      aria-label={`Open photo: ${item.title[lang]}`}
+      className="group cursor-pointer overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+    >
+      {/* Thumbnail */}
+      <div className="relative aspect-square w-full overflow-hidden bg-gray-100">
+        <Image
+          src={cldThumb(item.cloudinaryId)}
+          alt={item.title[lang]}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
+        <div className="absolute right-2 top-2">
+          <span
+            className={`inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold capitalize ${bg} ${color}`}
+          >
+            {item.category}
+          </span>
+        </div>
+      </div>
+
+      {/* Info */}
+      <div className="p-3">
+        <p className="mb-1 line-clamp-2 text-sm font-semibold leading-snug text-gray-800">
+          {item.title[lang]}
+        </p>
+        <div className="flex items-center gap-1 text-xs text-gray-400">
+          <Calendar className="h-3 w-3 flex-shrink-0" />
+          {new Date(item.date).toLocaleDateString("en-IN", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Component ────────────────────────────────────────────────────────────
 
 const PhotoGallery = () => {
-  const { t, language } = useLanguage()
-  const [filter, setFilter] = useState("all")
-  const [selectedImage, setSelectedImage] = useState<any>(null)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const { t, language } = useLanguage();
+  const lang = language as Language;
 
-  const categories = [
-    { key: "all", label: "All Photos" },
-    { key: "events", label: t("eventPhotos") },
+  const [filter, setFilter] = useState("all");
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const categories: Category[] = [
+    { key: "all",         label: t("allPhotos") },
+    { key: "events",      label: t("eventPhotos") },
     { key: "development", label: t("developmentWork") },
-    { key: "environment", label: "Environment" },
-    { key: "meetings", label: "Meetings" },
-    { key: "social", label: "Social Programs" },
-  ]
+    { key: "environment", label: t("environmentCategory") },
+    { key: "meetings",    label: t("meetingsCategory") },
+    { key: "social",      label: t("socialProgramsCategory") },
+  ];
 
-  const filteredItems = filter === "all" ? galleryItems : galleryItems.filter((item) => item.category === filter)
+  const filteredItems =
+    filter === "all"
+      ? galleryItems
+      : galleryItems.filter((i) => i.category === filter);
 
-  const openLightbox = (item: any, index: number) => {
-    setSelectedImage(item)
-    setCurrentImageIndex(index)
-  }
+  const selectedImage =
+    lightboxIndex !== null ? filteredItems[lightboxIndex] ?? null : null;
 
-  const closeLightbox = () => {
-    setSelectedImage(null)
-  }
+  const openLightbox = useCallback((item: GalleryItem, index: number) => {
+    // find index in filteredItems (handle filter change edge case)
+    setLightboxIndex(index);
+  }, []);
 
-  const navigateImage = (direction: "prev" | "next") => {
-    const currentFilteredIndex = filteredItems.findIndex((item) => item.id === selectedImage.id)
-    let newIndex
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
 
-    if (direction === "prev") {
-      newIndex = currentFilteredIndex > 0 ? currentFilteredIndex - 1 : filteredItems.length - 1
-    } else {
-      newIndex = currentFilteredIndex < filteredItems.length - 1 ? currentFilteredIndex + 1 : 0
-    }
+  const navigate = useCallback(
+    (dir: "prev" | "next") => {
+      setLightboxIndex((prev) => {
+        if (prev === null) return null;
+        const len = filteredItems.length;
+        return dir === "prev" ? (prev - 1 + len) % len : (prev + 1) % len;
+      });
+    },
+    [filteredItems.length]
+  );
 
-    setSelectedImage(filteredItems[newIndex])
-    setCurrentImageIndex(newIndex)
-  }
+  // Keyboard navigation
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") navigate("prev");
+      if (e.key === "ArrowRight") navigate("next");
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxIndex, closeLightbox, navigate]);
 
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case "events":
-        return "bg-blue-100 text-blue-800"
-      case "development":
-        return "bg-green-100 text-green-800"
-      case "environment":
-        return "bg-emerald-100 text-emerald-800"
-      case "meetings":
-        return "bg-purple-100 text-purple-800"
-      case "social":
-        return "bg-pink-100 text-pink-800"
-      default:
-        return "bg-gray-100 text-gray-800"
-    }
-  }
+  // Lock body scroll when lightbox is open
+  useEffect(() => {
+    document.body.style.overflow = lightboxIndex !== null ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [lightboxIndex]);
+
+  // Reset lightbox when filter changes
+  const handleFilterChange = (value: string) => {
+    setFilter(value);
+    setLightboxIndex(null);
+  };
 
   return (
-    <div>
-      {/* Filter Section */}
-      <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h2 className="text-2xl font-bold text-gray-900">Photo Gallery</h2>
-        <Select value={filter} onValueChange={setFilter}>
-          <SelectTrigger className="w-full sm:w-48">
-            <SelectValue placeholder="Filter by category" />
+    <div className="w-full">
+
+      {/* ── Header + Filter ──────────────────────────────────────────────── */}
+      <div className="mb-5 sm:mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 className="text-xl sm:text-2xl font-extrabold text-gray-800 tracking-tight">
+            {t("photoGalleryTitle")}
+          </h2>
+          <p className="text-xs sm:text-sm text-gray-400 mt-0.5">
+            {filteredItems.length} photo{filteredItems.length !== 1 ? "s" : ""}
+          </p>
+        </div>
+
+        <Select value={filter} onValueChange={handleFilterChange}>
+          <SelectTrigger className="w-full sm:w-52 border-gray-200 focus:border-emerald-400 focus:ring-emerald-400 text-sm">
+            <SelectValue placeholder={t("filterByCategory")} />
           </SelectTrigger>
           <SelectContent>
-            {categories.map((category) => (
-              <SelectItem key={category.key} value={category.key}>
-                {category.label}
+            {categories.map((c) => (
+              <SelectItem key={c.key} value={c.key} className="text-sm">
+                {c.label}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
       </div>
 
-      {/* Photo Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {/* ── Grid ─────────────────────────────────────────────────────────── */}
+      <div className="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {filteredItems.map((item, index) => (
-          <Card
+          <GalleryCard
             key={item.id}
-            className="group cursor-pointer overflow-hidden hover:shadow-lg transition-all duration-300"
-            onClick={() => openLightbox(item, index)}
-          >
-            <div className="relative aspect-square overflow-hidden">
-              <Image
-                src={item.thumbnail || "/placeholder.svg"}
-                alt={item.title[language]}
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-              <div className="absolute top-2 right-2">
-                <Badge className={getCategoryColor(item.category)}>{item.category}</Badge>
-              </div>
-            </div>
-            <CardContent className="p-3">
-              <h3 className="font-medium text-sm mb-1 line-clamp-2">{item.title[language]}</h3>
-              <div className="flex items-center text-xs text-gray-500">
-                <Calendar className="mr-1 h-3 w-3" />
-                {new Date(item.date).toLocaleDateString()}
-              </div>
-            </CardContent>
-          </Card>
+            item={item}
+            lang={lang}
+            index={index}
+            onOpen={openLightbox}
+          />
         ))}
       </div>
 
-      {/* Empty State */}
+      {/* ── Empty State ───────────────────────────────────────────────────── */}
       {filteredItems.length === 0 && (
-        <div className="text-center py-12">
-          <div className="mx-auto h-12 w-12 text-gray-400 mb-4">📷</div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No photos found</h3>
-          <p className="text-gray-600">Try adjusting your filter to see more photos.</p>
+        <div className="flex flex-col items-center justify-center py-16 text-center">
+          <Images className="mb-3 h-12 w-12 text-gray-200" />
+          <h3 className="text-base sm:text-lg font-semibold text-gray-600">
+            {t("noPhotosFound")}
+          </h3>
+          <p className="mt-1 text-xs sm:text-sm text-gray-400">{t("noPhotosHint")}</p>
         </div>
       )}
 
-      {/* Lightbox Modal */}
-      {selectedImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
-          <div className="relative max-w-4xl max-h-full w-full">
-            {/* Close Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 text-white"
+      {/* ── Lightbox ─────────────────────────────────────────────────────── */}
+      {selectedImage && lightboxIndex !== null && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Photo: ${selectedImage.title[lang]}`}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-3 sm:p-6 backdrop-blur-sm"
+          onClick={(e) => e.target === e.currentTarget && closeLightbox()}
+        >
+          <div className="relative flex w-full max-w-4xl flex-col">
+
+            {/* Close */}
+            <button
               onClick={closeLightbox}
+              className="absolute -top-9 right-0 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              aria-label="Close lightbox"
             >
-              <X className="h-6 w-6" />
-            </Button>
+              <X className="h-4 w-4" />
+            </button>
 
-            {/* Navigation Buttons */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white"
-              onClick={() => navigateImage("prev")}
+            {/* Prev */}
+            <button
+              onClick={() => navigate("prev")}
+              className="absolute left-2 sm:left-3 top-1/2 z-10 -translate-y-1/2 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              aria-label="Previous photo"
             >
-              <ChevronLeft className="h-6 w-6" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white"
-              onClick={() => navigateImage("next")}
-            >
-              <ChevronRight className="h-6 w-6" />
-            </Button>
+              <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
+            </button>
 
-            {/* Image */}
-            <div className="relative aspect-video w-full">
+            {/* Next */}
+            <button
+              onClick={() => navigate("next")}
+              className="absolute right-2 sm:right-3 top-1/2 z-10 -translate-y-1/2 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              aria-label="Next photo"
+            >
+              <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
+            </button>
+
+            {/* Full image */}
+            <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black">
               <Image
-                src={selectedImage.image || "/placeholder.svg"}
-                alt={selectedImage.title[language]}
+                src={cldUrl(selectedImage.cloudinaryId, 1200)}
+                alt={selectedImage.title[lang]}
                 fill
+                sizes="(max-width: 1024px) 100vw, 896px"
                 className="object-contain"
+                priority
               />
             </div>
 
-            {/* Image Info */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
-              <div className="flex items-start justify-between">
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">{selectedImage.title[language]}</h3>
-                  <div className="flex items-center space-x-4 text-sm">
-                    <div className="flex items-center">
-                      <Calendar className="mr-1 h-4 w-4" />
-                      {new Date(selectedImage.date).toLocaleDateString()}
-                    </div>
-                    <div className="flex items-center">
-                      <Tag className="mr-1 h-4 w-4" />
-                      {selectedImage.category}
-                    </div>
-                  </div>
-                </div>
-                <div className="text-sm opacity-75">
-                  {currentImageIndex + 1} / {filteredItems.length}
+            {/* Info bar */}
+            <div className="mt-2.5 flex items-start justify-between rounded-xl bg-white/10 px-3 sm:px-4 py-2.5 sm:py-3 text-white backdrop-blur-sm gap-3">
+              <div className="min-w-0">
+                <p className="text-sm sm:text-base font-semibold leading-snug truncate">
+                  {selectedImage.title[lang]}
+                </p>
+                <div className="mt-1 flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-white/60">
+                  <span className="flex items-center gap-1">
+                    <Calendar className="h-3 w-3" />
+                    {new Date(selectedImage.date).toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </span>
+                  <span className="flex items-center gap-1 capitalize">
+                    <Tag className="h-3 w-3" />
+                    {selectedImage.category}
+                  </span>
                 </div>
               </div>
+              <span className="shrink-0 text-xs sm:text-sm text-white/40 font-mono tabular-nums">
+                {lightboxIndex + 1} / {filteredItems.length}
+              </span>
             </div>
           </div>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default PhotoGallery
+export default PhotoGallery;

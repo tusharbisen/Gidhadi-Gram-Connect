@@ -130,15 +130,15 @@ const DocumentsList = () => {
           <Filter className="h-4 w-4 text-gray-500" />
           <Select value={filter} onValueChange={setFilter}>
             <SelectTrigger className="w-full sm:w-48">
-              <SelectValue placeholder="Filter by type" />
+              <SelectValue placeholder={t("filterByType")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="All">All Documents</SelectItem>
+              <SelectItem value="All">{t("allDocuments")}</SelectItem>
               <SelectItem value="Budget">{t("budgetReports")}</SelectItem>
               <SelectItem value="Minutes">{t("meetingMinutes")}</SelectItem>
               <SelectItem value="Forms">{t("certificates")}</SelectItem>
-              <SelectItem value="Plans">Development Plans</SelectItem>
-              <SelectItem value="Audit">Audit Reports</SelectItem>
+              <SelectItem value="Plans">{t("developmentPlans")}</SelectItem>
+              <SelectItem value="Audit">{t("auditReports")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -188,8 +188,8 @@ const DocumentsList = () => {
       {filteredDocuments.length === 0 && (
         <div className="text-center py-12">
           <FileText className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No documents found</h3>
-          <p className="text-gray-600">Try adjusting your filter to see more documents.</p>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">{t("noDocumentsFound")}</h3>
+          <p className="text-gray-600">{t("noDocumentsHint")}</p>
         </div>
       )}
     </div>

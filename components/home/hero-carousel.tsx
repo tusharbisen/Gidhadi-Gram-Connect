@@ -1,10 +1,10 @@
 "use client";
 
-import { useLanguage } from "@/components/providers/language-provider";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
+import { useLanguage } from "@/components/providers/language-provider";
 
 const carouselSlides = [
   { images: ["https://res.cloudinary.com/dy1w6zqom/image/upload/v1750698582/5_suenga.png"] },
@@ -61,7 +61,7 @@ const optimizeImageUrl = (url: string, width: number = 1920, quality: string = "
 };
 
 const HeroCarousel = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -159,7 +159,7 @@ const HeroCarousel = () => {
         size="icon"
         className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-blue-400 text-white border-white/20 h-8 w-8 md:h-10 md:w-10"
         onClick={prevSlide}
-        aria-label="Previous slide"
+        aria-label={t("previousSlide")}
       >
         <ChevronLeft className="h-4 w-4 md:h-6 md:w-6" />
       </Button>
@@ -169,7 +169,7 @@ const HeroCarousel = () => {
         size="icon"
         className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-blue-400 text-white border-white/20 h-8 w-8 md:h-10 md:w-10"
         onClick={nextSlide}
-        aria-label="Next slide"
+        aria-label={t("nextSlide")}
       >
         <ChevronRight className="h-4 w-4 md:h-6 md:w-6" />
       </Button>

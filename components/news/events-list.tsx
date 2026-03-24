@@ -121,7 +121,7 @@ const pastEvents = [
 ]
 
 const EventsList = () => {
-  const { t, language } = useLanguage()
+  const { language, t } = useLanguage()
 
   const getEventTypeColor = (type: string) => {
     switch (type) {
@@ -164,7 +164,7 @@ const EventsList = () => {
         <CardHeader>
           <CardTitle className="flex items-center">
             <Calendar className="mr-2 h-5 w-5 text-gov-blue" />
-            Upcoming Events
+            {t("upcomingEvents")}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -203,7 +203,7 @@ const EventsList = () => {
                     <span>{event.attendees}</span>
                   </div>
                   <Button variant="outline" size="sm">
-                    View Details
+                    {t("viewDetails")}
                     <ChevronRight className="ml-1 h-4 w-4" />
                   </Button>
                 </div>
@@ -218,7 +218,7 @@ const EventsList = () => {
         <CardHeader>
           <CardTitle className="flex items-center">
             <Calendar className="mr-2 h-5 w-5 text-gray-600" />
-            Past Events
+            {t("pastEvents")}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -240,7 +240,7 @@ const EventsList = () => {
           </div>
           <div className="mt-4 text-center">
             <Button variant="outline">
-              View All Past Events
+              {t("viewAllPastEvents")}
               <ChevronRight className="ml-1 h-4 w-4" />
             </Button>
           </div>

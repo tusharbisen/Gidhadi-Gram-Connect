@@ -1,168 +1,226 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { MapPin, Navigation, Maximize2, Minimize2, Share2 } from "lucide-react"
-import { useLanguage } from "@/components/providers/language-provider"
+import { useState, useCallback, useEffect } from "react";
+import { MapPin, Navigation, Maximize2, Minimize2, Share2, X } from "lucide-react";
+import { useLanguage } from "@/components/providers/language-provider";
+
+// ─── Types ────────────────────────────────────────────────────────────────────
 
 interface GoogleMapProps {
-  latitude?: number
-  longitude?: number
-  villageName?: string
-  zoom?: number
+  latitude?: number;
+  longitude?: number;
+  villageName?: string;
+  zoom?: number;
 }
 
+// ─── Constants ────────────────────────────────────────────────────────────────
+
+const DEFAULT_LAT = 21.297306;  // 21°17'50.3"N
+const DEFAULT_LNG = 80.284306;  // 80°17'03.5"E
+
+const INFO_ITEMS = [
+  { labelKey: "district", fallback: "District", value: "Gondia" },
+  { labelKey: "state",    fallback: "State",    value: "Maharashtra" },
+  { labelKey: "country",  fallback: "Country",  value: "India" },
+] as const;
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function buildMapUrl(lat: number, lng: number, zoom: number) {
+  return `https://maps.google.com/maps?q=${lat},${lng}&t=&z=${zoom}&ie=UTF8&iwloc=&output=embed`;
+}
+
+function openExternal(url: string) {
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+// ─── Component ────────────────────────────────────────────────────────────────
+
 export function GoogleMap({
-  latitude = 21.294949, 
-  longitude = 80.273759,
+  latitude  = DEFAULT_LAT,
+  longitude = DEFAULT_LNG,
   villageName = "Gidhadi",
   zoom = 15,
 }: GoogleMapProps) {
-  const { t } = useLanguage()
-  const [isFullscreen, setIsFullscreen] = useState(false)
+  const { t } = useLanguage();
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const mapUrlFallback = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001.234567890123!2d${longitude}!3d${latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z${encodeURIComponent(villageName)}!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin`
+  const mapUrl = buildMapUrl(latitude, longitude, zoom);
+  const mapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+  const mapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
 
-  const openInGoogleMaps = () => {
-    window.open(`https://www.google.com/maps/search/${latitude},${longitude}`, "_blank")
-  }
+  // Close fullscreen on Escape
+  useEffect(() => {
+    if (!isFullscreen) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsFullscreen(false);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [isFullscreen]);
 
-  const getDirections = () => {
-    window.open(`https://www.google.com/maps/dir//${latitude},${longitude}`, "_blank")
-  }
+  // Lock body scroll in fullscreen
+  useEffect(() => {
+    document.body.style.overflow = isFullscreen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [isFullscreen]);
 
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: `${villageName} Location`,
-        url: `https://www.google.com/maps/search/${latitude},${longitude}`,
-      })
+  const handleShare = useCallback(async () => {
+    const shareData = {
+      title: `${villageName} – ${t("villageLocation") || "Village Location"}`,
+      text: `${villageName} – ${latitude.toFixed(6)}°N, ${longitude.toFixed(6)}°E`,
+      url: mapsSearchUrl,
+    };
+    try {
+      if (navigator.share && navigator.canShare?.(shareData)) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(mapsSearchUrl);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      }
+    } catch (err) {
+      // User cancelled share — no action needed
     }
-  }
+  }, [villageName, latitude, longitude, mapsSearchUrl, t]);
+
+  // ── Map iframe (reused in normal + fullscreen) ────────────────────────────
+  const MapIframe = ({ title }: { title: string }) => (
+    <iframe
+      src={mapUrl}
+      width="100%"
+      height="100%"
+      style={{ border: 0 }}
+      allowFullScreen
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+      title={title}
+      className="w-full h-full"
+    />
+  );
 
   return (
     <>
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 sm:p-4 md:p-5 lg:p-6">
-        {/* Header Section - Responsive */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 sm:mb-4 gap-3">
-          <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-900 flex items-center gap-2">
-            <MapPin className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-sky-700 flex-shrink-0" />
-            <span className="leading-tight">{t("Village Location")}</span>
+      <div className="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4 sm:p-5 md:p-6">
+
+        {/* ── Header ──────────────────────────────────────────────────── */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-3">
+          <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-800 flex items-center gap-2">
+            <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0" />
+            {t("villageLocation") || "Village Location"}
           </h2>
+
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <button
-              onClick={getDirections}
-              className="flex items-center justify-center gap-1 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm bg-sky-100 text-sky-700 rounded-lg hover:bg-sky-200 transition-colors flex-1 sm:flex-initial"
+              onClick={() => openExternal(mapsDirectionsUrl)}
+              className="flex items-center justify-center gap-1.5 px-3 py-2 text-xs sm:text-sm bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg hover:bg-emerald-100 transition-colors flex-1 sm:flex-initial font-medium"
+              aria-label="Get directions to village"
             >
-              <Navigation className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-              <span className="hidden sm:inline">{t("Get Directions")}</span>
-              <span className="sm:hidden">Directions</span>
+              <Navigation className="w-3.5 h-3.5 flex-shrink-0" />
+              <span>{t("getDirections") || "Directions"}</span>
             </button>
             <button
               onClick={() => setIsFullscreen(true)}
-              className="flex items-center justify-center gap-1 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors flex-1 sm:flex-initial"
+              className="flex items-center justify-center gap-1.5 px-3 py-2 text-xs sm:text-sm bg-gray-50 text-gray-600 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors flex-1 sm:flex-initial font-medium"
+              aria-label="View map fullscreen"
             >
-              <Maximize2 className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-              <span className="hidden md:inline">{t("Fullscreen")}</span>
-              <span className="md:hidden">Full</span>
+              <Maximize2 className="w-3.5 h-3.5 flex-shrink-0" />
+              <span className="hidden sm:inline">{t("fullscreen") || "Fullscreen"}</span>
+              <span className="sm:hidden">Expand</span>
             </button>
           </div>
         </div>
 
-        {/* Map Container - Responsive Height */}
-        <div className="relative w-full h-64 sm:h-72 md:h-80 lg:h-96 rounded-lg overflow-hidden border border-gray-200">
-          <iframe
-            src={mapUrlFallback}
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title={`${villageName} Location Map`}
-          />
+        {/* ── Map ─────────────────────────────────────────────────────── */}
+        <div className="relative w-full h-56 sm:h-72 md:h-80 lg:h-96 rounded-xl overflow-hidden border border-emerald-100 bg-gray-100 shadow-inner">
+          <MapIframe title={`${villageName} Location Map`} />
         </div>
 
-        {/* Location Info Grid - Responsive */}
-        <div className="mt-3 sm:mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4">
-          <div className="text-center p-2.5 sm:p-3 bg-gray-50 rounded-lg">
-            <p className="text-xs sm:text-sm text-gray-600 mb-0.5 sm:mb-1">
-              {t("coordinates")}
+        {/* ── Coordinates + Info ──────────────────────────────────────── */}
+        <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+          {/* Coordinates spans 2 cols on mobile, 1 on sm+ */}
+          <div className="col-span-2 sm:col-span-1 text-center p-2.5 sm:p-3 bg-emerald-50 border border-emerald-100 rounded-xl">
+            <p className="text-[10px] sm:text-xs text-emerald-600 font-semibold uppercase tracking-wide mb-1">
+              {t("coordinates") || "Coordinates"}
             </p>
-            <p className="font-semibold text-gray-900 text-xs sm:text-sm md:text-base">
-              {latitude.toFixed(4)}°N, {longitude.toFixed(4)}°E
+            <p className="font-bold text-gray-800 text-xs sm:text-sm font-mono">
+              {latitude.toFixed(4)}°N
             </p>
-          </div>
-          <div className="text-center p-2.5 sm:p-3 bg-gray-50 rounded-lg">
-            <p className="text-xs sm:text-sm text-gray-600 mb-0.5 sm:mb-1">
-              {t("district")}
-            </p>
-            <p className="font-semibold text-gray-900 text-xs sm:text-sm md:text-base">
-              Gondia
+            <p className="font-bold text-gray-800 text-xs sm:text-sm font-mono">
+              {longitude.toFixed(4)}°E
             </p>
           </div>
-          <div className="text-center p-2.5 sm:p-3 bg-gray-50 rounded-lg">
-            <p className="text-xs sm:text-sm text-gray-600 mb-0.5 sm:mb-1">
-              {t("state")}
-            </p>
-            <p className="font-semibold text-gray-900 text-xs sm:text-sm md:text-base">
-              Maharashtra
-            </p>
-          </div>
+
+          {INFO_ITEMS.map(({ labelKey, fallback, value }) => (
+            <div
+              key={labelKey}
+              className="text-center p-2.5 sm:p-3 bg-gray-50 border border-gray-100 rounded-xl"
+            >
+              <p className="text-[10px] sm:text-xs text-gray-400 font-semibold uppercase tracking-wide mb-1">
+                {t(labelKey) || fallback}
+              </p>
+              <p className="font-bold text-gray-800 text-xs sm:text-sm">{value}</p>
+            </div>
+          ))}
         </div>
 
-        {/* Action Buttons - Responsive */}
-        <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row gap-2">
+        {/* ── Action Buttons ──────────────────────────────────────────── */}
+        <div className="mt-4 flex flex-col xs:flex-row gap-2">
           <button
-            onClick={openInGoogleMaps}
-            className="flex items-center justify-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm md:text-base bg-sky-700 text-white rounded-lg hover:bg-sky-800 transition-colors w-full sm:w-auto"
+            onClick={() => openExternal(mapsSearchUrl)}
+            className="flex items-center justify-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 active:bg-emerald-800 transition-colors flex-1"
           >
-            <MapPin className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-            <span>{t("openInGoogleMaps")}</span>
+            <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+            {t("openInGoogleMaps") || "Open in Google Maps"}
           </button>
           <button
             onClick={handleShare}
-            className="flex items-center justify-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm md:text-base bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors w-full sm:w-auto"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold bg-gray-100 text-gray-700 border border-gray-200 rounded-xl hover:bg-gray-200 active:bg-gray-300 transition-colors flex-1"
           >
-            <Share2 className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-            <span>{t("shareLocation")}</span>
+            <Share2 className="w-3.5 h-3.5 flex-shrink-0" />
+            {copied
+              ? t("linkCopied") || "Link copied!"
+              : t("shareLocation") || "Share Location"}
           </button>
         </div>
       </div>
 
-      {/* Fullscreen Modal - Responsive */}
+      {/* ── Fullscreen Modal ────────────────────────────────────────────── */}
       {isFullscreen && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-75 flex items-center justify-center p-2 sm:p-4">
-          <div className="bg-white rounded-lg w-full h-full sm:max-w-6xl sm:max-h-[90vh] flex flex-col">
-            {/* Modal Header - Responsive */}
-            <div className="flex items-center justify-between p-3 sm:p-4 border-b">
-              <h3 className="text-sm sm:text-base md:text-lg font-semibold truncate pr-2">
-                {villageName} - {t("villageLocation")}
-              </h3>
+        <div
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5"
+          onClick={(e) => e.target === e.currentTarget && setIsFullscreen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${villageName} fullscreen map`}
+        >
+          <div className="bg-white rounded-2xl w-full h-full sm:max-w-5xl sm:max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+            {/* Modal header */}
+            <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-100 flex-shrink-0">
+              <div className="flex items-center gap-2 min-w-0">
+                <MapPin className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                <h3 className="text-sm sm:text-base font-bold text-gray-800 truncate">
+                  {villageName} — {t("villageLocation") || "Village Location"}
+                </h3>
+              </div>
               <button
                 onClick={() => setIsFullscreen(false)}
-                className="flex items-center gap-1 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors flex-shrink-0"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs sm:text-sm bg-gray-100 text-gray-600 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors flex-shrink-0 ml-3 font-medium"
+                aria-label="Close fullscreen map"
               >
-                <Minimize2 className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="hidden sm:inline">{t("close")}</span>
-                <span className="sm:hidden">×</span>
+                <X className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">{t("close") || "Close"}</span>
               </button>
             </div>
-            {/* Modal Map */}
+
+            {/* Map */}
             <div className="flex-1 min-h-0">
-              <iframe
-                src={mapUrlFallback}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title={`${villageName} Location Map - Fullscreen`}
-              />
+              <MapIframe title={`${villageName} Location Map – Fullscreen`} />
             </div>
           </div>
         </div>
       )}
     </>
-  )
+  );
 }
