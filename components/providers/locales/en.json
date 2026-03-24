@@ -235,5 +235,12 @@
   "votesLabel": "votes",
   "waterSupply": "Water Supply",
   "whatIsGidhadiGramSubtitle": "Discover how our village community connects, grows, and thrives together through digital innovation and traditional values.",
-  "whatIsGidhadiGramTitle": "What is Gidhadi Gram?"
+  "whatIsGidhadiGramTitle": "What is Gidhadi Gram?",
+  "country": "Country",
+  "featureCommunity": "Community",
+  "featureCommunityDesc": "Connect with your local community",
+  "featureServices": "Services",
+  "featureServicesDesc": "Access essential services easily",
+  "featureDigital": "Digital",
+  "featureDigitalDesc": "Go digital with ease"
 }
