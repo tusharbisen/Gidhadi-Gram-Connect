@@ -202,7 +202,7 @@ const MobileMenu = ({
     <div className="border-t border-gray-100 bg-white shadow-lg px-4 pb-6 pt-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
       {/* Language selector */}
       <div className="mb-4 pb-4 border-b border-gray-100">
-        <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-2.5">
+        <p className="text- font-semibold text-gray-400 uppercase tracking-widest mb-2.5">
           {t("languageLabel")}
         </p>
         <div className="flex gap-2">

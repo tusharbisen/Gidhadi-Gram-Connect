@@ -29,6 +29,7 @@ export const metadata: Metadata = {
     default: "Gidhadi Gram Connect | गिधाडी ग्राम कनेक्ट",
     template: "%s | Gidhadi Gram Connect",
   },
+  
   description: SITE_CONFIG.description,
   keywords: [
     "Gidhadi village",
