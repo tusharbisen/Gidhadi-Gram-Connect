@@ -9,7 +9,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { X, ChevronLeft, ChevronRight, Calendar, Tag, Images } from "lucide-react";
+import {
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Calendar,
+  Tag,
+  Images,
+} from "lucide-react";
 import Image from "next/image";
 
 // ─────────────────────────────────────────────
@@ -18,13 +25,13 @@ import Image from "next/image";
 // 1. Go to your Cloudinary dashboard → Media Library
 // 2. Upload your images
 // 3. Click on any image → copy its "Public ID"
-//    e.g. "gidhadi/independence-day-2023"
+//    e.g. "DSC_7429.JPG_v9k2ci"
 // 4. Replace the `cloudinaryId` values below with your real Public IDs
 //
 // The helper `cldUrl()` auto-builds optimised URLs.
 // ─────────────────────────────────────────────
 
-const CLOUD_NAME = "YOUR_CLOUD_NAME"; // 👈 Replace with your Cloudinary cloud name
+const CLOUD_NAME = "dy1w6zqom"; // 👈 Replace with your Cloudinary cloud name
 
 const cldUrl = (publicId: string, width = 800, quality = "auto") =>
   `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_${quality},w_${width}/${publicId}`;
@@ -55,102 +62,102 @@ const galleryItems: GalleryItem[] = [
   {
     id: 1,
     title: {
-      en: "Independence Day Celebration 2023",
-      hi: "स्वतंत्रता दिवस समारोह 2023",
-      mr: "स्वातंत्र्य दिन समारंभ 2023",
+      en: "150 Years Completed at ZP School – Chief Guest Felicitation",
+      hi: "जिला परिषद स्कूल के 150 वर्ष पूर्ण – मुख्य अतिथि सम्मान",
+      mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "events",
     date: "2023-08-15",
-    cloudinaryId: "gidhadi/sample1",
+    cloudinaryId: "DSC_7429.JPG_v9k2ci", // ✅ Public ID only
   },
   {
     id: 2,
     title: {
-      en: "Tree Plantation Drive",
-      hi: "वृक्षारोपण अभियान",
-      mr: "वृक्षारोपण मोहीम",
+      en: "150 Years Completed at ZP School – Chief Guest Felicitation",
+      hi: "जिला परिषद स्कूल के 150 वर्ष पूर्ण – मुख्य अतिथि सम्मान",
+      mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "environment",
     date: "2023-07-05",
-    cloudinaryId: "gidhadi/sample2",
+    cloudinaryId: "DSC_7427.JPG_rijuzw", // ✅ Public ID only
   },
   {
     id: 3,
     title: {
-      en: "Village Road Construction",
-      hi: "गांव सड़क निर्माण",
-      mr: "गाव रस्ता बांधकाम",
+      en: "150 Years Completed at ZP School – Chief Guest Felicitation",
+      hi: "जिला परिषद स्कूल के 150 वर्ष पूर्ण – मुख्य अतिथि सम्मान",
+      mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "development",
     date: "2023-06-20",
-    cloudinaryId: "gidhadi/sample3",
+    cloudinaryId: "DSC_7422.JPG_pmqlay", // ✅ Public ID only
   },
   {
     id: 4,
     title: {
-      en: "Gram Sabha Meeting",
-      hi: "ग्राम सभा बैठक",
-      mr: "ग्रामसभा बैठक",
+      en: "150 Years Completed at ZP School – Chief Guest Felicitation",
+      hi: "जिला परिषद स्कूल के 150 वर्ष पूर्ण – मुख्य अतिथि सम्मान",
+      mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "meetings",
     date: "2023-06-25",
-    cloudinaryId: "gidhadi/sample4",
+    cloudinaryId: "DSC_7420.JPG_mhhyly", // ✅ Public ID only
   },
   {
     id: 5,
     title: {
-      en: "Water Tank Installation",
-      hi: "पानी की टंकी स्थापना",
-      mr: "पाण्याची टाकी बसवणे",
+      en: "150 Years Completed at ZP School – Chief Guest Felicitation",
+      hi: "जिला परिषद स्कूल के 150 वर्ष पूर्ण – मुख्य अतिथि सम्मान",
+      mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "development",
     date: "2023-05-15",
-    cloudinaryId: "gidhadi/sample5",
+    cloudinaryId: "DSC_7415.JPG_gvtgqw", // ✅ Public ID only
   },
   {
     id: 6,
     title: {
-      en: "Women's Self Help Group Meeting",
-      hi: "महिला स्वयं सहायता समूह बैठक",
-      mr: "महिला स्वयंसहायता गट बैठक",
+      en: "150 Years Completed at ZP School – Chief Guest Felicitation",
+      hi: "जिला परिषद स्कूल के 150 वर्ष पूर्ण – मुख्य अतिथि सम्मान",
+      mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "social",
     date: "2023-05-10",
-    cloudinaryId: "gidhadi/sample6",
+    cloudinaryId: "DSC_7417.JPG_pqstbp", // ✅ Public ID only
   },
   {
     id: 7,
     title: {
-      en: "Village Cleanliness Drive",
-      hi: "गांव स्वच्छता अभियान",
-      mr: "गाव स्वच्छता मोहीम",
+      en: "150 Years Completed at ZP School – Chief Guest Felicitation",
+      hi: "जिला परिषद स्कूल के 150 वर्ष पूर्ण – मुख्य अतिथि सम्मान",
+      mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "environment",
     date: "2023-04-22",
-    cloudinaryId: "gidhadi/sample7",
+    cloudinaryId: "DSC_7411.JPG_c1fxoq", // ✅ Public ID only
   },
   {
     id: 8,
     title: {
-      en: "School Building Renovation",
-      hi: "स्कूल भवन नवीनीकरण",
-      mr: "शाळा इमारत नूतनीकरण",
+      en: "150 Years Completed at ZP School – Chief Guest Felicitation",
+      hi: "जिला परिषद स्कूल के 150 वर्ष पूर्ण – मुख्य अतिथि सम्मान",
+      mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "development",
     date: "2023-04-10",
-    cloudinaryId: "gidhadi/sample8",
+    cloudinaryId: "DSC_7407.JPG_eol5ic", // ✅ Public ID only
   },
 ];
 
 // ─── Category config ──────────────────────────────────────────────────────────
 
 const CATEGORY_STYLES: Record<string, { color: string; bg: string }> = {
-  events:      { color: "text-blue-700",    bg: "bg-blue-100" },
-  development: { color: "text-green-700",   bg: "bg-green-100" },
+  events: { color: "text-blue-700", bg: "bg-blue-100" },
+  development: { color: "text-green-700", bg: "bg-green-100" },
   environment: { color: "text-emerald-700", bg: "bg-emerald-100" },
-  meetings:    { color: "text-purple-700",  bg: "bg-purple-100" },
-  social:      { color: "text-pink-700",    bg: "bg-pink-100" },
-  default:     { color: "text-gray-700",    bg: "bg-gray-100" },
+  meetings: { color: "text-purple-700", bg: "bg-purple-100" },
+  social: { color: "text-pink-700", bg: "bg-pink-100" },
+  default: { color: "text-gray-700", bg: "bg-gray-100" },
 };
 
 const getCategoryStyle = (category: string) =>
@@ -223,12 +230,12 @@ const PhotoGallery = () => {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const categories: Category[] = [
-    { key: "all",         label: t("allPhotos") },
-    { key: "events",      label: t("eventPhotos") },
+    { key: "all", label: t("allPhotos") },
+    { key: "events", label: t("eventPhotos") },
     { key: "development", label: t("developmentWork") },
     { key: "environment", label: t("environmentCategory") },
-    { key: "meetings",    label: t("meetingsCategory") },
-    { key: "social",      label: t("socialProgramsCategory") },
+    { key: "meetings", label: t("meetingsCategory") },
+    { key: "social", label: t("socialProgramsCategory") },
   ];
 
   const filteredItems =
@@ -237,10 +244,9 @@ const PhotoGallery = () => {
       : galleryItems.filter((i) => i.category === filter);
 
   const selectedImage =
-    lightboxIndex !== null ? filteredItems[lightboxIndex] ?? null : null;
+    lightboxIndex !== null ? (filteredItems[lightboxIndex] ?? null) : null;
 
-  const openLightbox = useCallback((item: GalleryItem, index: number) => {
-    // find index in filteredItems (handle filter change edge case)
+  const openLightbox = useCallback((_item: GalleryItem, index: number) => {
     setLightboxIndex(index);
   }, []);
 
@@ -254,7 +260,7 @@ const PhotoGallery = () => {
         return dir === "prev" ? (prev - 1 + len) % len : (prev + 1) % len;
       });
     },
-    [filteredItems.length]
+    [filteredItems.length],
   );
 
   // Keyboard navigation
@@ -272,7 +278,9 @@ const PhotoGallery = () => {
   // Lock body scroll when lightbox is open
   useEffect(() => {
     document.body.style.overflow = lightboxIndex !== null ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [lightboxIndex]);
 
   // Reset lightbox when filter changes
@@ -283,7 +291,6 @@ const PhotoGallery = () => {
 
   return (
     <div className="w-full">
-
       {/* ── Header + Filter ──────────────────────────────────────────────── */}
       <div className="mb-5 sm:mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
@@ -329,7 +336,9 @@ const PhotoGallery = () => {
           <h3 className="text-base sm:text-lg font-semibold text-gray-600">
             {t("noPhotosFound")}
           </h3>
-          <p className="mt-1 text-xs sm:text-sm text-gray-400">{t("noPhotosHint")}</p>
+          <p className="mt-1 text-xs sm:text-sm text-gray-400">
+            {t("noPhotosHint")}
+          </p>
         </div>
       )}
 
@@ -343,7 +352,6 @@ const PhotoGallery = () => {
           onClick={(e) => e.target === e.currentTarget && closeLightbox()}
         >
           <div className="relative flex w-full max-w-4xl flex-col">
-
             {/* Close */}
             <button
               onClick={closeLightbox}

@@ -30,7 +30,7 @@ const NAV_ITEMS: NavItem[] = [
   { key: "news", href: "/news" },
   { key: "grievance", href: "/grievance" },
   { key: "gallery", href: "/gallery" },
-  { key: "documents", href: "/documents" },
+  { key: "education", href: "/documents" },
 ];
 
 const LANGUAGES: Language[] = [

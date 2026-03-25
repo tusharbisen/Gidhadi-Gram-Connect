@@ -242,5 +242,8 @@
   "featureServices": "सेवाएं",
   "featureServicesDesc": "आवश्यक सेवाओं तक आसानी से पहुंचें",
   "featureDigital": "डिजिटल",
-  "featureDigitalDesc": "डिजिटल दुनिया से जुड़ें"
+  "featureDigitalDesc": "डिजिटल दुनिया से जुड़ें",
+  "villagePhoto": "गांव की तस्वीरें",
+  "readMore": "और पढ़ें",
+  "tapToCall": "कॉल करने के लिए टैप करें"
 }

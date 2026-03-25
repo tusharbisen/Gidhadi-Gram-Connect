@@ -1,199 +1,195 @@
-"use client"
+// app/education/page.tsx  (or pages/education.tsx)
+// Replace your documents page with this file.
+// No header/footer — your existing layout wraps it automatically.
 
-import { useState } from "react"
-import { useLanguage } from "@/components/providers/language-provider"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { FileText, Download, Calendar, Filter } from "lucide-react"
+import type { Metadata } from "next";
 
-const documents = [
-  {
-    id: 1,
-    titleKey: "budgetReport2023",
-    title: {
-      en: "Annual Budget Report 2023-24",
-      hi: "वार्षिक बजट रिपोर्ट 2023-24",
-      mr: "वार्षिक अर्थसंकल्प अहवाल 2023-24",
-    },
-    type: "Budget",
-    date: "2023-04-01",
-    size: "2.5 MB",
-    format: "PDF",
-  },
-  {
-    id: 2,
-    titleKey: "gramSabhaMinutes",
-    title: {
-      en: "Gram Sabha Meeting Minutes - June 2023",
-      hi: "ग्राम सभा बैठक कार्यवृत्त - जून 2023",
-      mr: "ग्रामसभा बैठक कार्यवृत्त - जून 2023",
-    },
-    type: "Minutes",
-    date: "2023-06-25",
-    size: "1.2 MB",
-    format: "PDF",
-  },
-  {
-    id: 3,
-    titleKey: "birthCertificateForm",
-    title: {
-      en: "Birth Certificate Application Form",
-      hi: "जन्म प्रमाणपत्र आवेदन फॉर्म",
-      mr: "जन्म प्रमाणपत्र अर्जाचा नमुना",
-    },
-    type: "Forms",
-    date: "2023-01-15",
-    size: "0.8 MB",
-    format: "PDF",
-  },
-  {
-    id: 4,
-    titleKey: "incomeCertificateForm",
-    title: {
-      en: "Income Certificate Application Form",
-      hi: "आय प्रमाणपत्र आवेदन फॉर्म",
-      mr: "उत्पन्न प्रमाणपत्र अर्जाचा नमुना",
-    },
-    type: "Forms",
-    date: "2023-01-15",
-    size: "0.9 MB",
-    format: "PDF",
-  },
-  {
-    id: 5,
-    titleKey: "developmentPlan",
-    title: {
-      en: "Village Development Plan 2023-25",
-      hi: "गांव विकास योजना 2023-25",
-      mr: "गाव विकास योजना 2023-25",
-    },
-    type: "Plans",
-    date: "2023-03-10",
-    size: "3.2 MB",
-    format: "PDF",
-  },
-  {
-    id: 6,
-    titleKey: "auditReport",
-    title: {
-      en: "Social Audit Report 2022-23",
-      hi: "सामाजिक ऑडिट रिपोर्ट 2022-23",
-      mr: "सामाजिक ऑडिट अहवाल 2022-23",
-    },
-    type: "Audit",
-    date: "2023-05-20",
-    size: "1.8 MB",
-    format: "PDF",
-  },
-]
+export const metadata: Metadata = {
+  title: "Education | Gidhadi Gram Connect",
+  description:
+    "Education section for Gidhadi Gram Connect – coming soon with school info, scholarships, and government schemes.",
+};
 
-const DocumentsList = () => {
-  const { t, language } = useLanguage()
-  const [filter, setFilter] = useState("All")
-
-  const filteredDocuments = filter === "All" ? documents : documents.filter((doc) => doc.type === filter)
-
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case "Budget":
-        return "bg-blue-100 text-blue-800"
-      case "Minutes":
-        return "bg-green-100 text-green-800"
-      case "Forms":
-        return "bg-orange-100 text-orange-800"
-      case "Plans":
-        return "bg-purple-100 text-purple-800"
-      case "Audit":
-        return "bg-red-100 text-red-800"
-      default:
-        return "bg-gray-100 text-gray-800"
-    }
-  }
-
-  const handleDownload = (document: any) => {
-    // In a real application, this would trigger the actual download
-    console.log(`Downloading: ${document.title[language]}`)
-    // You could implement actual file download logic here
-  }
-
+export default function EducationPage() {
   return (
-    <div>
-      {/* Filter Section */}
-      <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div className="flex items-center space-x-2">
-          <FileText className="h-6 w-6 text-gov-blue" />
-          <h2 className="text-2xl font-bold text-gray-900">{t("documentsDownloads")}</h2>
+    <main className="min-h-screen bg-white">
+
+      {/* ── Page Hero ── */}
+      <section className="bg-gradient-to-br from-[#1a6b3a] via-[#2a8c4e] to-[#3aaa64] text-white px-4 py-14 text-center relative overflow-hidden">
+        {/* subtle pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-rule='evenodd'%3E%3Ccircle cx='20' cy='20' r='1.5'/%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
+
+        <div className="relative z-10 max-w-2xl mx-auto">
+          <span className="inline-block bg-white/20 border border-white/30 text-white text-xs font-semibold tracking-[2px] uppercase px-4 py-1.5 rounded-full mb-4">
+            🎓 New Section
+          </span>
+          <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight mb-2">
+            Education <span className="text-[#f58220]">Hub</span>
+          </h1>
+          <p className="text-white/75 text-base font-medium" style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}>
+            शिक्षण विभाग · गिधाडी ग्राम कनेक्ट
+          </p>
         </div>
-        <div className="flex items-center space-x-2">
-          <Filter className="h-4 w-4 text-gray-500" />
-          <Select value={filter} onValueChange={setFilter}>
-            <SelectTrigger className="w-full sm:w-48">
-              <SelectValue placeholder={t("filterByType")} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="All">{t("allDocuments")}</SelectItem>
-              <SelectItem value="Budget">{t("budgetReports")}</SelectItem>
-              <SelectItem value="Minutes">{t("meetingMinutes")}</SelectItem>
-              <SelectItem value="Forms">{t("certificates")}</SelectItem>
-              <SelectItem value="Plans">{t("developmentPlans")}</SelectItem>
-              <SelectItem value="Audit">{t("auditReports")}</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+      </section>
+
+      {/* ── Breadcrumb ── */}
+      <div className="bg-green-50 border-b border-green-200 px-4 py-2.5 text-sm text-green-800">
+        <a href="/" className="font-semibold text-[#1a6b3a] hover:underline">Home</a>
+        <span className="mx-1.5 text-green-400">›</span>
+        <span className="font-semibold">Education</span>
       </div>
 
-      {/* Documents Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredDocuments.map((document) => (
-          <Card key={document.id} className="hover:shadow-lg transition-shadow">
-            <CardHeader className="pb-3">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-gov-blue/10 rounded-lg">
-                    <FileText className="h-6 w-6 text-gov-blue" />
-                  </div>
-                  <div className="flex-1">
-                    <CardTitle className="text-lg leading-tight">{document.title[language]}</CardTitle>
-                  </div>
-                </div>
-                <Badge className={getTypeColor(document.type)}>{document.type}</Badge>
-              </div>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between text-sm text-gray-600">
-                  <div className="flex items-center">
-                    <Calendar className="mr-1 h-4 w-4" />
-                    {new Date(document.date).toLocaleDateString()}
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span>{document.format}</span>
-                    <span>•</span>
-                    <span>{document.size}</span>
-                  </div>
-                </div>
-                <Button className="w-full" onClick={() => handleDownload(document)} variant="outline">
-                  <Download className="mr-2 h-4 w-4" />
-                  {t("download")}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      {/* ── Coming Soon Body ── */}
+      <div className="max-w-3xl mx-auto px-4 py-16 text-center">
 
-      {/* Empty State */}
-      {filteredDocuments.length === 0 && (
-        <div className="text-center py-12">
-          <FileText className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 mb-2">{t("noDocumentsFound")}</h3>
-          <p className="text-gray-600">{t("noDocumentsHint")}</p>
+        {/* Icon */}
+        <div className="w-24 h-24 bg-green-50 border-2 border-[#2a8c4e] rounded-full flex items-center justify-center mx-auto mb-8">
+          <svg className="w-11 h-11" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26 6L4 17l22 11 22-11L26 6z" fill="#2a8c4e" stroke="#1a6b3a" strokeWidth="1.5" strokeLinejoin="round" />
+            <path d="M4 17v16M48 17v16" stroke="#1a6b3a" strokeWidth="2" strokeLinecap="round" />
+            <path d="M12 21.5V34a14 14 0 0028 0V21.5" stroke="#1a6b3a" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="4" cy="33" r="3" fill="#f58220" />
+            <line x1="4" y1="17" x2="4" y2="33" stroke="#f58220" strokeWidth="2" strokeLinecap="round" />
+          </svg>
         </div>
-      )}
-    </div>
-  )
+
+        {/* Badge */}
+        <span className="inline-block bg-orange-50 border border-orange-400 text-orange-500 text-xs font-bold tracking-[2px] uppercase px-5 py-1.5 rounded-full mb-6">
+          🚧 Coming Soon
+        </span>
+
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1a6b3a] mb-3 leading-snug">
+          Our Team is <span className="text-[#f58220]">Working</span> on It!
+        </h2>
+
+        <p
+          className="text-lg text-[#3a5544] mb-3"
+          style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
+        >
+          आमची टीम यावर काम करत आहे…
+        </p>
+
+        <p className="text-sm text-[#7a9a84] max-w-lg mx-auto mb-14 leading-relaxed">
+          The Education section is under development. We are building a dedicated space for school
+          information, scholarships, government education schemes, and learning resources for the
+          students and families of Gidhadi village.
+        </p>
+
+        {/* ── Feature Preview Cards ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-14 text-left">
+          {features.map((f) => (
+            <div
+              key={f.title}
+              className="bg-white border border-green-200 rounded-2xl p-5 hover:border-[#2a8c4e] hover:shadow-md transition-all duration-200 hover:-translate-y-1"
+            >
+              <div className="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center mb-3">
+                {f.icon}
+              </div>
+              <h3 className="text-sm font-bold text-[#1a6b3a] mb-1">{f.title}</h3>
+              <p className="text-xs text-[#7a9a84] leading-relaxed">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Team Working ── */}
+        <div className="bg-green-50 border border-green-200 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-5 text-left mb-10">
+          {/* Avatars */}
+          <div className="flex flex-shrink-0">
+            {["GG", "IT", "CS", "BE"].map((initials, i) => (
+              <div
+                key={initials}
+                className={`w-11 h-11 rounded-full border-[3px] border-white flex items-center justify-center text-white text-sm font-bold ${avatarColors[i]} ${i !== 0 ? "-ml-3" : ""}`}
+              >
+                {initials}
+              </div>
+            ))}
+          </div>
+          <div>
+            <h3 className="text-base font-bold text-[#1a6b3a] mb-1.5">
+              Our Intern Team is Building This Page
+            </h3>
+            <p className="text-sm text-[#3a5544] leading-relaxed">
+              Gidhadi Gram Connect interns from B.E. / Diploma in IT &amp; CS are actively
+              developing this Education section. It will be live very soon with full information
+              for the village community.
+            </p>
+            <div className="flex items-center gap-2 mt-3">
+              <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse" />
+              <span className="text-xs font-semibold text-[#2a8c4e]">
+                Active Development in Progress
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Contact nudge ── */}
+        <p className="text-xs text-[#7a9a84]">
+          For queries, contact us at{" "}
+          <a href="mailto:gidhadigramconnect@gmail.com" className="text-[#1a6b3a] font-semibold hover:underline">
+            gidhadigramconnect@gmail.com
+          </a>{" "}
+          or call{" "}
+          <a href="tel:+919168383674" className="text-[#1a6b3a] font-semibold hover:underline">
+            +91 9168383674
+          </a>
+        </p>
+      </div>
+    </main>
+  );
 }
 
-export default DocumentsList
+/* ── Static data ── */
+
+const features = [
+  {
+    title: "School Information",
+    desc: "Details about local schools, teachers, and academic calendar.",
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#2a8c4e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
+        <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Scholarships",
+    desc: "Government & private scholarships available for village students.",
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#2a8c4e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="8" r="6" />
+        <path d="M12 14v8M9 19h6" />
+      </svg>
+    ),
+  },
+  {
+    title: "Govt. Schemes",
+    desc: "Education schemes by state & central government for rural areas.",
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#2a8c4e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M8 12h8M12 8v8" />
+      </svg>
+    ),
+  },
+  {
+    title: "Learning Resources",
+    desc: "Study materials, notes, and helpful links for all students.",
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#2a8c4e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+      </svg>
+    ),
+  },
+];
+
+const avatarColors = [
+  "bg-[#2a8c4e]",
+  "bg-[#f58220]",
+  "bg-[#1a6b5a]",
+  "bg-[#8a4b00]",
+];

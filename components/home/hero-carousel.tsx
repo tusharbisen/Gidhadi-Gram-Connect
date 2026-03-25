@@ -202,7 +202,7 @@ const HeroCarousel = () => {
             {/* Subtle dark overlay so nav buttons stay visible over bright images */}
             <div className="absolute inset-0 bg-black/15" />
           </div>
-        );  
+        );    
       })}
 
       {/* ── Slide counter — top right ───────────────────────────────────────── */}

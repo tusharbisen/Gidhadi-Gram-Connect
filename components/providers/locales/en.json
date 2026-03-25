@@ -242,5 +242,8 @@
   "featureServices": "Services",
   "featureServicesDesc": "Access essential services easily",
   "featureDigital": "Digital",
-  "featureDigitalDesc": "Go digital with ease"
+  "featureDigitalDesc": "Go digital with ease",
+  "villagePhoto": "Village Photos",
+  "readMore": "Read More",
+  "tapToCall": "Tap to Call"
 }
