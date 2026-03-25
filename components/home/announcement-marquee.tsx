@@ -9,7 +9,7 @@ const AnnouncementMarquee = () => {
   const { t } = useLanguage();
 
   // Memoize to prevent unnecessary re-renders
-  const announcement = t("covidVaccinationDesc");
+  const announcement = t("scrollmarquee");
 
   return <Marquee text={announcement} />;
 };
