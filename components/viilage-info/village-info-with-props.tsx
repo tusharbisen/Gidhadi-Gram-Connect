@@ -99,15 +99,15 @@ export default function VillageInfoWithProps({ data = defaultVillageData }: Vill
   const statCards: StatCard[] = [
     {
       icon: Users,
-      bgColor: "bg-emerald-50",
-      iconColor: "text-emerald-600",
-      badgeBg: "bg-emerald-50",
-      badgeText: "text-emerald-700",
+      bgColor: "bg-primary/5",
+      iconColor: "text-primary",
+      badgeBg: "bg-primary/5",
+      badgeText: "text-primary",
       badgeKey: "census",
       value: data.population.total,
       labelKey: "totalPopulation",
       subValue: `↗ ${t("updatedCensus")} (${data.population.growth})`,
-      subColor: "text-emerald-600",
+      subColor: "text-primary",
     },
     {
       icon: UserCheck,
@@ -148,10 +148,10 @@ export default function VillageInfoWithProps({ data = defaultVillageData }: Vill
   const infraCards: InfraCard[] = [
     {
       icon: MapPin,
-      iconBg: "bg-emerald-100",
-      iconColor: "text-emerald-700",
-      badgeBg: "bg-emerald-100",
-      badgeText: "text-emerald-700",
+      iconBg: "bg-primary/10",
+      iconColor: "text-primary",
+      badgeBg: "bg-primary/10",
+      badgeText: "text-primary",
       value: `${data.infrastructure.landArea.toLocaleString()} ac`,
       labelKey: "totalLandArea",
       tagKey: "surveyed",
@@ -189,11 +189,11 @@ export default function VillageInfoWithProps({ data = defaultVillageData }: Vill
   ];
 
   return (
-    <section className="bg-gradient-to-br from-emerald-50 via-white to-teal-50 py-5 sm:py-8 md:py-10">
+    <section className="bg-gradient-to-br from-primary/5 via-white to-primary/5 py-5 sm:py-8 md:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Page Header ─────────────────────────────────────────────── */}
-        <div className="bg-white rounded-2xl border border-emerald-100 shadow-sm p-4 sm:p-5 md:p-6 mb-5 sm:mb-6 md:mb-8">
+        <div className="bg-white rounded-2xl border border-primary/10 shadow-sm p-4 sm:p-5 md:p-6 mb-5 sm:mb-6 md:mb-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
             <div>
               <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-800 leading-tight tracking-tight">
@@ -214,7 +214,7 @@ export default function VillageInfoWithProps({ data = defaultVillageData }: Vill
               </div>
             </div>
           </div>
-          <div className="h-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full" />
+          <div className="h-1 bg-gradient-to-r from-primary to-secondary rounded-full" />
         </div>
 
         <OfficialBadge />
@@ -227,9 +227,9 @@ export default function VillageInfoWithProps({ data = defaultVillageData }: Vill
         </div>
 
         {/* ── Infrastructure ──────────────────────────────────────────── */}
-        <div className="bg-white rounded-2xl border border-emerald-100 shadow-sm p-4 sm:p-5 md:p-6">
+        <div className="bg-white rounded-2xl border border-primary/10 shadow-sm p-4 sm:p-5 md:p-6">
           <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-800 mb-4 sm:mb-5 flex items-center gap-2">
-            <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0" />
+            <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
             {t("infrastructureFacilities")}
           </h2>
           <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
@@ -243,7 +243,7 @@ export default function VillageInfoWithProps({ data = defaultVillageData }: Vill
         <div className="mt-4 sm:mt-6 bg-white rounded-2xl border border-gray-100 shadow-sm px-4 py-3">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1.5 text-xs text-gray-400">
             <div className="flex items-center gap-1.5">
-              <Shield className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+              <Shield className="w-3.5 h-3.5 text-primary flex-shrink-0" />
               <span>{t("dataVerified")}</span>
             </div>
             <span>{t("forQueries")}</span>

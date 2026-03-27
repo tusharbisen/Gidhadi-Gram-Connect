@@ -1,11 +1,11 @@
-import AdminLogin from "@/components/admin/admin-login";
+import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Admin Login - Gram Panchayat Gidhadi",
-  description: "Admin login for Gram Panchayat Gidhadi officials",
+  title: "Admin Portal - Gram Panchayat Gidhadi",
+  description: "Secure admin management portal",
 };
 
 export default function AdminPage() {
-  return <AdminLogin />;
+  redirect("/admin/dashboard");
 }

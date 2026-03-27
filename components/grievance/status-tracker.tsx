@@ -46,7 +46,7 @@ const STATUS_CONFIG: Record<
 > = {
   pending:    { icon: Clock,         bg: "bg-amber-50",   text: "text-amber-700",  border: "border-amber-200",  dot: "bg-amber-400"  },
   inProgress: { icon: AlertCircle,   bg: "bg-blue-50",    text: "text-blue-700",   border: "border-blue-200",   dot: "bg-blue-400"   },
-  resolved:   { icon: CheckCircle2,  bg: "bg-emerald-50", text: "text-emerald-700",border: "border-emerald-200",dot: "bg-emerald-500" },
+  resolved:   { icon: CheckCircle2,  bg: "bg-primary/5", text: "text-primary",border: "border-primary/20",dot: "bg-primary" },
   rejected:   { icon: XCircle,       bg: "bg-red-50",     text: "text-red-700",    border: "border-red-200",    dot: "bg-red-400"    },
 };
 
@@ -101,7 +101,7 @@ function DetailRow({
   return (
     <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
       <div className="w-8 h-8 bg-white rounded-lg border border-gray-100 flex items-center justify-center flex-shrink-0 shadow-sm">
-        <Icon className="h-4 w-4 text-emerald-500" />
+        <Icon className="h-4 w-4 text-primary" />
       </div>
       <div className="min-w-0">
         <p className="text-[10px] sm:text-xs text-gray-400 font-semibold uppercase tracking-wide">
@@ -132,16 +132,29 @@ const StatusTracker = () => {
     setComplaint(null);
 
     try {
-      // Simulate API call — replace with real fetch
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Mock: any non-empty ID starting with "GP" returns a result
-      if (trimmed.toUpperCase().startsWith("GP")) {
-        setComplaint({ ...MOCK_COMPLAINT, id: trimmed.toUpperCase() });
-        setSearchState("found");
-      } else {
-        setSearchState("notFound");
+      const res = await fetch(`/api/complaints/${trimmed}`);
+      if (!res.ok) {
+        if (res.status === 404) {
+          setSearchState("notFound");
+        } else {
+          setSearchState("error");
+        }
+        return;
       }
+
+      const data = await res.json();
+
+      setComplaint({
+        id: data.referenceId,
+        name: data.fullName,
+        type: data.complaintType,
+        description: data.description,
+        status: data.status,
+        submittedDate: data.createdAt,
+        lastUpdated: data.updatedAt,
+        assignedTo: data.assignedTo,
+      });
+      setSearchState("found");
     } catch {
       setSearchState("error");
     }
@@ -160,8 +173,8 @@ const StatusTracker = () => {
   const isSearching = searchState === "searching";
 
   return (
-    <Card className="border border-emerald-100 shadow-lg overflow-hidden">
-      <div className="h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500" />
+    <Card className="border border-primary/10 shadow-lg overflow-hidden">
+      <div className="h-1.5 bg-gradient-to-r from-primary to-secondary" />
 
       <CardHeader className="px-4 sm:px-6 pt-5 pb-3">
         <CardTitle className="text-lg sm:text-xl font-bold text-gray-800">
@@ -193,13 +206,13 @@ const StatusTracker = () => {
               placeholder="e.g. GP123456"
               disabled={isSearching}
               maxLength={12}
-              className="flex-1 h-10 sm:h-11 text-sm font-mono border-gray-200 focus:border-emerald-400 focus:ring-emerald-400 uppercase"
+              className="flex-1 h-10 sm:h-11 text-sm font-mono border-gray-200 focus:border-primary focus:ring-primary uppercase"
               aria-label={t("referenceId")}
             />
             <Button
               onClick={handleSearch}
               disabled={isSearching || !referenceId.trim()}
-              className="h-10 sm:h-11 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg flex-shrink-0"
+              className="h-10 sm:h-11 px-4 bg-primary hover:bg-primary text-white rounded-lg flex-shrink-0"
               aria-label={t("searchComplaint")}
             >
               {isSearching ? (
@@ -254,7 +267,7 @@ const StatusTracker = () => {
                 <StatusBadge status={complaint.status} t={t} />
                 <button
                   onClick={handleReset}
-                  className="w-7 h-7 flex items-center justify-center rounded-lg bg-gray-100 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                  className="w-7 h-7 flex items-center justify-center rounded-lg bg-gray-100 text-gray-400 hover:text-primary hover:bg-primary/5 transition-colors"
                   aria-label="Clear and search again"
                   title={t("searchAgain")}
                 >
@@ -304,7 +317,7 @@ const StatusTracker = () => {
                         complaint.status === s
                           ? `${cfg.bg} ${cfg.border} ${cfg.text}`
                           : isPast
-                          ? "bg-emerald-100 border-emerald-300 text-emerald-600"
+                          ? "bg-primary/10 border-primary/40 text-primary"
                           : "bg-gray-100 border-gray-200 text-gray-300"
                       }`}
                     >

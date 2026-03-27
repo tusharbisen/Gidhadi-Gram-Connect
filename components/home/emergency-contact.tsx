@@ -19,7 +19,7 @@ interface EmergencyContactItem {
 const EMERGENCY_CONTACTS: EmergencyContactItem[] = [
   { nameKey: "police",     number: "100",           icon: Shield,        color: "text-blue-600 bg-blue-50"   },
   { nameKey: "fireBrigade",number: "101",           icon: AlertTriangle, color: "text-orange-600 bg-orange-50"},
-  { nameKey: "ambulance",  number: "108",           icon: Truck,         color: "text-green-600 bg-green-50" },
+  { nameKey: "ambulance",  number: "108",           icon: Truck,         color: "text-primary bg-green-50" },
   { nameKey: "Admin",      number: "+91 9168383674",icon: Phone,         color: "text-sky-600 bg-sky-50"     },
 ]
 

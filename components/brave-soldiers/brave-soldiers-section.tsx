@@ -89,7 +89,7 @@ export default function BraveSoldiersSection() {
           </p>
 
           {/* Decorative underline bar */}
-          <div className="w-24 sm:w-32 h-1.5 sm:h-2 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 mx-auto mt-4 rounded-full shadow-md" />
+          <div className="w-24 sm:w-32 h-1.5 sm:h-2 bg-gradient-to-r from-amber-500 via-accent to-red-500 mx-auto mt-4 rounded-full shadow-md" />
         </div>
 
         {/* ── Soldier Cards Grid ──────────────────────────────────────────── */}
@@ -142,7 +142,7 @@ export default function BraveSoldiersSection() {
                   <Badge
                     className={`${
                       soldier.status === "Currently Serving"
-                        ? "bg-emerald-700 hover:bg-emerald-800"
+                        ? "bg-primary hover:bg-primary"
                         : "bg-slate-700 hover:bg-slate-800"
                     } text-white font-semibold px-2.5 py-1 text-xs uppercase tracking-wide shadow-md`}
                   >
@@ -206,7 +206,7 @@ export default function BraveSoldiersSection() {
                       <span className="text-xs sm:text-sm font-semibold text-slate-500">
                         {label}
                       </span>
-                      <span className="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-emerald-700 transition-colors duration-300 text-right max-w-[60%]">
+                      <span className="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-primary transition-colors duration-300 text-right max-w-[60%]">
                         {value}
                       </span>
                     </div>

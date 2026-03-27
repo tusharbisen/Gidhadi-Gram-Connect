@@ -18,7 +18,7 @@ import { useLanguage } from "@/components/providers/language-provider";
 const QUICK_LINKS = [
   { href: "/about", key: "about" },
   { href: "/schemes", key: "schemes" },
-  { href: "/news", key: "news" },
+  { href: "/brave-soldiers", key: "braveSoldiers" },
   { href: "/grievance", key: "grievance" },
   { href: "/documents", key: "documents" },
 ] as const;
@@ -96,7 +96,7 @@ const Footer = () => {
         }
       `}</style>
 
-      <footer className="footer-body relative bg-gradient-to-br from-gray-900 via-emerald-950 to-gray-900 overflow-hidden">
+      <footer className="footer-body relative bg-gradient-to-br from-gray-900 via-primary to-gray-900 overflow-hidden">
         {/* Dot-grid texture */}
         <div
           className="absolute inset-0 footer-dots pointer-events-none"
@@ -105,7 +105,7 @@ const Footer = () => {
 
         {/* Ambient glow orbs */}
         <div
-          className="absolute top-0 left-1/4 w-72 h-72 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none"
+          className="absolute top-0 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-3xl pointer-events-none"
           aria-hidden="true"
         />
         <div
@@ -114,7 +114,7 @@ const Footer = () => {
         />
 
         {/* Top accent bar */}
-        <div className="h-1 bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500" />
+        <div className="h-1 bg-gradient-to-r from-primary via-teal-300 to-primary" />
 
         {/* ── Main content ─────────────────────────────────────────────── */}
         <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 lg:pt-16 pb-6">
@@ -124,13 +124,13 @@ const Footer = () => {
             <div className="sm:col-span-2 lg:col-span-1">
               {/* Logo + name */}
               <div className="flex items-center gap-2.5 mb-4">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-900/40 flex-shrink-0">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/40 flex-shrink-0">
                   <Leaf className="h-5 w-5 text-white" aria-hidden="true" />
                 </div>
                 <h2 className="footer-heading text-xl text-white leading-tight">
                   Gidhadi
                   <span
-                    className="block text-xs font-normal text-emerald-400 tracking-widest uppercase"
+                    className="block text-xs font-normal text-primary tracking-widest uppercase"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                   >
                     Gram Connect
@@ -139,7 +139,7 @@ const Footer = () => {
               </div>
 
               {/* Tagline */}
-              <p className="text-sm text-gray-400 leading-relaxed mb-5 max-w-[16rem]">
+              <p className="text-sm text-gray-400 leading-relaxed mb-5 max-w-xs">
                 {t("footerDescription")}
               </p>
 
@@ -163,7 +163,7 @@ const Footer = () => {
               <h3 className="footer-heading text-base text-white mb-4 sm:mb-5 flex items-center gap-2">
                 {t("quickLinks")}
                 <span
-                  className="flex-1 h-px bg-gradient-to-r from-emerald-700/60 to-transparent"
+                  className="flex-1 h-px bg-gradient-to-r from-primary/60 to-transparent"
                   aria-hidden="true"
                 />
               </h3>
@@ -172,10 +172,10 @@ const Footer = () => {
                   <li key={key}>
                     <Link
                       href={href}
-                      className="footer-link-hover text-sm text-gray-400 hover:text-emerald-300 flex items-center gap-2 group transition-colors"
+                      className="footer-link-hover text-sm text-gray-400 hover:text-primary/40 flex items-center gap-2 group transition-colors"
                     >
                       <span
-                        className="w-1.5 h-1.5 rounded-full bg-emerald-700 group-hover:bg-emerald-400 transition-colors flex-shrink-0"
+                        className="w-1.5 h-1.5 rounded-full bg-primary group-hover:bg-primary transition-colors flex-shrink-0"
                         aria-hidden="true"
                       />
                       {t(key)}
@@ -190,7 +190,7 @@ const Footer = () => {
               <h3 className="footer-heading text-base text-white mb-4 sm:mb-5 flex items-center gap-2">
                 {t("importantLinks")}
                 <span
-                  className="flex-1 h-px bg-gradient-to-r from-emerald-700/60 to-transparent"
+                  className="flex-1 h-px bg-gradient-to-r from-primary/60 to-transparent"
                   aria-hidden="true"
                 />
               </h3>
@@ -201,10 +201,10 @@ const Footer = () => {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-gray-400 hover:text-emerald-300 flex items-center gap-1.5 group transition-colors"
+                      className="text-sm text-gray-400 hover:text-primary/40 flex items-center gap-1.5 group transition-colors"
                     >
                       <ArrowUpRight
-                        className="h-3.5 w-3.5 text-emerald-700 group-hover:text-emerald-400 transition-colors flex-shrink-0"
+                        className="h-3.5 w-3.5 text-primary group-hover:text-primary transition-colors flex-shrink-0"
                         aria-hidden="true"
                       />
                       {t(key)}
@@ -219,17 +219,17 @@ const Footer = () => {
               <h3 className="footer-heading text-base text-white mb-4 sm:mb-5 flex items-center gap-2">
                 {t("contactUs")}
                 <span
-                  className="flex-1 h-px bg-gradient-to-r from-emerald-700/60 to-transparent"
+                  className="flex-1 h-px bg-gradient-to-r from-primary/60 to-transparent"
                   aria-hidden="true"
                 />
               </h3>
               <ul className="space-y-3">
                 {CONTACT_ITEMS.map(({ icon: Icon, value, isTranslation }) => (
                   <li key={value} className="flex items-start gap-3 group">
-                    <div className="w-7 h-7 rounded-lg bg-emerald-900/60 border border-emerald-800/60 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:border-emerald-600 transition-colors">
+                    <div className="w-7 h-7 rounded-lg bg-primary/60 border border-primary/60 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:border-primary transition-colors">
                       <Icon
                         size={13}
-                        className="text-emerald-400"
+                        className="text-primary"
                         aria-hidden="true"
                       />
                     </div>
@@ -244,7 +244,7 @@ const Footer = () => {
 
           {/* ── Divider ───────────────────────────────────────────────── */}
           <div
-            className="h-px bg-gradient-to-r from-transparent via-emerald-800/50 to-transparent mb-5 sm:mb-6"
+            className="h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent mb-5 sm:mb-6"
             aria-hidden="true"
           />
 
@@ -252,14 +252,14 @@ const Footer = () => {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4">
             <p className="text-xs text-gray-500 text-center sm:text-left">
               &copy; {new Date().getFullYear()}{" "}
-              <span className="text-emerald-500 font-medium">
+              <span className="text-primary font-medium">
                 {t("gramPanchayat")} {t("gidhadi")}
               </span>
               . {t("allRightsReserved")}
             </p>
             <p className="text-xs text-gray-600 flex items-center gap-1 flex-wrap justify-center sm:justify-end">
               {t("builtWithLove")}
-              <span className="text-emerald-500 mx-0.5" aria-hidden="true">
+              <span className="text-primary mx-0.5" aria-hidden="true">
                 ♥
               </span>
               {t("forGidhadiVillage")}

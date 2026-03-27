@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { Poppins, Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/layout/header";
@@ -9,17 +9,17 @@ import { LanguageProvider } from "@/components/providers/language-provider";
 import AnnouncementMarquee from "@/components/home/announcement-marquee";
 import { SITE_CONFIG } from "@/lib/site-config";
 
-const playfair = Playfair_Display({
+const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-playfair",
+  weight: ["500", "600", "700"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-dm-sans",
+  weight: ["400", "500", "600"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -207,13 +207,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${dmSans.variable}`}
+      className={`${poppins.variable} ${inter.variable}`}
     >
       <head>
         <meta name="color-scheme" content="light" />
-        <meta name="theme-color" content="#f4f8fb" />
+        <meta name="theme-color" content="#f8f9fa" />
       </head>
-      <body className={`${dmSans.className} antialiased`}>
+      <body className={`${inter.className} antialiased overflow-x-hidden`}>
         <Script
           id="json-ld-structured-data"
           type="application/ld+json"

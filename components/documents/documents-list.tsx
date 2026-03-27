@@ -59,7 +59,7 @@ export default function EducationPage() {
         </div>
 
         {/* Badge */}
-        <span className="inline-block bg-orange-50 border border-orange-400 text-orange-500 text-xs font-bold tracking-[2px] uppercase px-5 py-1.5 rounded-full mb-6">
+        <span className="inline-block bg-orange-50 border border-orange-400 text-accent text-xs font-bold tracking-[2px] uppercase px-5 py-1.5 rounded-full mb-6">
           🚧 Coming Soon
         </span>
 
@@ -119,7 +119,7 @@ export default function EducationPage() {
               for the village community.
             </p>
             <div className="flex items-center gap-2 mt-3">
-              <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse" />
+              <span className="w-2.5 h-2.5 bg-primary rounded-full animate-pulse" />
               <span className="text-xs font-semibold text-[#2a8c4e]">
                 Active Development in Progress
               </span>

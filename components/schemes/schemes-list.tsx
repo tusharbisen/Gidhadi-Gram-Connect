@@ -832,7 +832,7 @@ function EligibilityModal({
     >
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[85vh] flex flex-col overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-5 py-4 flex items-start justify-between gap-3 flex-shrink-0">
+        <div className="bg-gradient-to-r from-primary to-secondary px-5 py-4 flex items-start justify-between gap-3 flex-shrink-0">
           <div className="min-w-0">
             <h2 className="text-base sm:text-lg font-bold text-white leading-snug">
               {scheme.name}
@@ -859,20 +859,20 @@ function EligibilityModal({
             <ul className="space-y-2">
               {scheme.eligibilityCriteria.map((item, i) => (
                 <li key={i} className="flex items-start gap-2.5 text-sm text-gray-600">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-3.5 space-y-1.5">
+          <div className="bg-primary/5 border border-primary/10 rounded-xl p-3.5 space-y-1.5">
             <p className="text-sm text-gray-700">
-              <span className="font-semibold text-emerald-700">{t("benefits")}:</span>{" "}
+              <span className="font-semibold text-primary">{t("benefits")}:</span>{" "}
               {scheme.benefits}
             </p>
             <p className="text-sm text-gray-700">
-              <span className="font-semibold text-emerald-700">{t("deadline")}:</span>{" "}
+              <span className="font-semibold text-primary">{t("deadline")}:</span>{" "}
               {scheme.deadline}
             </p>
           </div>
@@ -888,7 +888,7 @@ function EligibilityModal({
             {t("closeModal")}
           </Button>
           <Button
-            className="flex-1 text-sm bg-emerald-600 hover:bg-emerald-700 text-white"
+            className="flex-1 text-sm bg-primary hover:bg-primary text-white"
             onClick={() => handleApplyNow(scheme.applyLink)}
           >
             {t("applyNow")}
@@ -930,7 +930,7 @@ function SchemeCard({
 
       <CardContent className="pb-3 px-4 sm:px-5 flex-1">
         <div className="space-y-2">
-          <div className="flex items-center gap-1.5 text-emerald-600 font-bold text-sm">
+          <div className="flex items-center gap-1.5 text-primary font-bold text-sm">
             <IndianRupee className="h-3.5 w-3.5 flex-shrink-0" />
             {scheme.benefits}
           </div>
@@ -949,7 +949,7 @@ function SchemeCard({
         <Button
           variant="outline"
           size="sm"
-          className="flex-1 text-xs sm:text-sm border-gray-200 hover:border-emerald-300 hover:text-emerald-700 hover:bg-emerald-50 transition-colors"
+          className="flex-1 text-xs sm:text-sm border-gray-200 hover:border-primary/40 hover:text-primary hover:bg-primary/5 transition-colors"
           onClick={() => onCheckEligibility(scheme)}
         >
           <ChevronDown className="mr-1 h-3.5 w-3.5" />
@@ -957,7 +957,7 @@ function SchemeCard({
         </Button>
         <Button
           size="sm"
-          className="flex-1 text-xs sm:text-sm bg-emerald-600 hover:bg-emerald-700 text-white"
+          className="flex-1 text-xs sm:text-sm bg-primary hover:bg-primary text-white"
           onClick={() => handleApplyNow(scheme.applyLink)}
         >
           {t("applyNow")}
@@ -987,10 +987,10 @@ export default function GovSchemes() {
   const closeModal = useCallback(() => setSelectedScheme(null), []);
 
   return (
-    <div className="bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+    <div className="bg-gradient-to-br from-primary/5 via-white to-primary/5">
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white py-12 sm:py-16">
+      <section className="bg-gradient-to-r from-primary to-secondary text-white py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 bg-white/15 rounded-full px-3 py-1.5 text-xs sm:text-sm font-medium mb-4">
             <MapPin className="h-3.5 w-3.5" />
@@ -1005,7 +1005,7 @@ export default function GovSchemes() {
           <div className="flex flex-col xs:flex-row gap-3 justify-center">
             <Button
               size="lg"
-              className="bg-white text-emerald-700 hover:bg-emerald-50 font-semibold text-sm sm:text-base h-10 sm:h-12 px-6"
+              className="bg-white text-primary hover:bg-primary/5 font-semibold text-sm sm:text-base h-10 sm:h-12 px-6"
               onClick={() => setActiveCategory("All")}
             >
               {t("browseAllSchemes")} ({schemes.length})
@@ -1036,7 +1036,7 @@ export default function GovSchemes() {
               key={label}
               className="text-center bg-white rounded-xl border border-gray-100 shadow-sm py-3 sm:py-4 px-2"
             >
-              <p className="text-xl sm:text-2xl font-extrabold text-emerald-600">{value}</p>
+              <p className="text-xl sm:text-2xl font-extrabold text-primary">{value}</p>
               <p className="text-[10px] sm:text-xs text-gray-400 uppercase tracking-wide mt-0.5">
                 {label}
               </p>
@@ -1051,7 +1051,7 @@ export default function GovSchemes() {
               <TabsTrigger
                 key={id}
                 value={id}
-                className="flex flex-col items-center gap-1 py-2 sm:py-2.5 px-1 rounded-lg text-gray-500 data-[state=active]:bg-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-sm transition-all text-[10px] sm:text-xs font-medium"
+                className="flex flex-col items-center gap-1 py-2 sm:py-2.5 px-1 rounded-lg text-gray-500 data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-sm transition-all text-[10px] sm:text-xs font-medium"
               >
                 <Icon className="h-4 w-4 flex-shrink-0" />
                 <span className="hidden sm:block leading-tight">{name}</span>

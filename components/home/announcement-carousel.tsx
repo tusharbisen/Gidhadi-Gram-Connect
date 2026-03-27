@@ -124,14 +124,16 @@ const AnnouncementCarousel = () => {
   }, [isPaused, selected, currentIndex]);
 
   // ── Scroll active card into view ────────────────────────────────────────────
-  // Uses scrollIntoView so it works regardless of card width or screen size
+  // Uses absolute horizontal scrolling (scrollLeft) instead of scrollIntoView 
+  // to prevent involuntary vertical window jumping when the user scrolls down the page.
   useEffect(() => {
     const card = cardRefs.current[currentIndex];
-    if (card && scrollRef.current) {
-      card.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
+    const container = scrollRef.current;
+    if (card && container) {
+      const scrollLeft = card.offsetLeft - (container.clientWidth / 2) + (card.clientWidth / 2);
+      container.scrollTo({
+        left: scrollLeft,
+        behavior: "smooth"
       });
     }
   }, [currentIndex]);
@@ -175,7 +177,7 @@ const AnnouncementCarousel = () => {
           Scales to text-xl on sm+, text-2xl on md+.
         */}
         <h2 className="text-base sm:text-xl md:text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <Megaphone className="h-4 w-4 sm:h-5 sm:w-5 text-orange-500 flex-shrink-0" />
+          <Megaphone className="h-4 w-4 sm:h-5 sm:w-5 text-accent flex-shrink-0" />
           <span className="leading-tight">{t("latestAnnouncements")}</span>
         </h2>
 
@@ -229,7 +231,7 @@ const AnnouncementCarousel = () => {
               key={copy}
               className="inline-flex items-center gap-2 pr-12 text-xs sm:text-sm font-medium text-blue-800"
             >
-              <AlertTriangle className="h-3 w-3 text-orange-500 flex-shrink-0" />
+              <AlertTriangle className="h-3 w-3 text-accent flex-shrink-0" />
               {current.title[language]}
               <span className="text-blue-400 mx-2">•</span>
               {current.content[language]}

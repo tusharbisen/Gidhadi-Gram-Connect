@@ -80,9 +80,7 @@ function validate(data: FormData, t: (k: string) => string): FormErrors {
   return errors;
 }
 
-function generateReferenceId(): string {
-  return `GP${Date.now().toString().slice(-6)}`;
-}
+// Removed generateReferenceId Since Backend Provides It
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -157,10 +155,34 @@ const ComplaintForm = () => {
 
     setStatus("submitting");
     try {
-      // Simulate API submission
-      await new Promise((resolve) => setTimeout(resolve, 1800));
-      const id = generateReferenceId();
-      setReferenceId(id);
+      let base64Photo = null;
+      if (formData.photo) {
+        base64Photo = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = reject;
+          reader.readAsDataURL(formData.photo!);
+        });
+      }
+
+      const res = await fetch("/api/complaints", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          phoneNumber: formData.phoneNumber,
+          complaintType: formData.complaintType,
+          description: formData.description,
+          photo: base64Photo,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to submit complaint");
+      }
+
+      const data = await res.json();
+      setReferenceId(data.referenceId);
       setStatus("success");
       setFormData(INITIAL_FORM);
       setErrors({});
@@ -173,11 +195,11 @@ const ComplaintForm = () => {
 
   if (status === "success") {
     return (
-      <Card className="border border-emerald-100 shadow-lg overflow-hidden">
-        <div className="h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500" />
+      <Card className="border border-primary/10 shadow-lg overflow-hidden">
+        <div className="h-1.5 bg-gradient-to-r from-primary to-secondary" />
         <CardContent className="p-6 sm:p-8 text-center">
-          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <CheckCircle2 className="h-7 w-7 sm:h-8 sm:w-8 text-emerald-600" />
+          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <CheckCircle2 className="h-7 w-7 sm:h-8 sm:w-8 text-primary" />
           </div>
           <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
             {t("complaintSubmitted") || "Complaint Submitted!"}
@@ -186,17 +208,17 @@ const ComplaintForm = () => {
             {t("complaintSubmittedDesc") ||
               "Your complaint has been recorded. You can track it using the reference ID below."}
           </p>
-          <div className="inline-block bg-emerald-50 border border-emerald-200 rounded-xl px-5 py-3 mb-6">
-            <p className="text-xs text-emerald-600 font-semibold uppercase tracking-wider mb-1">
+          <div className="inline-block bg-primary/5 border border-primary/20 rounded-xl px-5 py-3 mb-6">
+            <p className="text-xs text-primary font-semibold uppercase tracking-wider mb-1">
               {t("referenceId") || "Reference ID"}
             </p>
-            <p className="text-xl sm:text-2xl font-extrabold text-emerald-700 font-mono tracking-wider">
+            <p className="text-xl sm:text-2xl font-extrabold text-primary font-mono tracking-wider">
               {referenceId}
             </p>
           </div>
           <Button
             onClick={() => setStatus("idle")}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl px-6"
+            className="bg-primary hover:bg-primary text-white rounded-xl px-6"
           >
             {t("submitAnother") || "Submit Another Complaint"}
           </Button>
@@ -210,8 +232,8 @@ const ComplaintForm = () => {
   const isSubmitting = status === "submitting";
 
   return (
-    <Card className="border border-emerald-100 shadow-lg overflow-hidden">
-      <div className="h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500" />
+    <Card className="border border-primary/10 shadow-lg overflow-hidden">
+      <div className="h-1.5 bg-gradient-to-r from-primary to-secondary" />
 
       <CardHeader className="px-4 sm:px-6 pt-5 pb-3">
         <CardTitle className="text-lg sm:text-xl font-bold text-gray-800">
@@ -247,7 +269,7 @@ const ComplaintForm = () => {
               disabled={isSubmitting}
               autoComplete="name"
               placeholder={t("fullNamePlaceholder") || "Enter your full name"}
-              className={`h-10 sm:h-11 text-sm border-gray-200 focus:border-emerald-400 focus:ring-emerald-400 ${
+              className={`h-10 sm:h-11 text-sm border-gray-200 focus:border-primary focus:ring-primary ${
                 errors.fullName ? "border-red-300" : ""
               }`}
             />
@@ -269,7 +291,7 @@ const ComplaintForm = () => {
               autoComplete="tel"
               placeholder="e.g. 9876543210"
               maxLength={10}
-              className={`h-10 sm:h-11 text-sm border-gray-200 focus:border-emerald-400 focus:ring-emerald-400 ${
+              className={`h-10 sm:h-11 text-sm border-gray-200 focus:border-primary focus:ring-primary ${
                 errors.phoneNumber ? "border-red-300" : ""
               }`}
             />
@@ -287,7 +309,7 @@ const ComplaintForm = () => {
               disabled={isSubmitting}
             >
               <SelectTrigger
-                className={`h-10 sm:h-11 text-sm border-gray-200 focus:border-emerald-400 focus:ring-emerald-400 ${
+                className={`h-10 sm:h-11 text-sm border-gray-200 focus:border-primary focus:ring-primary ${
                   errors.complaintType ? "border-red-300" : ""
                 }`}
               >
@@ -317,7 +339,7 @@ const ComplaintForm = () => {
               disabled={isSubmitting}
               rows={4}
               placeholder={t("descriptionPlaceholder") || "Describe your complaint in detail (min. 20 characters)…"}
-              className={`text-sm border-gray-200 focus:border-emerald-400 focus:ring-emerald-400 resize-none ${
+              className={`text-sm border-gray-200 focus:border-primary focus:ring-primary resize-none ${
                 errors.description ? "border-red-300" : ""
               }`}
             />
@@ -339,9 +361,9 @@ const ComplaintForm = () => {
             </Label>
 
             {formData.photo ? (
-              <div className="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl">
-                <div className="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Upload className="h-4 w-4 text-emerald-600" />
+              <div className="flex items-center gap-3 p-3 bg-primary/5 border border-primary/20 rounded-xl">
+                <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Upload className="h-4 w-4 text-primary" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-xs sm:text-sm font-medium text-gray-700 truncate">
@@ -365,7 +387,7 @@ const ComplaintForm = () => {
                 type="button"
                 onClick={() => document.getElementById(photoInputId)?.click()}
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-200 rounded-xl text-xs sm:text-sm text-gray-400 hover:border-emerald-300 hover:text-emerald-600 hover:bg-emerald-50 transition-all duration-200 disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-200 rounded-xl text-xs sm:text-sm text-gray-400 hover:border-primary/40 hover:text-primary hover:bg-primary/5 transition-all duration-200 disabled:opacity-50"
               >
                 <Upload className="h-4 w-4" />
                 {t("chooseFile") || "Click to choose a photo"}
@@ -386,7 +408,7 @@ const ComplaintForm = () => {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full h-10 sm:h-11 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-semibold text-sm sm:text-base rounded-xl transition-colors disabled:opacity-60"
+            className="w-full h-10 sm:h-11 bg-primary hover:bg-primary active:bg-primary text-white font-semibold text-sm sm:text-base rounded-xl transition-colors disabled:opacity-60"
           >
             {isSubmitting ? (
               <span className="flex items-center gap-2">

@@ -10,111 +10,44 @@
     color-scheme: light;
     --radius: 0.5rem;
 
-    /* Brand palette */
-    --brand-navy: #0D3D6E;
-    --brand-blue: #1565A8;
-    --brand-sky: #2196D9;
-    --brand-sky-light: #E8F3FC;
-    --brand-gold: #C8962A;
-    --brand-gold-light: #FDF6E8;
-
-    /* Backgrounds */
-    --color-bg-primary: #F0F6FC;
-    --color-bg-secondary: #E8F3FC;
-    --color-bg-tertiary: #D6EAFA;
+    /* Theme Palette */
+    --color-bg-primary: #F8F9FA;
+    --color-bg-secondary: #FFFFFF;
     --color-surface: #FFFFFF;
+    
+    --color-text-primary: #1A1A1A;
+    --color-text-secondary: #555555;
+    
+    --color-border-primary: #E0E0E0;
 
-    /* Text */
-    --color-text-primary: #0D3D6E;
-    --color-text-secondary: #1D5A8A;
-    --color-text-muted: #4A7AB5;
-    --color-text-inverse: #FFFFFF;
+    --color-accent-primary: #1565C0;
+    --color-accent-primary-hover: #1976D2;
 
-    /* Borders */
-    --color-border-primary: #B5D4F4;
-    --color-border-secondary: #D6EAFA;
-
-    /* Accent */
-    --color-accent-primary: #1565A8;
-    --color-accent-primary-hover: #0D3D6E;
-    --color-accent-soft: rgba(21, 101, 168, 0.12);
-    --color-accent-contrast: #FFFFFF;
-
-    /* Gold */
-    --color-gold: #C8962A;
-    --color-gold-light: #FDF6E8;
-
-    /* Shadows */
-    --shadow-sm: 0 2px 8px rgba(13, 61, 110, 0.08);
-    --shadow-md: 0 10px 30px rgba(13, 61, 110, 0.12);
-    --shadow-lg: 0 20px 60px rgba(13, 61, 110, 0.18);
-
-    --focus-ring: 0 0 0 3px rgba(21, 101, 168, 0.3);
-    --header-nav-bg: rgba(255, 255, 255, 0.95);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --focus-ring: 0 0 0 3px rgba(21, 101, 192, 0.3);
 
     /* Tailwind vars */
-    --background: 210 60% 97%;
-    --foreground: 213 75% 24%;
+    --background: 210 20% 98%;
+    --foreground: 0 0% 10%;
+    
     --card: 0 0% 100%;
-    --card-foreground: 213 75% 24%;
-    --primary: 210 78% 39%;
+    --card-foreground: 0 0% 10%;
+    
+    --primary: 212 80% 42%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 210 60% 94%;
-    --secondary-foreground: 213 75% 24%;
-    --muted: 210 50% 94%;
-    --muted-foreground: 213 45% 47%;
-    --accent: 39 66% 48%;
-    --accent-foreground: 0 0% 100%;
-    --border: 210 45% 85%;
-    --input: 210 45% 85%;
-    --ring: 210 78% 39%;
-  }
-
-  html[data-theme="dark"] {
-    color-scheme: dark;
-
-    --color-bg-primary: #071828;
-    --color-bg-secondary: #0D2540;
-    --color-bg-tertiary: #122E52;
-    --color-surface: #0D2540;
-
-    --color-text-primary: #E8F3FC;
-    --color-text-secondary: #B5D4F4;
-    --color-text-muted: #6FA8D8;
-    --color-text-inverse: #071828;
-
-    --color-border-primary: #1E4A7A;
-    --color-border-secondary: #163A62;
-
-    --color-accent-primary: #2196D9;
-    --color-accent-primary-hover: #4AAEE8;
-    --color-accent-soft: rgba(33, 150, 217, 0.18);
-    --color-accent-contrast: #071828;
-
-    --color-gold: #E6AA35;
-    --color-gold-light: #2A1E08;
-
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
-    --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.45);
-    --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.55);
-
-    --header-nav-bg: rgba(13, 37, 64, 0.95);
-
-    --background: 213 75% 8%;
-    --foreground: 210 60% 94%;
-    --card: 213 68% 13%;
-    --card-foreground: 210 60% 94%;
-    --primary: 205 72% 52%;
-    --primary-foreground: 213 75% 8%;
-    --secondary: 213 55% 18%;
-    --secondary-foreground: 210 60% 94%;
-    --muted: 213 55% 18%;
-    --muted-foreground: 210 40% 70%;
-    --accent: 39 72% 55%;
-    --accent-foreground: 213 75% 8%;
-    --border: 213 45% 24%;
-    --input: 213 45% 24%;
-    --ring: 205 72% 52%;
+    
+    --secondary: 210 79% 46%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 33%;
+    
+    --accent: 38 92% 56%;
+    --accent-foreground: 0 0% 10%;
+    
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 212 80% 42%;
   }
 
   * {
@@ -128,14 +61,12 @@
 
   body {
     @apply bg-background text-foreground font-sans;
-
-    font-family: "Inter", "Roboto", system-ui, sans-serif;
-
-    background:
-      radial-gradient(circle at top, rgba(21, 101, 168, 0.08), transparent 28%),
-      linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
-
+    font-family: var(--font-inter), sans-serif;
     color: var(--color-text-primary);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-poppins), sans-serif;
   }
 
   :focus-visible {

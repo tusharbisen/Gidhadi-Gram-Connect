@@ -102,19 +102,19 @@ export function GoogleMap({
 
   return (
     <>
-      <div className="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4 sm:p-5 md:p-6">
+      <div className="bg-white rounded-2xl shadow-sm border border-primary/10 p-4 sm:p-5 md:p-6">
 
         {/* ── Header ──────────────────────────────────────────────────── */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-3">
           <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-800 flex items-center gap-2">
-            <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0" />
+            <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
             {t("villageLocation") || "Village Location"}
           </h2>
 
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <button
               onClick={() => openExternal(mapsDirectionsUrl)}
-              className="flex items-center justify-center gap-1.5 px-3 py-2 text-xs sm:text-sm bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg hover:bg-emerald-100 transition-colors flex-1 sm:flex-initial font-medium"
+              className="flex items-center justify-center gap-1.5 px-3 py-2 text-xs sm:text-sm bg-primary/5 text-primary border border-primary/20 rounded-lg hover:bg-primary/10 transition-colors flex-1 sm:flex-initial font-medium"
               aria-label="Get directions to village"
             >
               <Navigation className="w-3.5 h-3.5 flex-shrink-0" />
@@ -133,15 +133,15 @@ export function GoogleMap({
         </div>
 
         {/* ── Map ─────────────────────────────────────────────────────── */}
-        <div className="relative w-full h-56 sm:h-72 md:h-80 lg:h-96 rounded-xl overflow-hidden border border-emerald-100 bg-gray-100 shadow-inner">
+        <div className="relative w-full h-56 sm:h-72 md:h-80 lg:h-96 rounded-xl overflow-hidden border border-primary/10 bg-gray-100 shadow-inner">
           <MapIframe title={`${villageName} Location Map`} />
         </div>
 
         {/* ── Coordinates + Info ──────────────────────────────────────── */}
         <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
           {/* Coordinates spans 2 cols on mobile, 1 on sm+ */}
-          <div className="col-span-2 sm:col-span-1 text-center p-2.5 sm:p-3 bg-emerald-50 border border-emerald-100 rounded-xl">
-            <p className="text-[10px] sm:text-xs text-emerald-600 font-semibold uppercase tracking-wide mb-1">
+          <div className="col-span-2 sm:col-span-1 text-center p-2.5 sm:p-3 bg-primary/5 border border-primary/10 rounded-xl">
+            <p className="text-[10px] sm:text-xs text-primary font-semibold uppercase tracking-wide mb-1">
               {t("coordinates") || "Coordinates"}
             </p>
             <p className="font-bold text-gray-800 text-xs sm:text-sm font-mono">
@@ -169,7 +169,7 @@ export function GoogleMap({
         <div className="mt-4 flex flex-col xs:flex-row gap-2">
           <button
             onClick={() => openExternal(mapsSearchUrl)}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 active:bg-emerald-800 transition-colors flex-1"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold bg-primary text-white rounded-xl hover:bg-primary active:bg-primary transition-colors flex-1"
           >
             <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
             {t("openInGoogleMaps") || "Open in Google Maps"}
@@ -199,7 +199,7 @@ export function GoogleMap({
             {/* Modal header */}
             <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-100 flex-shrink-0">
               <div className="flex items-center gap-2 min-w-0">
-                <MapPin className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
                 <h3 className="text-sm sm:text-base font-bold text-gray-800 truncate">
                   {villageName} — {t("villageLocation") || "Village Location"}
                 </h3>

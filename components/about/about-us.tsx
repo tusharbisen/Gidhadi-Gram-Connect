@@ -86,9 +86,9 @@ const teamMembers: TeamMember[] = [
 function SectionDivider() {
   return (
     <div className="flex items-center gap-3 my-2">
-      <div className="h-px flex-1 bg-gradient-to-r from-transparent to-emerald-200" />
-      <Sparkles className="h-3 w-3 text-emerald-400" />
-      <div className="h-px flex-1 bg-gradient-to-l from-transparent to-emerald-200" />
+      <div className="h-px flex-1 bg-gradient-to-r from-transparent to-primary/20" />
+      <Sparkles className="h-3 w-3 text-primary" />
+      <div className="h-px flex-1 bg-gradient-to-l from-transparent to-primary/20" />
     </div>
   );
 }
@@ -133,12 +133,12 @@ export default function AboutUs() {
   ];
 
   return (
-    <div className="mx-auto max-w-6xl bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+    <div className="mx-auto max-w-6xl bg-gradient-to-br from-primary/5 via-white to-primary/5 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         <div className="mb-10 text-center sm:mb-14">
           <div className="mb-5 flex justify-center sm:mb-6">
             <div className="relative">
-              <div className="absolute inset-0 scale-110 rounded-full bg-emerald-200 opacity-60 blur-xl" />
-              <div className="relative flex h-20 w-20 items-center justify-center rounded-full border-4 border-emerald-200 bg-white shadow-xl sm:h-24 sm:w-24 md:h-28 md:w-28">
+              <div className="absolute inset-0 scale-110 rounded-full bg-primary/20 opacity-60 blur-xl" />
+              <div className="relative flex h-20 w-20 items-center justify-center rounded-full border-4 border-primary/20 bg-white shadow-xl sm:h-24 sm:w-24 md:h-28 md:w-28">
                 <Image
                   src="/logo.png"
                   alt="Gidhadi Gram Connect Logo"
@@ -158,8 +158,8 @@ export default function AboutUs() {
           </p>
         </div>
 
-        <Card className="mb-6 overflow-hidden border border-emerald-100 shadow-lg sm:mb-8">
-          <CardHeader className="bg-gradient-to-r from-emerald-600 to-teal-600 p-4 text-white sm:p-6">
+        <Card className="mb-6 overflow-hidden border border-primary/10 shadow-lg sm:mb-8">
+          <CardHeader className="bg-gradient-to-r from-primary to-secondary p-4 text-white sm:p-6">
             <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl">
               <Globe className="h-5 w-5 flex-shrink-0" />
               {t("aboutWelcomeTitle")}
@@ -176,15 +176,15 @@ export default function AboutUs() {
         </Card>
 
         <div className="mb-8 grid grid-cols-1 gap-5 sm:mb-10 sm:gap-6 lg:grid-cols-2">
-          <Card className="overflow-hidden border border-emerald-100 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-4 text-white sm:p-5">
+          <Card className="overflow-hidden border border-primary/10 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-primary to-primary p-4 text-white sm:p-5">
               <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg">
                 <Target className="h-5 w-5 flex-shrink-0" />
                 {t("aboutVisionTitle")}
               </CardTitle>
             </CardHeader>
             <CardContent className="bg-white p-4 sm:p-6">
-              <div className="border-l-4 border-emerald-400 pl-4">
+              <div className="border-l-4 border-primary pl-4">
                 <p className="text-sm italic leading-relaxed text-gray-600 sm:text-base">
                   {t("aboutVisionText")}
                 </p>
@@ -193,7 +193,7 @@ export default function AboutUs() {
           </Card>
 
           <Card className="overflow-hidden border border-teal-100 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-teal-500 to-teal-600 p-4 text-white sm:p-5">
+            <CardHeader className="bg-gradient-to-r from-secondary to-secondary p-4 text-white sm:p-5">
               <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg">
                 <Heart className="h-5 w-5 flex-shrink-0" />
                 {t("aboutMissionTitle")}
@@ -214,8 +214,8 @@ export default function AboutUs() {
           </Card>
         </div>
 
-        <Card className="mb-6 overflow-hidden border border-emerald-100 shadow-lg sm:mb-8">
-          <CardHeader className="bg-gradient-to-r from-emerald-600 to-teal-600 p-4 text-white sm:p-6">
+        <Card className="mb-6 overflow-hidden border border-primary/10 shadow-lg sm:mb-8">
+          <CardHeader className="bg-gradient-to-r from-primary to-secondary p-4 text-white sm:p-6">
             <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl">
               <Users className="h-5 w-5 flex-shrink-0" />
               {t("aboutTeamTitle")}
@@ -230,13 +230,13 @@ export default function AboutUs() {
               {teamMembers.map((member) => (
                 <Card
                   key={member.contact}
-                  className="group border border-emerald-100 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                  className="group border border-primary/10 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                 >
                   <CardContent className="p-4 sm:p-5 md:p-6">
                     <div className="space-y-4">
                       <div className="flex flex-col items-center gap-3 text-center">
                         <div className="relative">
-                          <div className="h-20 w-20 overflow-hidden rounded-full border-4 border-emerald-100 bg-emerald-50 shadow-md ring-2 ring-emerald-300 ring-offset-2 sm:h-24 sm:w-24">
+                          <div className="h-20 w-20 overflow-hidden rounded-full border-4 border-primary/10 bg-primary/5 shadow-md ring-2 ring-primary/40 ring-offset-2 sm:h-24 sm:w-24">
                             <Image
                               src={member.image}
                               alt={`${member.name} profile picture`}
@@ -245,7 +245,7 @@ export default function AboutUs() {
                               className="h-full w-full object-cover"
                             />
                           </div>
-                          <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-emerald-500 shadow">
+                          <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-primary shadow">
                             <Star className="h-3 w-3 fill-white text-white" />
                           </span>
                         </div>
@@ -254,7 +254,7 @@ export default function AboutUs() {
                           <h3 className="text-sm font-bold leading-snug text-gray-800 sm:text-base">
                             {member.name}
                           </h3>
-                          <Badge className="border border-emerald-200 bg-emerald-50 text-[11px] font-medium text-emerald-700">
+                          <Badge className="border border-primary/20 bg-primary/5 text-[11px] font-medium text-primary">
                             {member.designation}
                           </Badge>
                         </div>
@@ -262,15 +262,15 @@ export default function AboutUs() {
 
                       <SectionDivider />
 
-                      <div className="rounded-lg border border-emerald-100 bg-emerald-50 px-3 py-2 text-center">
-                        <p className="text-xs font-medium leading-snug text-emerald-700">
+                      <div className="rounded-lg border border-primary/10 bg-primary/5 px-3 py-2 text-center">
+                        <p className="text-xs font-medium leading-snug text-primary">
                           {member.role[language]}
                         </p>
                       </div>
 
                       <div className="space-y-1.5">
                         <span className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-gray-400 sm:text-xs">
-                          <Target className="h-3 w-3 text-emerald-500" />
+                          <Target className="h-3 w-3 text-primary" />
                           {t("responsibility")}
                         </span>
                         <p className="rounded-lg border border-gray-100 bg-gray-50 p-2.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
@@ -280,7 +280,7 @@ export default function AboutUs() {
 
                       <div className="space-y-1.5">
                         <span className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-gray-400 sm:text-xs">
-                          <Star className="h-3 w-3 text-emerald-500" />
+                          <Star className="h-3 w-3 text-primary" />
                           {t("skills")}
                         </span>
                         <div className="flex flex-wrap gap-1">
@@ -288,7 +288,7 @@ export default function AboutUs() {
                             <Badge
                               key={skill}
                               variant="outline"
-                              className="border-emerald-200 bg-white text-[10px] text-emerald-700 sm:text-xs"
+                              className="border-primary/20 bg-white text-[10px] text-primary sm:text-xs"
                             >
                               {skill}
                             </Badge>
@@ -296,10 +296,10 @@ export default function AboutUs() {
                         </div>
                       </div>
 
-                      <div className="border-t border-emerald-100 pt-3">
+                      <div className="border-t border-primary/10 pt-3">
                         <a
                           href={`tel:${member.contact.replace(/\s/g, "")}`}
-                          className="flex items-center justify-center gap-2 rounded-lg border border-emerald-100 bg-emerald-50 p-2.5 text-xs font-medium text-emerald-700 transition-colors hover:bg-emerald-100 sm:text-sm"
+                          className="flex items-center justify-center gap-2 rounded-lg border border-primary/10 bg-primary/5 p-2.5 text-xs font-medium text-primary transition-colors hover:bg-primary/10 sm:text-sm"
                         >
                           <Phone className="h-3.5 w-3.5 flex-shrink-0" />
                           {member.contact}
@@ -315,9 +315,9 @@ export default function AboutUs() {
               {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-xl border border-emerald-100 bg-gradient-to-br from-emerald-50 to-teal-50 p-4 text-center shadow-sm"
+                  className="rounded-xl border border-primary/10 bg-gradient-to-br from-primary/5 to-primary/5 p-4 text-center shadow-sm"
                 >
-                  <div className="text-2xl font-extrabold tracking-tight text-emerald-600 sm:text-3xl">
+                  <div className="text-2xl font-extrabold tracking-tight text-primary sm:text-3xl">
                     {stat.value}
                   </div>
                   <div className="mt-1 text-[10px] font-medium uppercase tracking-widest text-gray-500 sm:text-xs">
@@ -329,8 +329,8 @@ export default function AboutUs() {
           </CardContent>
         </Card>
 
-        <Card className="mb-6 overflow-hidden border border-emerald-100 shadow-lg sm:mb-8">
-          <CardHeader className="bg-gradient-to-r from-emerald-600 to-teal-600 p-4 text-white sm:p-6">
+        <Card className="mb-6 overflow-hidden border border-primary/10 shadow-lg sm:mb-8">
+          <CardHeader className="bg-gradient-to-r from-primary to-secondary p-4 text-white sm:p-6">
             <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl">
               <Mail className="h-5 w-5 flex-shrink-0" />
               {t("getInTouch")}
@@ -341,9 +341,9 @@ export default function AboutUs() {
               {contactCards.map((item) => (
                 <div
                   key={item.title}
-                  className="flex flex-col items-center gap-3 rounded-xl border border-emerald-100 bg-gradient-to-br from-emerald-50 to-teal-50 p-4 text-center shadow-sm"
+                  className="flex flex-col items-center gap-3 rounded-xl border border-primary/10 bg-gradient-to-br from-primary/5 to-primary/5 p-4 text-center shadow-sm"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                     {item.icon}
                   </div>
                   <h3 className="text-sm font-semibold text-gray-800 sm:text-base">
@@ -380,11 +380,11 @@ export default function AboutUs() {
           </CardContent>
         </Card>
 
-        <div className="rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 p-6 text-center shadow-lg sm:p-8">
+        <div className="rounded-2xl bg-gradient-to-r from-primary to-secondary p-6 text-center shadow-lg sm:p-8">
           <h3 className="mb-2 text-lg font-bold text-white sm:text-xl md:text-2xl">
             {t("togetherWeGrow")}
           </h3>
-          <p className="mx-auto max-w-2xl text-xs leading-relaxed text-emerald-100 sm:text-sm md:text-base">
+          <p className="mx-auto max-w-2xl text-xs leading-relaxed text-primary/10 sm:text-sm md:text-base">
             {t("aboutFooterMessage")}
           </p>
         </div>

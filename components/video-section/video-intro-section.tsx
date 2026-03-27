@@ -19,7 +19,7 @@ const FEATURE_CARDS = [
     fallbackTitle: "Community Connection",
     fallbackDesc:
       "Connecting villagers, sharing resources, and building stronger community bonds.",
-    color: "text-emerald-700",
+    color: "text-primary",
   },
   {
     icon: Briefcase,
@@ -39,7 +39,7 @@ const FEATURE_CARDS = [
     fallbackTitle: "Digital Innovation",
     fallbackDesc:
       "Modern technology meeting traditional village life for better living.",
-    color: "text-emerald-800",
+    color: "text-primary",
   },
 ] as const;
 
@@ -75,34 +75,34 @@ export default function VideoIntroSection() {
   }, [isMuted]);
 
   return (
-    <section className="w-full py-10 sm:py-14 md:py-20 bg-gradient-to-br from-emerald-50 via-white to-teal-50 mt-5 rounded-2xl border border-emerald-200 shadow-sm">
+    <section className="w-full py-10 sm:py-14 md:py-20 bg-gradient-to-br from-primary/5 via-white to-primary/5 mt-5 rounded-2xl border border-primary/20 shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Section Header ───────────────────────────────────────────── */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
-          <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-emerald-500 mb-2">
+          <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-primary mb-2">
             Village · Gram · गाव
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-800 mb-3 leading-tight tracking-tight">
             "गिधाडी ग्राम कनेक्ट म्हणजे काय?"
           </h2>
-          <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-emerald-600 mb-4">
+          <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-primary mb-4">
             {t("whatIsGidhadiGramTitle")}
           </h3>
           <p className="text-sm sm:text-base md:text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
             {t("whatIsGidhadiGramSubtitle")}
           </p>
           <div className="mt-4 flex items-center justify-center gap-2">
-            <div className="h-1 w-8 rounded-full bg-emerald-300" />
-            <div className="h-1 w-16 rounded-full bg-emerald-500" />
-            <div className="h-1 w-8 rounded-full bg-emerald-300" />
+            <div className="h-1 w-8 rounded-full bg-primary/40" />
+            <div className="h-1 w-16 rounded-full bg-primary" />
+            <div className="h-1 w-8 rounded-full bg-primary/40" />
           </div>
         </div>
 
         {/* ── Video Player ─────────────────────────────────────────────── */}
         <div className="max-w-4xl mx-auto">
           <div
-            className="relative bg-black rounded-2xl overflow-hidden shadow-2xl ring-1 ring-emerald-200"
+            className="relative bg-black rounded-2xl overflow-hidden shadow-2xl ring-1 ring-primary/20"
             onMouseEnter={() => setShowControls(true)}
             onMouseLeave={() => setShowControls(false)}
             onTouchStart={() => setShowControls((v) => !v)}
@@ -161,7 +161,7 @@ export default function VideoIntroSection() {
               <div className="absolute inset-0 flex items-center justify-center bg-black/30">
                 <button
                   onClick={handlePlayPause}
-                  className="w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl flex items-center justify-center transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-400"
+                  className="w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full bg-primary hover:bg-primary text-white shadow-xl flex items-center justify-center transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary"
                   aria-label="Play video"
                 >
                   <Play className="h-6 w-6 sm:h-7 sm:w-7 ml-1" />
@@ -197,7 +197,7 @@ export default function VideoIntroSection() {
         <div className="text-center mt-8 sm:mt-10">
           <Button
             size="lg"
-            className="bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white px-7 sm:px-9 py-2.5 sm:py-3 text-sm sm:text-base font-semibold rounded-full shadow-lg hover:shadow-emerald-200 transition-all duration-200 hover:scale-105"
+            className="bg-primary hover:bg-primary active:bg-primary text-white px-7 sm:px-9 py-2.5 sm:py-3 text-sm sm:text-base font-semibold rounded-full shadow-lg hover:shadow-primary/20 transition-all duration-200 hover:scale-105"
           >
             {t("joinCommunityBtn") !== "joinCommunityBtn"
               ? t("joinCommunityBtn")

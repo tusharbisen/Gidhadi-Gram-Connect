@@ -154,7 +154,7 @@ const galleryItems: GalleryItem[] = [
 const CATEGORY_STYLES: Record<string, { color: string; bg: string }> = {
   events: { color: "text-blue-700", bg: "bg-blue-100" },
   development: { color: "text-green-700", bg: "bg-green-100" },
-  environment: { color: "text-emerald-700", bg: "bg-emerald-100" },
+  environment: { color: "text-primary", bg: "bg-primary/10" },
   meetings: { color: "text-purple-700", bg: "bg-purple-100" },
   social: { color: "text-pink-700", bg: "bg-pink-100" },
   default: { color: "text-gray-700", bg: "bg-gray-100" },
@@ -181,7 +181,7 @@ function GalleryCard({ item, lang, index, onOpen }: GalleryCardProps) {
       onClick={() => onOpen(item, index)}
       onKeyDown={(e) => e.key === "Enter" && onOpen(item, index)}
       aria-label={`Open photo: ${item.title[lang]}`}
-      className="group cursor-pointer overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+      className="group cursor-pointer overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
     >
       {/* Thumbnail */}
       <div className="relative aspect-square w-full overflow-hidden bg-gray-100">
@@ -303,7 +303,7 @@ const PhotoGallery = () => {
         </div>
 
         <Select value={filter} onValueChange={handleFilterChange}>
-          <SelectTrigger className="w-full sm:w-52 border-gray-200 focus:border-emerald-400 focus:ring-emerald-400 text-sm">
+          <SelectTrigger className="w-full sm:w-52 border-gray-200 focus:border-primary focus:ring-primary text-sm">
             <SelectValue placeholder={t("filterByCategory")} />
           </SelectTrigger>
           <SelectContent>

@@ -11,7 +11,11 @@ const AnnouncementMarquee = () => {
   // Memoize to prevent unnecessary re-renders
   const announcement = t("scrollmarquee");
 
-  return <Marquee text={announcement} />;
+  return (
+    <div className="sticky top-[60px] md:top-[68px] z-40 border-b border-blue-100 shadow-sm">
+      <Marquee text={announcement} />
+    </div>
+  );
 };
 
 // Memoize the component to prevent re-renders when parent updates

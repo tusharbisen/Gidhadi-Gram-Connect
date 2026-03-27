@@ -26,7 +26,7 @@
 //       title: "Upcoming Events",
 //       value: "3",
 //       icon: Calendar,
-//       color: "text-green-600",
+//       color: "text-primary",
 //     },
 //     {
 //       title: "Active Users",
@@ -255,13 +255,13 @@ interface QuickActionGroup {
 const STATUS_STYLES: Record<string, string> = {
   pending: "bg-amber-100 text-amber-800 border-amber-200",
   inProgress: "bg-blue-100 text-blue-800 border-blue-200",
-  resolved: "bg-emerald-100 text-emerald-800 border-emerald-200",
+  resolved: "bg-primary/10 text-primary border-primary/20",
 };
 
 const STATUS_DOT: Record<string, string> = {
   pending: "bg-amber-400",
   inProgress: "bg-blue-400",
-  resolved: "bg-emerald-400",
+  resolved: "bg-primary",
 };
 
 const stats: Stat[] = [
@@ -285,8 +285,8 @@ const stats: Stat[] = [
     title: "Upcoming Events",
     value: "3",
     icon: Calendar,
-    bgColor: "bg-emerald-50",
-    textColor: "text-emerald-600",
+    bgColor: "bg-primary/5",
+    textColor: "text-primary",
     trend: "Next: Tomorrow",
   },
   {
@@ -429,7 +429,7 @@ function ComplaintRow({
         <Button
           variant="ghost"
           size="icon"
-          className="h-8 w-8 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50"
+          className="h-8 w-8 text-gray-400 hover:text-primary hover:bg-primary/5"
           aria-label="Edit complaint"
         >
           <Edit className="h-3.5 w-3.5" />
@@ -452,7 +452,7 @@ function QuickActionCard({ group }: { group: QuickActionGroup }) {
     <Card className="border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200">
       <CardHeader className="p-4 sm:p-5 pb-3">
         <CardTitle className="text-sm sm:text-base font-bold text-gray-700 flex items-center gap-2">
-          <group.icon className="h-4 w-4 text-emerald-500" />
+          <group.icon className="h-4 w-4 text-primary" />
           {group.title}
         </CardTitle>
       </CardHeader>
@@ -461,7 +461,7 @@ function QuickActionCard({ group }: { group: QuickActionGroup }) {
           <Button
             key={label}
             variant="outline"
-            className="w-full justify-start text-xs sm:text-sm text-gray-600 border-gray-200 hover:border-emerald-300 hover:text-emerald-700 hover:bg-emerald-50 transition-colors h-9"
+            className="w-full justify-start text-xs sm:text-sm text-gray-600 border-gray-200 hover:border-primary/40 hover:text-primary hover:bg-primary/5 transition-colors h-9"
           >
             <Icon className="mr-2 h-3.5 w-3.5 flex-shrink-0" />
             <span className="truncate">{label}</span>
@@ -505,7 +505,7 @@ const AdminDashboard = () => {
           </CardTitle>
           <Button
             size="sm"
-            className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm h-8 sm:h-9 px-3 sm:px-4 flex-shrink-0"
+            className="bg-primary hover:bg-primary text-white text-xs sm:text-sm h-8 sm:h-9 px-3 sm:px-4 flex-shrink-0"
           >
             <Plus className="mr-1.5 h-3.5 w-3.5" />
             Add New
