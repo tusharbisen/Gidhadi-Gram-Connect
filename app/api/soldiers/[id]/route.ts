@@ -11,9 +11,10 @@ const patchSchema = z.object({
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const cookieStore = await cookies();
     const token = cookieStore.get("auth-token")?.value;
     if (!token) {
@@ -30,7 +31,7 @@ export async function PATCH(
     await connectToDatabase();
 
     const updatedSoldier = await Soldier.findByIdAndUpdate(
-      params.id,
+      id,
       { status: body.status },
       { new: true }
     );
@@ -52,9 +53,10 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const cookieStore = await cookies();
     const token = cookieStore.get("auth-token")?.value;
     if (!token) {
@@ -67,7 +69,7 @@ export async function DELETE(
 
     await connectToDatabase();
     
-    const deletedSoldier = await Soldier.findByIdAndDelete(params.id);
+    const deletedSoldier = await Soldier.findByIdAndDelete(id);
 
     if (!deletedSoldier) {
       return NextResponse.json({ error: "Soldier not found" }, { status: 404 });

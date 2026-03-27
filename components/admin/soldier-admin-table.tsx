@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Check, X, ShieldAlert, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 interface Soldier {
-  id: string;
+  _id?: string;
+  id?: string;
   name: string;
   village: string;
   force: string;
@@ -37,7 +38,7 @@ export function SoldierAdminTable({ initialData }: Props) {
       });
       if (!res.ok) throw new Error("Failed to update status");
       const updated = await res.json();
-      setSoldiers((prev) => prev.map((s) => (s.id === id ? updated : s)));
+      setSoldiers((prev) => prev.map((s) => ((s._id || s.id) === id ? updated : s)));
       toast.success(`Status updated to ${status}`);
     } catch (err: any) {
       console.error(err);
@@ -53,7 +54,7 @@ export function SoldierAdminTable({ initialData }: Props) {
     try {
       const res = await fetch(`/api/soldiers/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Failed to delete");
-      setSoldiers((prev) => prev.filter((s) => s.id !== id));
+      setSoldiers((prev) => prev.filter((s) => (s._id || s.id) !== id));
       toast.success("Record deleted successfully.");
     } catch (err: any) {
       console.error(err);
@@ -85,8 +86,10 @@ export function SoldierAdminTable({ initialData }: Props) {
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
-            {soldiers.map((soldier) => (
-              <tr key={soldier.id} className="hover:bg-slate-50/50 transition-colors">
+            {soldiers.map((soldier) => {
+              const soldierId = soldier._id || soldier.id || "";
+              return (
+              <tr key={soldierId} className="hover:bg-slate-50/50 transition-colors">
                 
                 {/* ── Name & Village ────────────────────────────── */}
                 <td className="px-6 py-4">
@@ -132,10 +135,10 @@ export function SoldierAdminTable({ initialData }: Props) {
                         size="sm"
                         variant="outline"
                         className="bg-green-50 text-green-700 border-green-200 hover:bg-green-100"
-                        onClick={() => updateStatus(soldier.id, "approved")}
-                        disabled={loadingId === soldier.id}
+                        onClick={() => updateStatus(soldierId, "approved")}
+                        disabled={loadingId === soldierId}
                       >
-                        {loadingId === soldier.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4 mr-1" />}
+                        {loadingId === soldierId ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4 mr-1" />}
                         Approve
                       </Button>
                     )}
@@ -145,8 +148,8 @@ export function SoldierAdminTable({ initialData }: Props) {
                         size="sm"
                         variant="outline"
                         className="bg-red-50 text-red-700 border-red-200 hover:bg-red-100"
-                        onClick={() => updateStatus(soldier.id, "rejected")}
-                        disabled={loadingId === soldier.id}
+                        onClick={() => updateStatus(soldierId, "rejected")}
+                        disabled={loadingId === soldierId}
                       >
                          <X className="w-4 h-4 mr-1" />
                         Reject
@@ -157,15 +160,15 @@ export function SoldierAdminTable({ initialData }: Props) {
                       size="sm"
                       variant="ghost"
                       className="text-slate-400 hover:text-red-600 hover:bg-red-50 ml-2"
-                      onClick={() => deleteSoldier(soldier.id)}
-                      disabled={loadingId === soldier.id}
+                      onClick={() => deleteSoldier(soldierId)}
+                      disabled={loadingId === soldierId}
                     >
                       Delete
                     </Button>
                   </div>
                 </td>
               </tr>
-            ))}
+            )})}
           </tbody>
         </table>
       </div>

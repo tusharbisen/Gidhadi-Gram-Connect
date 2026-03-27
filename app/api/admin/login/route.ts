@@ -3,14 +3,13 @@ import { connectToDatabase } from "@/lib/db";
 import { Admin } from "@/lib/models/admin";
 import bcrypt from "bcryptjs";
 import { signToken, setAuthCookie } from "@/lib/auth";
+import { loginSchema } from "@/lib/validators";
+import { z } from "zod";
 
 export async function POST(req: Request) {
   try {
-    const { email, password } = await req.json();
-
-    if (!email || !password) {
-      return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
-    }
+    const json = await req.json();
+    const { email, password } = loginSchema.parse(json);
 
     await connectToDatabase();
 
@@ -28,7 +27,10 @@ export async function POST(req: Request) {
     await setAuthCookie(token);
 
     return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error) {
+  } catch (error: any) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: "Validation Error", details: error.errors }, { status: 400 });
+    }
     console.error("Login Error:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }

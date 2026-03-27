@@ -6,7 +6,6 @@ import { useLanguage } from "@/components/providers/language-provider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
@@ -15,37 +14,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Upload, Send, CheckCircle2, X, AlertCircle } from "lucide-react";
+import { Upload, Send, CheckCircle2, X, AlertCircle, Loader2 } from "lucide-react";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-
-interface FormData {
-  fullName: string;
-  phoneNumber: string;
-  complaintType: string;
-  description: string;
-  photo: File | null;
-}
-
-interface FormErrors {
-  fullName?: string;
-  phoneNumber?: string;
-  complaintType?: string;
-  description?: string;
-  photo?: string;
-}
-
-type SubmitStatus = "idle" | "submitting" | "success" | "error";
-
-// ─── Constants ────────────────────────────────────────────────────────────────
-
-const INITIAL_FORM: FormData = {
-  fullName: "",
-  phoneNumber: "",
-  complaintType: "",
-  description: "",
-  photo: null,
-};
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { complaintSchema, ComplaintFormValues } from "@/lib/validators";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 const COMPLAINT_TYPE_KEYS = [
   "waterSupply",
@@ -56,112 +37,63 @@ const COMPLAINT_TYPE_KEYS = [
 ] as const;
 
 const MAX_FILE_SIZE_MB = 5;
-const PHONE_REGEX = /^[6-9]\d{9}$/; // Indian mobile number
-
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
-function validate(data: FormData, t: (k: string) => string): FormErrors {
-  const errors: FormErrors = {};
-  if (!data.fullName.trim()) errors.fullName = t("fieldRequired") || "This field is required.";
-  if (!data.phoneNumber) {
-    errors.phoneNumber = t("fieldRequired") || "This field is required.";
-  } else if (!PHONE_REGEX.test(data.phoneNumber)) {
-    errors.phoneNumber = t("invalidPhone") || "Enter a valid 10-digit Indian mobile number.";
-  }
-  if (!data.complaintType) errors.complaintType = t("fieldRequired") || "Please select a type.";
-  if (!data.description.trim()) {
-    errors.description = t("fieldRequired") || "This field is required.";
-  } else if (data.description.trim().length < 20) {
-    errors.description = t("descriptionTooShort") || "Please provide at least 20 characters.";
-  }
-  if (data.photo && data.photo.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
-    errors.photo = t("fileTooLarge") || `File must be under ${MAX_FILE_SIZE_MB}MB.`;
-  }
-  return errors;
-}
-
-// Removed generateReferenceId Since Backend Provides It
-
-// ─── Sub-components ───────────────────────────────────────────────────────────
-
-function FieldError({ message }: { message?: string }) {
-  if (!message) return null;
-  return (
-    <p className="mt-1 text-[11px] sm:text-xs text-red-500 flex items-center gap-1">
-      <AlertCircle className="h-3 w-3 flex-shrink-0" />
-      {message}
-    </p>
-  );
-}
-
-// ─── Main Component ────────────────────────────────────────────────────────────
 
 const ComplaintForm = () => {
   const { t } = useLanguage();
   const photoInputId = useId();
 
-  const [formData, setFormData] = useState<FormData>(INITIAL_FORM);
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState<SubmitStatus>("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [referenceId, setReferenceId] = useState("");
+  const [photoPreview, setPhotoPreview] = useState<{ file: File; name: string; size: number } | null>(null);
 
-  // ── Handlers ────────────────────────────────────────────────────────────────
-
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const { name, value } = e.target;
-      setFormData((prev) => ({ ...prev, [name]: value }));
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
+  const form = useForm<ComplaintFormValues>({
+    resolver: zodResolver(complaintSchema),
+    defaultValues: {
+      fullName: "",
+      phoneNumber: "",
+      complaintType: "",
+      description: "",
+      photo: null,
     },
-    []
-  );
-
-  const handleSelectChange = useCallback((value: string) => {
-    setFormData((prev) => ({ ...prev, complaintType: value }));
-    setErrors((prev) => ({ ...prev, complaintType: undefined }));
-  }, []);
+    mode: "onChange",
+  });
 
   const handleFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0] ?? null;
-      setFormData((prev) => ({ ...prev, photo: file }));
-      if (file && file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
-        setErrors((prev) => ({
-          ...prev,
-          photo: t("fileTooLarge") || `File must be under ${MAX_FILE_SIZE_MB}MB.`,
-        }));
-      } else {
-        setErrors((prev) => ({ ...prev, photo: undefined }));
+      if (file) {
+        if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+          form.setError("photo", { type: "manual", message: t("fileTooLarge") || `File must be under ${MAX_FILE_SIZE_MB}MB.` });
+          setPhotoPreview(null);
+          form.setValue("photo", null);
+        } else {
+          form.clearErrors("photo");
+          setPhotoPreview({ file, name: file.name, size: file.size });
+          form.setValue("photo", file);
+        }
       }
     },
-    [t]
+    [form, t]
   );
 
   const clearPhoto = useCallback(() => {
-    setFormData((prev) => ({ ...prev, photo: null }));
-    setErrors((prev) => ({ ...prev, photo: undefined }));
-    // Reset the file input
+    form.setValue("photo", null);
+    form.clearErrors("photo");
+    setPhotoPreview(null);
     const input = document.getElementById(photoInputId) as HTMLInputElement | null;
     if (input) input.value = "";
-  }, [photoInputId]);
+  }, [form, photoInputId]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const validationErrors = validate(formData, t);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-
+  const onSubmit = async (data: ComplaintFormValues) => {
     setStatus("submitting");
     try {
       let base64Photo = null;
-      if (formData.photo) {
+      if (photoPreview?.file) {
         base64Photo = await new Promise<string>((resolve, reject) => {
           const reader = new FileReader();
           reader.onload = () => resolve(reader.result as string);
           reader.onerror = reject;
-          reader.readAsDataURL(formData.photo!);
+          reader.readAsDataURL(photoPreview.file);
         });
       }
 
@@ -169,10 +101,10 @@ const ComplaintForm = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullName: formData.fullName,
-          phoneNumber: formData.phoneNumber,
-          complaintType: formData.complaintType,
-          description: formData.description,
+          fullName: data.fullName,
+          phoneNumber: data.phoneNumber,
+          complaintType: data.complaintType,
+          description: data.description,
           photo: base64Photo,
         }),
       });
@@ -181,17 +113,15 @@ const ComplaintForm = () => {
         throw new Error("Failed to submit complaint");
       }
 
-      const data = await res.json();
-      setReferenceId(data.referenceId);
+      const responseData = await res.json();
+      setReferenceId(responseData.referenceId);
       setStatus("success");
-      setFormData(INITIAL_FORM);
-      setErrors({});
+      form.reset();
+      setPhotoPreview(null);
     } catch {
       setStatus("error");
     }
   };
-
-  // ── Success State ────────────────────────────────────────────────────────────
 
   if (status === "success") {
     return (
@@ -227,8 +157,6 @@ const ComplaintForm = () => {
     );
   }
 
-  // ── Form ─────────────────────────────────────────────────────────────────────
-
   const isSubmitting = status === "submitting";
 
   return (
@@ -245,7 +173,6 @@ const ComplaintForm = () => {
       </CardHeader>
 
       <CardContent className="px-4 sm:px-6 pb-6">
-        {/* General error */}
         {status === "error" && (
           <div className="mb-4 flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-sm text-red-600">
             <AlertCircle className="h-4 w-4 flex-shrink-0" />
@@ -253,177 +180,195 @@ const ComplaintForm = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} noValidate className="space-y-4 sm:space-y-5">
-
-          {/* Full Name */}
-          <div className="space-y-1.5">
-            <Label htmlFor="fullName" className="text-xs sm:text-sm font-semibold text-gray-700">
-              {t("fullName")} <span className="text-red-400">*</span>
-            </Label>
-            <Input
-              id="fullName"
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} noValidate className="space-y-4 sm:space-y-5">
+            {/* Full Name */}
+            <FormField
+              control={form.control}
               name="fullName"
-              type="text"
-              value={formData.fullName}
-              onChange={handleChange}
-              disabled={isSubmitting}
-              autoComplete="name"
-              placeholder={t("fullNamePlaceholder") || "Enter your full name"}
-              className={`h-10 sm:h-11 text-sm border-gray-200 focus:border-primary focus:ring-primary ${
-                errors.fullName ? "border-red-300" : ""
-              }`}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-xs sm:text-sm font-semibold text-gray-700">
+                    {t("fullName")} <span className="text-red-400">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isSubmitting}
+                      autoComplete="name"
+                      placeholder={t("fullNamePlaceholder") || "Enter your full name"}
+                      className={`h-10 sm:h-11 text-sm ${form.formState.errors.fullName ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
             />
-            <FieldError message={errors.fullName} />
-          </div>
 
-          {/* Phone Number */}
-          <div className="space-y-1.5">
-            <Label htmlFor="phoneNumber" className="text-xs sm:text-sm font-semibold text-gray-700">
-              {t("phoneNumber")} <span className="text-red-400">*</span>
-            </Label>
-            <Input
-              id="phoneNumber"
+            {/* Phone Number */}
+            <FormField
+              control={form.control}
               name="phoneNumber"
-              type="tel"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              disabled={isSubmitting}
-              autoComplete="tel"
-              placeholder="e.g. 9876543210"
-              maxLength={10}
-              className={`h-10 sm:h-11 text-sm border-gray-200 focus:border-primary focus:ring-primary ${
-                errors.phoneNumber ? "border-red-300" : ""
-              }`}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-xs sm:text-sm font-semibold text-gray-700">
+                    {t("phoneNumber")} <span className="text-red-400">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="tel"
+                      disabled={isSubmitting}
+                      autoComplete="tel"
+                      placeholder="e.g. 9876543210"
+                      maxLength={10}
+                      className={`h-10 sm:h-11 text-sm ${form.formState.errors.phoneNumber ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
             />
-            <FieldError message={errors.phoneNumber} />
-          </div>
 
-          {/* Complaint Type */}
-          <div className="space-y-1.5">
-            <Label className="text-xs sm:text-sm font-semibold text-gray-700">
-              {t("complaintType")} <span className="text-red-400">*</span>
-            </Label>
-            <Select
-              value={formData.complaintType}
-              onValueChange={handleSelectChange}
-              disabled={isSubmitting}
-            >
-              <SelectTrigger
-                className={`h-10 sm:h-11 text-sm border-gray-200 focus:border-primary focus:ring-primary ${
-                  errors.complaintType ? "border-red-300" : ""
-                }`}
-              >
-                <SelectValue placeholder={t("selectComplaintType") || "Select complaint type"} />
-              </SelectTrigger>
-              <SelectContent>
-                {COMPLAINT_TYPE_KEYS.map((key) => (
-                  <SelectItem key={key} value={key} className="text-sm">
-                    {t(key)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <FieldError message={errors.complaintType} />
-          </div>
+            {/* Complaint Type */}
+            <FormField
+              control={form.control}
+              name="complaintType"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-xs sm:text-sm font-semibold text-gray-700">
+                    {t("complaintType")} <span className="text-red-400">*</span>
+                  </FormLabel>
+                  <Select
+                    disabled={isSubmitting}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger className={`h-10 sm:h-11 text-sm ${form.formState.errors.complaintType ? "border-red-500 focus-visible:ring-red-500" : ""}`}>
+                        <SelectValue placeholder={t("selectComplaintType") || "Select complaint type"} />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {COMPLAINT_TYPE_KEYS.map((key) => (
+                        <SelectItem key={key} value={key} className="text-sm">
+                          {t(key)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
+            />
 
-          {/* Description */}
-          <div className="space-y-1.5">
-            <Label htmlFor="description" className="text-xs sm:text-sm font-semibold text-gray-700">
-              {t("description")} <span className="text-red-400">*</span>
-            </Label>
-            <Textarea
-              id="description"
+            {/* Description */}
+            <FormField
+              control={form.control}
               name="description"
-              value={formData.description}
-              onChange={handleChange}
-              disabled={isSubmitting}
-              rows={4}
-              placeholder={t("descriptionPlaceholder") || "Describe your complaint in detail (min. 20 characters)…"}
-              className={`text-sm border-gray-200 focus:border-primary focus:ring-primary resize-none ${
-                errors.description ? "border-red-300" : ""
-              }`}
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel className="text-xs sm:text-sm font-semibold text-gray-700">
+                      {t("description")} <span className="text-red-400">*</span>
+                    </FormLabel>
+                    <span className="text-[10px] text-gray-400">
+                      {field.value.length}/500 chars
+                    </span>
+                  </div>
+                  <FormControl>
+                    <Textarea
+                      disabled={isSubmitting}
+                      rows={4}
+                      placeholder={t("descriptionPlaceholder") || "Describe your complaint in detail (min. 20 characters)…"}
+                      className={`text-sm resize-none ${form.formState.errors.description ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
             />
-            <div className="flex items-start justify-between">
-              <FieldError message={errors.description} />
-              <span className="text-[10px] text-gray-300 ml-auto">
-                {formData.description.length} chars
-              </span>
-            </div>
-          </div>
 
-          {/* Photo Upload */}
-          <div className="space-y-1.5">
-            <Label className="text-xs sm:text-sm font-semibold text-gray-700">
-              {t("uploadPhoto")}{" "}
-              <span className="text-gray-400 font-normal text-[11px]">
-                ({t("optional") || "Optional"}, max {MAX_FILE_SIZE_MB}MB)
-              </span>
-            </Label>
-
-            {formData.photo ? (
-              <div className="flex items-center gap-3 p-3 bg-primary/5 border border-primary/20 rounded-xl">
-                <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Upload className="h-4 w-4 text-primary" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs sm:text-sm font-medium text-gray-700 truncate">
-                    {formData.photo.name}
-                  </p>
-                  <p className="text-[10px] sm:text-xs text-gray-400">
-                    {(formData.photo.size / 1024).toFixed(0)} KB
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={clearPhoto}
-                  className="w-6 h-6 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-400 hover:text-red-500 hover:border-red-300 transition-colors flex-shrink-0"
-                  aria-label={t("removePhoto")}
-                >
-                  <X className="h-3.5 w-3.5" />
-                </button>
-              </div>
-            ) : (
-              <button
-                type="button"
-                onClick={() => document.getElementById(photoInputId)?.click()}
-                disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-200 rounded-xl text-xs sm:text-sm text-gray-400 hover:border-primary/40 hover:text-primary hover:bg-primary/5 transition-all duration-200 disabled:opacity-50"
-              >
-                <Upload className="h-4 w-4" />
-                {t("chooseFile") || "Click to choose a photo"}
-              </button>
-            )}
-            <input
-              id={photoInputId}
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              className="hidden"
-              disabled={isSubmitting}
+            {/* Photo Upload */}
+            <FormField
+              control={form.control}
+              name="photo"
+              render={() => (
+                <FormItem>
+                  <FormLabel className="text-xs sm:text-sm font-semibold text-gray-700">
+                    {t("uploadPhoto")} <span className="text-gray-400 font-normal text-[11px]">({t("optional") || "Optional"}, max {MAX_FILE_SIZE_MB}MB)</span>
+                  </FormLabel>
+                  <FormControl>
+                    <div>
+                      {photoPreview ? (
+                        <div className="flex items-center gap-3 p-3 bg-primary/5 border border-primary/20 rounded-xl">
+                          <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <Upload className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs sm:text-sm font-medium text-gray-700 truncate">
+                              {photoPreview.name}
+                            </p>
+                            <p className="text-[10px] sm:text-xs text-gray-500">
+                              {(photoPreview.size / 1024).toFixed(0)} KB
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={clearPhoto}
+                            className="w-6 h-6 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-400 hover:text-red-500 hover:border-red-300 transition-colors flex-shrink-0"
+                            aria-label={t("removePhoto")}
+                          >
+                            <X className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => document.getElementById(photoInputId)?.click()}
+                          disabled={isSubmitting}
+                          className={`w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed rounded-xl text-xs sm:text-sm transition-all duration-200 disabled:opacity-50 ${form.formState.errors.photo ? "border-red-300 text-red-400 bg-red-50" : "border-gray-200 text-gray-400 hover:border-primary/40 hover:text-primary hover:bg-primary/5"}`}
+                        >
+                          <Upload className="h-4 w-4" />
+                          {t("chooseFile") || "Click to choose a photo"}
+                        </button>
+                      )}
+                      <input
+                        id={photoInputId}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        className="hidden"
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
             />
-            <FieldError message={errors.photo} />
-          </div>
 
-          {/* Submit */}
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full h-10 sm:h-11 bg-primary hover:bg-primary active:bg-primary text-white font-semibold text-sm sm:text-base rounded-xl transition-colors disabled:opacity-60"
-          >
-            {isSubmitting ? (
-              <span className="flex items-center gap-2">
-                <span className="h-4 w-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
-                {t("loading")}
-              </span>
-            ) : (
-              <span className="flex items-center gap-2">
-                <Send className="h-4 w-4" />
-                {t("submit")}
-              </span>
-            )}
-          </Button>
-
-        </form>
+            {/* Submit */}
+            <Button
+              type="submit"
+              disabled={isSubmitting || !form.formState.isValid}
+              className="w-full h-10 sm:h-11 bg-primary hover:bg-primary active:bg-primary text-white font-semibold text-sm sm:text-base rounded-xl transition-colors disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+            >
+              {isSubmitting ? (
+                <span className="flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  {t("loading")}
+                </span>
+              ) : (
+                <span className="flex items-center gap-2">
+                  <Send className="h-4 w-4" />
+                  {t("submit")}
+                </span>
+              )}
+            </Button>
+          </form>
+        </Form>
       </CardContent>
     </Card>
   );

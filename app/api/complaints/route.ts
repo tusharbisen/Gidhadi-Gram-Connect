@@ -1,15 +1,8 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/db";
 import { Complaint } from "@/lib/models/complaint";
+import { complaintSchema } from "@/lib/validators";
 import { z } from "zod";
-
-const createSchema = z.object({
-  fullName: z.string().min(1),
-  phoneNumber: z.string().regex(/^[6-9]\d{9}$/),
-  complaintType: z.string().min(1),
-  description: z.string().min(20),
-  photo: z.string().optional().nullable(),
-});
 
 async function generateUniqueReferenceId(): Promise<string> {
   let isUnique = false;
@@ -30,7 +23,7 @@ async function generateUniqueReferenceId(): Promise<string> {
 export async function POST(req: Request) {
   try {
     const json = await req.json();
-    const data = createSchema.parse(json);
+    const data = complaintSchema.parse(json);
 
     await connectToDatabase();
     

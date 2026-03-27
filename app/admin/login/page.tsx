@@ -5,31 +5,47 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ShieldCheck, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema, LoginFormValues } from "@/lib/validators";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    mode: "onSubmit",
+  });
+
+  const onSubmit = async (data: LoginFormValues) => {
     setLoading(true);
     setError("");
-
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get("email");
-    const password = formData.get("password");
 
     try {
       const res = await fetch("/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: data.email, password: data.password }),
       });
 
-      const data = await res.json();
+      const resData = await res.json();
       if (!res.ok) {
-        throw new Error(data.error || "Login failed");
+        throw new Error(resData.error || "Login failed");
       }
 
       toast.success("Logged in successfully");
@@ -60,31 +76,56 @@ export default function AdminLoginPage() {
           </div>
         )}
 
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
-            <input
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
               name="email"
-              type="email"
-              required
-              className="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium text-slate-700">Email Address</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      disabled={loading}
+                      className={form.formState.errors.email ? "border-red-500 focus-visible:ring-red-500" : ""}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
             />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Password</label>
-            <input
-              name="password"
-              type="password"
-              required
-              className="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-            />
-          </div>
 
-          <Button type="submit" className="w-full py-6 mt-6 text-base" disabled={loading}>
-            {loading ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : null}
-            Sign In
-          </Button>
-        </form>
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium text-slate-700">Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      disabled={loading}
+                      className={form.formState.errors.password ? "border-red-500 focus-visible:ring-red-500" : ""}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
+            />
+
+            <Button
+              type="submit"
+              className="w-full py-6 mt-6 text-base"
+              disabled={loading}
+            >
+              {loading ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : null}
+              Sign In
+            </Button>
+          </form>
+        </Form>
       </div>
     </div>
   );

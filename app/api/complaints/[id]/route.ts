@@ -3,19 +3,16 @@ import { connectToDatabase } from "@/lib/db";
 import { Complaint } from "@/lib/models/complaint";
 import { cookies } from "next/headers";
 import { verifyAuth } from "@/lib/auth";
+import { complaintStatusSchema } from "@/lib/validators";
 import { z } from "zod";
 
-const patchSchema = z.object({
-  status: z.enum(["pending", "inProgress", "resolved", "rejected"]).optional(),
-  assignedTo: z.string().optional(),
-});
-
 // GET does not require authentication - Public Tracker
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     await connectToDatabase();
-    // params.id is the referenceId
-    const complaint = await Complaint.findOne({ referenceId: params.id.toUpperCase() }).lean();
+    // id is the referenceId
+    const complaint = await Complaint.findOne({ referenceId: id.toUpperCase() }).lean();
     
     if (!complaint) {
       return NextResponse.json({ error: "Complaint not found" }, { status: 404 });
@@ -28,20 +25,21 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 }
 
 // PATCH requires authentication
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const cookieStore = await cookies();
     const token = cookieStore.get("auth-token")?.value;
     if (!token) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     if (!(await verifyAuth(token))) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const json = await req.json();
-    const body = patchSchema.parse(json);
+    const body = complaintStatusSchema.parse(json);
 
     await connectToDatabase();
     
     const updatedUser = await Complaint.findOneAndUpdate(
-      { referenceId: params.id },
+      { referenceId: id },
       { $set: body },
       { new: true }
     );
@@ -52,20 +50,24 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
 
     return NextResponse.json(updatedUser);
   } catch (error: any) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: "Validation Error", details: error.errors }, { status: 400 });
+    }
     return NextResponse.json({ error: "Update failed", details: error.message }, { status: 500 });
   }
 }
 
 // DELETE requires authentication
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const cookieStore = await cookies();
     const token = cookieStore.get("auth-token")?.value;
     if (!token) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     if (!(await verifyAuth(token))) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     await connectToDatabase();
-    const deletedUser = await Complaint.findOneAndDelete({ referenceId: params.id });
+    const deletedUser = await Complaint.findOneAndDelete({ referenceId: id });
 
     if (!deletedUser) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });

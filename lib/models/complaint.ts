@@ -7,6 +7,7 @@ export interface IComplaint extends Document {
   description: string;
   photo?: string;
   status: "pending" | "inProgress" | "resolved" | "rejected";
+  remarks?: string;
   referenceId: string;
   assignedTo?: string; 
   createdAt: Date;
@@ -25,6 +26,7 @@ const ComplaintSchema = new Schema(
       enum: ["pending", "inProgress", "resolved", "rejected"],
       default: "pending",
     },
+    remarks: { type: String },
     referenceId: { type: String, required: true, unique: true },
     assignedTo: { type: String, default: "Unassigned" }, 
   },

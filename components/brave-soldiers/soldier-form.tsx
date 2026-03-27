@@ -1,26 +1,53 @@
 "use client";
 
-import { useState } from "react";
-import { useLanguage } from "@/components/providers/language-provider";
+import { useState, useCallback, useId } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { ShieldCheck, Loader2 } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { soldierSchema, SoldierFormValues } from "@/lib/validators";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export function SoldierForm() {
-  const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  const fileInputId = useId();
+
+  const form = useForm<SoldierFormValues>({
+    resolver: zodResolver(soldierSchema),
+    defaultValues: {
+      name: "",
+      village: "",
+      force: "",
+      rank: "",
+      phone: "",
+      photo: null,
+      message: "",
+      isPublic: true,
+    },
+    mode: "onChange",
+  });
+
+  const onSubmit = async (data: SoldierFormValues) => {
     setLoading(true);
     setError(null);
 
-    const formData = new FormData(e.currentTarget);
-    const photoFile = formData.get("photo") as File;
     let base64Photo = undefined;
-    if (photoFile && photoFile.size > 0) {
-      if (photoFile.size > 5 * 1024 * 1024) {
+
+    if (data.photo instanceof File) {
+      if (data.photo.size > 5 * 1024 * 1024) {
         setError("Photo must be less than 5MB");
         setLoading(false);
         return;
@@ -28,7 +55,7 @@ export function SoldierForm() {
       try {
         base64Photo = await new Promise((resolve, reject) => {
           const reader = new FileReader();
-          reader.readAsDataURL(photoFile);
+          reader.readAsDataURL(data.photo as File);
           reader.onload = () => resolve(reader.result as string);
           reader.onerror = (error) => reject(error);
         });
@@ -39,16 +66,7 @@ export function SoldierForm() {
       }
     }
 
-    const payload = {
-      name: formData.get("name"),
-      village: formData.get("village"),
-      force: formData.get("force"),
-      rank: formData.get("rank"),
-      phone: formData.get("phone"),
-      photo: base64Photo,
-      message: formData.get("message"),
-      isPublic: formData.get("isPublic") === "on",
-    };
+    const payload = { ...data, photo: base64Photo };
 
     try {
       const res = await fetch("/api/soldiers", {
@@ -62,13 +80,23 @@ export function SoldierForm() {
       }
 
       setSuccess(true);
-      (e.target as HTMLFormElement).reset();
+      form.reset();
     } catch (err: any) {
       setError(err.message || "An error occurred");
     } finally {
       setLoading(false);
     }
-  }
+  };
+
+  const handleFileChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0] ?? null;
+      if (file) {
+        form.setValue("photo", file, { shouldValidate: true });
+      }
+    },
+    [form]
+  );
 
   if (success) {
     return (
@@ -87,59 +115,189 @@ export function SoldierForm() {
     <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200 text-left max-w-2xl mx-auto">
       <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
         <ShieldCheck className="w-6 h-6 text-primary" />
-        {t("share_your_story") || "Submit brave soldier details"}
+        Submit brave soldier details
       </h3>
 
       {error && <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-xl text-sm">{error}</div>}
 
-      <form onSubmit={onSubmit} className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-1.5">
-            <label className="text-sm font-semibold text-slate-700">Full Name *</label>
-            <input required name="name" type="text" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. Nikhil Thakare" />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem className="space-y-1.5">
+                  <FormLabel className="text-sm font-semibold text-slate-700">Full Name *</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      placeholder="e.g. Nikhil Thakare"
+                      className={`h-11 rounded-xl ${form.formState.errors.name ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="village"
+              render={({ field }) => (
+                <FormItem className="space-y-1.5">
+                  <FormLabel className="text-sm font-semibold text-slate-700">Village/City *</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      placeholder="e.g. Gidhadi"
+                      className={`h-11 rounded-xl ${form.formState.errors.village ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
+            />
           </div>
-          <div className="space-y-1.5">
-            <label className="text-sm font-semibold text-slate-700">Village/City *</label>
-            <input required name="village" type="text" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. Gidhadi" />
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-1.5">
-            <label className="text-sm font-semibold text-slate-700">Force/Regiment *</label>
-            <input required name="force" type="text" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. Indian Army" />
-          </div>
-          <div className="space-y-1.5">
-            <label className="text-sm font-semibold text-slate-700">Rank (Optional)</label>
-            <input name="rank" type="text" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. Havildar" />
-          </div>
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="force"
+              render={({ field }) => (
+                <FormItem className="space-y-1.5">
+                  <FormLabel className="text-sm font-semibold text-slate-700">Force/Regiment *</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      placeholder="e.g. Indian Army"
+                      className={`h-11 rounded-xl ${form.formState.errors.force ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
+            />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-1.5">
-            <label className="text-sm font-semibold text-slate-700">Phone Number (Optional)</label>
-            <input name="phone" type="tel" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Used by admins for verification only" />
+            <FormField
+              control={form.control}
+              name="rank"
+              render={({ field }) => (
+                <FormItem className="space-y-1.5">
+                  <FormLabel className="text-sm font-semibold text-slate-700">Rank (Optional)</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      placeholder="e.g. Havildar"
+                      className={`h-11 rounded-xl ${form.formState.errors.rank ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
+            />
           </div>
-          <div className="space-y-1.5">
-            <label className="text-sm font-semibold text-slate-700">Upload Photo (Optional, max 5MB)</label>
-            <input name="photo" type="file" accept="image/*" className="w-full px-4 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer" />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem className="space-y-1.5">
+                  <FormLabel className="text-sm font-semibold text-slate-700">Phone Number (Optional)</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="tel"
+                      disabled={loading}
+                      placeholder="e.g. 9876543210"
+                      maxLength={10}
+                      className={`h-11 rounded-xl ${form.formState.errors.phone ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="photo"
+              render={() => (
+                <FormItem className="space-y-1.5">
+                  <FormLabel className="text-sm font-semibold text-slate-700">Upload Photo (Optional, max 5MB)</FormLabel>
+                  <FormControl>
+                    <div>
+                      <input
+                        id={fileInputId}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        disabled={loading}
+                        className="w-full px-4 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer text-sm"
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
+            />
           </div>
-        </div>
 
-        <div className="space-y-1.5">
-          <label className="text-sm font-semibold text-slate-700">Short Message/Story (Optional)</label>
-          <textarea name="message" rows={3} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none" placeholder="Share a few words of respect..." />
-        </div>
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem className="space-y-1.5">
+                <FormLabel className="text-sm font-semibold text-slate-700">Short Message/Story (Optional)</FormLabel>
+                <FormControl>
+                  <Textarea
+                    disabled={loading}
+                    rows={3}
+                    placeholder="Share a few words of respect..."
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none text-sm"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-xs" />
+              </FormItem>
+            )}
+          />
 
-        <label className="flex items-center gap-3 cursor-pointer py-2">
-          <input type="checkbox" name="isPublic" defaultChecked className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary" />
-          <span className="text-sm text-slate-600">Make this profile visible to the public once approved.</span>
-        </label>
+          <FormField
+            control={form.control}
+            name="isPublic"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0 py-2">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    disabled={loading}
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel className="text-sm text-slate-600 font-normal cursor-pointer">
+                    Make this profile visible to the public once approved.
+                  </FormLabel>
+                </div>
+              </FormItem>
+            )}
+          />
 
-        <Button type="submit" disabled={loading} className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-6 rounded-xl shadow-lg mt-4 text-base">
-          {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Submit Application"}
-        </Button>
-      </form>
+          <Button
+            type="submit"
+            disabled={loading || !form.formState.isValid}
+            className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-6 rounded-xl shadow-lg mt-4 text-base disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Submit Application"}
+          </Button>
+        </form>
+      </Form>
     </div>
   );
 }
