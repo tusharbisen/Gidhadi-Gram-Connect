@@ -9,6 +9,10 @@ export async function POST(req: Request) {
     const json = await req.json();
     const body = soldierSchema.parse(json);
 
+    if (!["Currently Serving", "Retired"].includes(body.serviceStatus)) {
+      return NextResponse.json({ error: "Invalid service status" }, { status: 400 });
+    }
+
     await connectToDatabase();
 
     const soldier = await Soldier.create({
@@ -20,6 +24,7 @@ export async function POST(req: Request) {
       photo: body.photo,
       message: body.message,
       isPublic: body.isPublic,
+      serviceStatus: body.serviceStatus,
       status: "pending", // Initially pending for admin approval
     });
 

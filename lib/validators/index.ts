@@ -37,6 +37,9 @@ export const soldierSchema = z.object({
   photo: z.any().optional().nullable(),
   message: z.string().optional(),
   isPublic: z.boolean().default(true),
+  serviceStatus: z.enum(["Currently Serving", "Retired"], {
+    required_error: "Service status is required",
+  }),
 });
 
 export type SoldierFormValues = z.infer<typeof soldierSchema>;

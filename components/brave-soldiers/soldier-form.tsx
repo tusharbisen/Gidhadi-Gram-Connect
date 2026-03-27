@@ -32,6 +32,7 @@ export function SoldierForm() {
       village: "",
       force: "",
       rank: "",
+      serviceStatus: undefined,
       phone: "",
       photo: null,
       message: "",
@@ -41,6 +42,7 @@ export function SoldierForm() {
   });
 
   const onSubmit = async (data: SoldierFormValues) => {
+    console.log("Submitting formData:", data);
     setLoading(true);
     setError(null);
 
@@ -205,6 +207,27 @@ export function SoldierForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField
               control={form.control}
+              name="serviceStatus"
+              render={({ field }) => (
+                <FormItem className="space-y-1.5">
+                  <FormLabel className="text-sm font-semibold text-slate-700">Service Status *</FormLabel>
+                  <FormControl>
+                    <select
+                      {...field}
+                      disabled={loading}
+                      className={`w-full h-11 px-3 rounded-xl border bg-white text-sm ${form.formState.errors.serviceStatus ? "border-red-500 focus-visible:ring-red-500" : "border-slate-200 focus:ring-2 focus:ring-primary/20 focus:border-primary"} focus:outline-none transition-all`}
+                    >
+                      <option value="" disabled selected>Select status</option>
+                      <option value="Currently Serving">Currently Serving</option>
+                      <option value="Retired">Retired</option>
+                    </select>
+                  </FormControl>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="phone"
               render={({ field }) => (
                 <FormItem className="space-y-1.5">
@@ -291,7 +314,7 @@ export function SoldierForm() {
 
           <Button
             type="submit"
-            disabled={loading || !form.formState.isValid}
+            disabled={loading}
             className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-6 rounded-xl shadow-lg mt-4 text-base disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Submit Application"}

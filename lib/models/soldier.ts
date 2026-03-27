@@ -9,6 +9,7 @@ export interface ISoldier extends Document {
   photo?: string;
   message?: string;
   isPublic: boolean;
+  serviceStatus: "Currently Serving" | "Retired";
   status: "pending" | "approved" | "rejected";
   createdAt: Date;
   updatedAt: Date;
@@ -24,6 +25,7 @@ const SoldierSchema = new Schema(
     photo: { type: String, required: false },
     message: { type: String, required: false },
     isPublic: { type: Boolean, default: true },
+    serviceStatus: { type: String, enum: ["Currently Serving", "Retired"], required: true },
     status: {
       type: String,
       enum: ["pending", "approved", "rejected"],
