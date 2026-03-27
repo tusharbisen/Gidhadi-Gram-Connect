@@ -352,7 +352,7 @@ const ComplaintForm = () => {
             {/* Submit */}
             <Button
               type="submit"
-              disabled={isSubmitting || !form.formState.isValid}
+              disabled={isSubmitting}
               className="w-full h-10 sm:h-11 bg-primary hover:bg-primary active:bg-primary text-white font-semibold text-sm sm:text-base rounded-xl transition-colors disabled:opacity-60 disabled:cursor-not-allowed mt-2"
             >
               {isSubmitting ? (
