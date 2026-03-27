@@ -16,6 +16,7 @@ import mr from "./locales/mr.json";
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type Language = "en" | "hi" | "mr";
+export type Languages = "en" | "hi" | "mr";
 
 type LocaleMap = Record<string, string>;
 

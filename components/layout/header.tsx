@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ShieldCheck } from "lucide-react";
-import { useLanguage, Language } from "@/components/providers/language-provider";
+import { useLanguage, Languages } from "@/components/providers/language-provider";
 import { Button } from "@/components/ui/button";
 
 /* ---------------- NAV ITEMS ---------------- */
