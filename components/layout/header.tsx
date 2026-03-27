@@ -105,7 +105,7 @@ const Header = () => {
             <div className="hidden sm:block">
               <select
                 value={language}
-                onChange={(e) => setLanguage(e.target.value as Language)}
+                onChange={(e) => setLanguage(e.target.value as Languages)}
                 className="px-2 py-1 border rounded-md text-xs font-semibold bg-white cursor-pointer focus:outline-none"
               >
                 {LANGUAGES.map((lang) => (
@@ -142,7 +142,7 @@ const Header = () => {
           {/* Mobile Language Dropdown */}
           <select
             value={language}
-            onChange={(e) => setLanguage(e.target.value as Language)}
+            onChange={(e) => setLanguage(e.target.value as Languages)}
             className="w-full px-3 py-2 border rounded-md text-sm font-medium bg-white"
           >
             {LANGUAGES.map((lang) => (
