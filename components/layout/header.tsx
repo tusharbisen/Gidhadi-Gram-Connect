@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ShieldCheck } from "lucide-react";
-import { useLanguage } from "@/components/providers/language-provider";
+import { useLanguage, Language } from "@/components/providers/language-provider";
 import { Button } from "@/components/ui/button";
 
 /* ---------------- NAV ITEMS ---------------- */
@@ -31,10 +31,11 @@ const NavLink = ({ href, isActive, label }: any) => (
     <Link
       href={href}
       className={`px-2 py-1.5 text-xs md:text-sm font-medium rounded-md whitespace-nowrap transition-all duration-200
-      ${isActive
+      ${
+        isActive
           ? "text-primary bg-primary/10"
           : "text-gray-600 hover:text-primary hover:bg-primary/5"
-        }`}
+      }`}
     >
       {label}
     </Link>
@@ -43,7 +44,7 @@ const NavLink = ({ href, isActive, label }: any) => (
 
 /* ---------------- HEADER ---------------- */
 const Header = () => {
-  const { t, language } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
   const pathname = usePathname();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -57,15 +58,13 @@ const Header = () => {
 
   const toggleMenu = useCallback(() => setIsMenuOpen((v) => !v), []);
 
-  const currentLang =
-    LANGUAGES.find((l) => l.code === language) ?? LANGUAGES[0];
-
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${isScrolled
-        ? "bg-white/90 backdrop-blur-md shadow-md"
-        : "bg-white"
-        }`}
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        isScrolled
+          ? "bg-white/90 backdrop-blur-md shadow-md"
+          : "bg-white"
+      }`}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-5 lg:px-6">
         <div className="flex items-center justify-between h-16">
@@ -100,13 +99,21 @@ const Header = () => {
           </nav>
 
           {/* ---------------- RIGHT ---------------- */}
-          <div className="flex items-center gap-1 flex-shrink-0">
+          <div className="flex items-center gap-2 flex-shrink-0">
 
-            {/* Language */}
+            {/* 🌐 Language Dropdown */}
             <div className="hidden sm:block">
-              <button className="px-2 py-1 border rounded-md text-xs font-semibold">
-                {currentLang.short}
-              </button>
+              <select
+                value={language}
+                onChange={(e) => setLanguage(e.target.value as Language)}
+                className="px-2 py-1 border rounded-md text-xs font-semibold bg-white cursor-pointer focus:outline-none"
+              >
+                {LANGUAGES.map((lang) => (
+                  <option key={lang.code} value={lang.code}>
+                    {lang.short} ({lang.name})
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Admin */}
@@ -130,7 +137,21 @@ const Header = () => {
 
       {/* ---------------- MOBILE MENU ---------------- */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-white border-t px-4 py-4 space-y-2">
+        <div className="lg:hidden bg-white border-t px-4 py-4 space-y-3">
+
+          {/* Mobile Language Dropdown */}
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value as Language)}
+            className="w-full px-3 py-2 border rounded-md text-sm font-medium bg-white"
+          >
+            {LANGUAGES.map((lang) => (
+              <option key={lang.code} value={lang.code}>
+                {lang.name}
+              </option>
+            ))}
+          </select>
+
           {NAV_ITEMS.map(({ key, href }) => (
             <Link
               key={href}
