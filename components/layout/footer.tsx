@@ -139,7 +139,7 @@ const Footer = () => {
               </div>
 
               {/* Tagline */}
-              <p className="text-sm text-gray-400 leading-relaxed mb-5 max-w-xs">
+              <p className="text-sm text-white leading-relaxed mb-5 max-w-xs">
                 {t("footerDescription")}
               </p>
 
@@ -172,10 +172,10 @@ const Footer = () => {
                   <li key={key}>
                     <Link
                       href={href}
-                      className="footer-link-hover text-sm text-gray-400 hover:text-primary/40 flex items-center gap-2 group transition-colors"
+                      className="footer-link-hover text-sm text-white hover:text-primary/40 flex items-center gap-2 group transition-colors"
                     >
                       <span
-                        className="w-1.5 h-1.5 rounded-full bg-primary group-hover:bg-primary transition-colors flex-shrink-0"
+                        className="w-1.5 h-1.5 rounded-full bg-primary group-hover:bg-white transition-colors flex-shrink-0"
                         aria-hidden="true"
                       />
                       {t(key)}
@@ -201,10 +201,10 @@ const Footer = () => {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-gray-400 hover:text-primary/40 flex items-center gap-1.5 group transition-colors"
+                      className="text-sm text-white  group-hover:text-green-400  flex items-center gap-1.5 group transition-colors"
                     >
                       <ArrowUpRight
-                        className="h-3.5 w-3.5 text-primary group-hover:text-primary transition-colors flex-shrink-0"
+                        className="h-3.5 w-3.5 text-white group-hover:text-green-400 transition-colors flex-shrink-0"
                         aria-hidden="true"
                       />
                       {t(key)}
@@ -233,7 +233,7 @@ const Footer = () => {
                         aria-hidden="true"
                       />
                     </div>
-                    <span className="text-sm text-gray-400 leading-snug group-hover:text-gray-300 transition-colors break-all sm:break-normal">
+                    <span className="text-sm text-white leading-snug group-hover:text-green-400 transition-colors break-all sm:break-normal">
                       {isTranslation ? t(value) : value}
                     </span>
                   </li>
@@ -250,19 +250,19 @@ const Footer = () => {
 
           {/* ── Bottom bar ────────────────────────────────────────────── */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4">
-            <p className="text-xs text-gray-500 text-center sm:text-left">
+            <p className="text-xs text-white text-center sm:text-left">
               &copy; {new Date().getFullYear()}{" "}
-              <span className="text-primary font-medium">
-                {t("gramPanchayat")} {t("gidhadi")}
+              <span className="text-white font-medium">
+                {t("GidhadiGramConnect")}   
               </span>
               . {t("allRightsReserved")}
             </p>
-            <p className="text-xs text-gray-600 flex items-center gap-1 flex-wrap justify-center sm:justify-end">
-              {t("builtWithLove")}
+            <p className="text-xs text-white flex items-center gap-1 flex-wrap justify-center sm:justify-end">
+              {t("Built With Team")}
               <span className="text-primary mx-0.5" aria-hidden="true">
                 ♥
               </span>
-              {t("forGidhadiVillage")}
+              {t("GidhadiGramConnect")}
             </p>
           </div>
         </div>
