@@ -8,7 +8,7 @@ import Footer from "@/components/layout/footer";
 import { LanguageProvider } from "@/components/providers/language-provider";
 import AnnouncementMarquee from "@/components/home/announcement-marquee"; 
 import { SITE_CONFIG } from "@/lib/site-config";
-import ChatBot from "@/components/Chatbot"; // ✅ Importing the ChatBot component
+import ChatBot from "@/components/ChatBot/ChatBot"; // ✅ Importing the ChatBot component
 
 const poppins = Poppins({
   subsets: ["latin"],
