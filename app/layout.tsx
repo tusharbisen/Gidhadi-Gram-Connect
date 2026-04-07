@@ -6,9 +6,9 @@ import "./globals.css";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { LanguageProvider } from "@/components/providers/language-provider";
-import AnnouncementMarquee from "@/components/home/announcement-marquee";
-import Chatbot from "@/components/Chatbot"; // ✅ Added
+import AnnouncementMarquee from "@/components/home/announcement-marquee"; 
 import { SITE_CONFIG } from "@/lib/site-config";
+import ChatBot from "@/components/Chatbot"; // ✅ Importing the ChatBot component
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -223,7 +223,7 @@ export default function RootLayout({
             <AnnouncementMarquee />
             <main className="flex-1">{children}</main>
             <Footer />
-            <Chatbot /> {/* ✅ Chatbot added here — appears on every page */}
+            <ChatBot /> {/* ✅ Chatbot added here — appears on every page */}
           </div>
         </LanguageProvider>
       </body>
