@@ -47,7 +47,7 @@ const carouselSlides = [
 
 const TOTAL = carouselSlides.length;
 // Auto-advance interval in ms
-const INTERVAL_MS = 6000;
+const INTERVAL_MS = 2000;
 
 // ─── Cloudinary URL optimizer ──────────────────────────────────────────────────
 // Serves a correctly-sized image per device instead of always fetching 1920px.

@@ -7,6 +7,7 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { LanguageProvider } from "@/components/providers/language-provider";
 import AnnouncementMarquee from "@/components/home/announcement-marquee";
+import Chatbot from "@/components/Chatbot"; // ✅ Added
 import { SITE_CONFIG } from "@/lib/site-config";
 
 const poppins = Poppins({
@@ -29,7 +30,6 @@ export const metadata: Metadata = {
     default: "Gidhadi Gram Connect | गिधाडी ग्राम कनेक्ट",
     template: "%s | Gidhadi Gram Connect",
   },
-  
   description: SITE_CONFIG.description,
   keywords: [
     "Gidhadi village",
@@ -205,10 +205,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${poppins.variable} ${inter.variable}`}
-    >
+    <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
       <head>
         <meta name="color-scheme" content="light" />
         <meta name="theme-color" content="#f8f9fa" />
@@ -226,6 +223,7 @@ export default function RootLayout({
             <AnnouncementMarquee />
             <main className="flex-1">{children}</main>
             <Footer />
+            <Chatbot /> {/* ✅ Chatbot added here — appears on every page */}
           </div>
         </LanguageProvider>
       </body>
