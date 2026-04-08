@@ -45,7 +45,6 @@ export default function BraveSoldiersSection() {
     */
     <section className="py-8 sm:py-12 lg:py-16 bg-gradient-to-b from-slate-50 to-white rounded-2xl border-2 border-sky-700">
       <div className="max-w-6xl mx-auto">
-
         {/* ── Section Header ──────────────────────────────────────────────── */}
         {/*
           mb-8 on mobile (32px) → mb-12 on lg+.
@@ -55,7 +54,6 @@ export default function BraveSoldiersSection() {
           (military pattern) stays scoped inside this block, not the whole page.
         */}
         <div className="relative text-center mb-8 lg:mb-12 overflow-hidden">
-
           {/* Decorative background — scoped correctly with relative parent */}
           <div className="absolute inset-0 opacity-5 bg-gradient-to-br from-slate-200 to-transparent pointer-events-none rounded-xl" />
 
@@ -166,7 +164,6 @@ export default function BraveSoldiersSection() {
                 Old p-6 (24px) on all screens was eating too much width on mobile.
               */}
               <CardContent className="p-4 sm:p-5 lg:p-6">
-
                 {/* Name + Rank */}
                 <div className="mb-3 sm:mb-4">
                   {/*
@@ -238,51 +235,37 @@ export default function BraveSoldiersSection() {
                     </span>
                   </div>
                 </div>
-
               </CardContent>
             </Card>
           ))}
         </div>
 
         {/* ── Call to Action ──────────────────────────────────────────────── */}
-        {/*
-          mt-8 on mobile → mt-12 on lg+. Old mt-12 was too large on mobile.
-          p-5 on mobile → p-8 on sm+. Old p-8 left very little content width
-          inside the box on a 360px screen.
-        */}
         <div className="text-center mt-8 lg:mt-12">
-          <div className="bg-slate-50 rounded-2xl p-5 sm:p-8 max-w-2xl mx-auto border border-slate-200">
-
-            {/* text-base on mobile → text-xl on sm+ */}
-            <h3 className="text-base sm:text-xl font-semibold text-slate-800 mb-2 sm:mb-3 leading-snug">
-              {t("know_a_soldier")}
+          <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-5 sm:p-8 max-w-2xl mx-auto border border-orange-200 shadow-md">
+            {/* Heading */}
+            <h3 className="text-base sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3 leading-snug">
+              In Know a Brave Soldier from Gidhadi?
             </h3>
 
-            {/* text-sm on mobile → text-base on sm+ */}
-            <p className="text-sm sm:text-base text-slate-600 mb-5 sm:mb-6 leading-relaxed">
-              {t("know_a_soldier_desc")}
+            {/* Description */}
+            <p className="text-sm sm:text-base text-gray-600 mb-5 sm:mb-6 leading-relaxed">
+              We proudly honor the brave soldiers of our village. If you know
+              someone who has served in the Indian Armed Forces, you can explore
+              their profiles or contribute their story to inspire others.
             </p>
 
-            <a
-              href="https://docs.google.com/forms/d/1K2xP06egTSRr2BLvb86nmP20vs_z_jTreOHxbUrwk3A/edit"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {/*
-                Full width on mobile so it's easy to tap.
-                Auto width on sm+ (inline button).
-                min-h-[48px] — 48px is Google's recommended minimum touch target.
-              */}
+            {/* Redirect to Brave Soldiers Page */}
+            <a href="/brave-soldiers">
               <Button
                 size="lg"
-                className="w-full sm:w-auto bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-medium px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 min-h-[48px] text-sm sm:text-base"
+                className="w-full sm:w-auto bg-orange-600 hover:bg-orange-700 text-white font-medium px-8 rounded-full shadow-md hover:shadow-lg transition-all duration-300 min-h-[48px] text-sm sm:text-base"
               >
-                {t("share_your_story")}
+                View & Share Soldier Details
               </Button>
             </a>
           </div>
         </div>
-
       </div>
     </section>
   );
