@@ -11,16 +11,16 @@ import { SITE_CONFIG } from "@/lib/site-config";
 // ─── Page Metadata ─────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Home",
-  description: SITE_CONFIG.description,
+  title: "Gidhadi Village Portal | Schemes & Updates",
+  description: "Access official Gidhadi Gram Panchayat services, government schemes, local news, and grievance redressal in one place. Explore our village portal today!",
 
   alternates: {
     canonical: "/",
   },
 
   openGraph: {
-    title:       "Gidhadi Gram Connect | गिधाडी ग्राम कनेक्ट",
-    description: SITE_CONFIG.description,
+    title:       "Gidhadi Village Portal | Schemes & Updates",
+    description: "Access official Gidhadi Gram Panchayat services, government schemes, local news, and grievance redressal in one place.",
     url:         SITE_CONFIG.url,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
@@ -32,10 +32,18 @@ export default function Home() {
   return (
     // Full-width wrapper — no horizontal overflow on any screen
     <main className="w-full min-h-screen">
+      <h1 className="sr-only">Gidhadi Village Portal: Gram Panchayat Services, Schemes & Local News</h1>
 
       {/* ── Hero: edge-to-edge on mobile, contained on desktop ── */}
       <section className="w-full">
         <HeroSection />
+      </section>
+
+      {/* ── SEO Intro & Internal Links ── */}
+      <section className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12 text-center">
+        <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Welcome to the official <strong>Gidhadi Village Portal</strong>. Our mission is to empower residents by providing continuous access to critical Gram Panchayat services. Discover active <a href="/schemes" className="text-primary font-semibold hover:underline">government schemes</a>, stay updated with local news, or use our digital <a href="/grievance" className="text-primary font-semibold hover:underline">grievance redressal</a> system to report community issues.
+        </p>
       </section>
 
       {/* ── All remaining sections share consistent horizontal padding ── */}

@@ -160,10 +160,10 @@ export default function AboutUs() {
 
         <Card className="mb-6 overflow-hidden border border-primary/10 shadow-lg sm:mb-8">
           <CardHeader className="bg-gradient-to-r from-primary to-secondary p-4 text-white sm:p-6">
-            <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl">
+            <h2 className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl font-bold">
               <Globe className="h-5 w-5 flex-shrink-0" />
               {t("aboutWelcomeTitle")}
-            </CardTitle>
+            </h2>
           </CardHeader>
           <CardContent className="space-y-4 bg-white p-4 sm:p-6">
             <p className="text-sm leading-relaxed text-gray-600 sm:text-base">
@@ -178,10 +178,10 @@ export default function AboutUs() {
         <div className="mb-8 grid grid-cols-1 gap-5 sm:mb-10 sm:gap-6 lg:grid-cols-2">
           <Card className="overflow-hidden border border-primary/10 shadow-lg">
             <CardHeader className="bg-gradient-to-r from-primary to-primary p-4 text-white sm:p-5">
-              <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg">
+              <h2 className="flex items-center gap-2.5 text-base sm:text-lg font-bold">
                 <Target className="h-5 w-5 flex-shrink-0" />
                 {t("aboutVisionTitle")}
-              </CardTitle>
+              </h2>
             </CardHeader>
             <CardContent className="bg-white p-4 sm:p-6">
               <div className="border-l-4 border-primary pl-4">
@@ -192,12 +192,12 @@ export default function AboutUs() {
             </CardContent>
           </Card>
 
-          <Card className="overflow-hidden border border-teal-100 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-secondary to-secondary p-4 text-white sm:p-5">
-              <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg">
+          <Card className="overflow-hidden border border-primary/10 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-primary to-secondary p-4 text-white sm:p-5">
+              <h2 className="flex items-center gap-2.5 text-base sm:text-lg font-bold">
                 <Heart className="h-5 w-5 flex-shrink-0" />
                 {t("aboutMissionTitle")}
-              </CardTitle>
+              </h2>
             </CardHeader>
             <CardContent className="bg-white p-4 sm:p-6">
               <ul className="space-y-3">
@@ -216,10 +216,10 @@ export default function AboutUs() {
 
         <Card className="mb-6 overflow-hidden border border-primary/10 shadow-lg sm:mb-8">
           <CardHeader className="bg-gradient-to-r from-primary to-secondary p-4 text-white sm:p-6">
-            <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl">
+            <h2 className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl font-bold">
               <Users className="h-5 w-5 flex-shrink-0" />
               {t("aboutTeamTitle")}
-            </CardTitle>
+            </h2>
           </CardHeader>
           <CardContent className="bg-white p-4 sm:p-6">
             <p className="mb-6 text-center text-xs leading-relaxed text-gray-500 sm:text-sm">
@@ -254,7 +254,7 @@ export default function AboutUs() {
                           <h3 className="text-sm font-bold leading-snug text-gray-800 sm:text-base">
                             {member.name}
                           </h3>
-                          <Badge className="border border-primary/20 bg-primary/5 text-[11px] font-medium text-primary">
+                          <Badge className="border border-primary/20 bg-primary/5 text-xs font-medium text-primary">
                             {member.designation}
                           </Badge>
                         </div>
@@ -263,13 +263,13 @@ export default function AboutUs() {
                       <SectionDivider />
 
                       <div className="rounded-lg border border-primary/10 bg-primary/5 px-3 py-2 text-center">
-                        <p className="text-xs font-medium leading-snug text-primary">
+                        <p className="text-sm font-medium leading-snug text-primary">
                           {member.role[language]}
                         </p>
                       </div>
 
                       <div className="space-y-1.5">
-                        <span className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-gray-400 sm:text-xs">
+                        <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-gray-400 sm:text-sm">
                           <Target className="h-3 w-3 text-primary" />
                           {t("responsibility")}
                         </span>
@@ -279,7 +279,7 @@ export default function AboutUs() {
                       </div>
 
                       <div className="space-y-1.5">
-                        <span className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-gray-400 sm:text-xs">
+                        <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-gray-400 sm:text-sm">
                           <Star className="h-3 w-3 text-primary" />
                           {t("skills")}
                         </span>
@@ -288,7 +288,7 @@ export default function AboutUs() {
                             <Badge
                               key={skill}
                               variant="outline"
-                              className="border-primary/20 bg-white text-[10px] text-primary sm:text-xs"
+                              className="border-primary/20 bg-white text-xs sm:text-sm text-primary"
                             >
                               {skill}
                             </Badge>
@@ -299,7 +299,7 @@ export default function AboutUs() {
                       <div className="border-t border-primary/10 pt-3">
                         <a
                           href={`tel:${member.contact.replace(/\s/g, "")}`}
-                          className="flex items-center justify-center gap-2 rounded-lg border border-primary/10 bg-primary/5 p-2.5 text-xs font-medium text-primary transition-colors hover:bg-primary/10 sm:text-sm"
+                          className="flex items-center justify-center gap-2 rounded-lg border border-primary/10 bg-primary/5 p-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/10 sm:text-base"
                         >
                           <Phone className="h-3.5 w-3.5 flex-shrink-0" />
                           {member.contact}
@@ -320,7 +320,7 @@ export default function AboutUs() {
                   <div className="text-2xl font-extrabold tracking-tight text-primary sm:text-3xl">
                     {stat.value}
                   </div>
-                  <div className="mt-1 text-[10px] font-medium uppercase tracking-widest text-gray-500 sm:text-xs">
+                  <div className="mt-1 text-xs font-medium uppercase tracking-widest text-gray-500 sm:text-sm">
                     {stat.label}
                   </div>
                 </div>
@@ -331,10 +331,10 @@ export default function AboutUs() {
 
         <Card className="mb-6 overflow-hidden border border-primary/10 shadow-lg sm:mb-8">
           <CardHeader className="bg-gradient-to-r from-primary to-secondary p-4 text-white sm:p-6">
-            <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl">
+            <h2 className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl font-bold">
               <Mail className="h-5 w-5 flex-shrink-0" />
               {t("getInTouch")}
-            </CardTitle>
+            </h2>
           </CardHeader>
           <CardContent className="bg-white p-4 sm:p-6">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
@@ -363,12 +363,12 @@ export default function AboutUs() {
           </CardContent>
         </Card>
 
-        <Card className="mb-6 overflow-hidden border border-amber-200 shadow-lg sm:mb-8">
-          <CardHeader className="bg-gradient-to-r from-amber-400 to-orange-400 p-4 text-white sm:p-6">
-            <CardTitle className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl">
+        <Card className="mb-6 overflow-hidden border border-primary/10 shadow-lg sm:mb-8">
+          <CardHeader className="bg-gradient-to-r from-primary to-secondary p-4 text-white sm:p-6">
+            <h2 className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl font-bold">
               <Shield className="h-5 w-5 flex-shrink-0" />
               {t("importantDisclaimer")}
-            </CardTitle>
+            </h2>
           </CardHeader>
           <CardContent className="space-y-3 bg-amber-50 p-4 sm:p-6">
             <p className="text-xs leading-relaxed text-gray-700 sm:text-sm md:text-base">

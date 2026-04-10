@@ -6,6 +6,15 @@ import { Badge } from "@/components/ui/badge";
 import { Star, Award } from "lucide-react";
 
 import { SoldierForm } from "@/components/brave-soldiers/soldier-form";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Honoring Our Brave Soldiers",
+  description: "A tribute to the brave sons and daughters of Gidhadi village serving in the armed forces. Submit and honor a local hero today.",
+  alternates: {
+    canonical: "/brave-soldiers",
+  },
+};
 
 export const revalidate = 60; // ISR cache
 
@@ -36,8 +45,11 @@ export default async function BraveSoldiersPage() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight tracking-tight">
             Honoring Our Brave Soldiers 🇮🇳
           </h1>
-          <p className="text-lg md:text-xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed px-4">
-            A tribute to the brave sons and daughters of our land who serve the nation with unwavering courage and dedication.
+          <p className="text-lg md:text-xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed px-4 mb-4">
+            A tribute to the brave sons and daughters of Gidhadi village who physically serve the nation with unwavering courage and dedication. 
+          </p>
+          <p className="text-sm md:text-base text-white/80 max-w-2xl mx-auto px-4">
+            Explore our community's rich <a href="/about" className="font-semibold underline hover:text-white">village history</a> or browse the <a href="/gallery" className="font-semibold underline hover:text-white">photo gallery</a> of past felicitation events.
           </p>
         </div>
       </section>

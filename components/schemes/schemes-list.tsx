@@ -837,7 +837,7 @@ function EligibilityModal({
             <h2 className="text-base sm:text-lg font-bold text-white leading-snug">
               {scheme.name}
             </h2>
-            <Badge className={`mt-1.5 text-[11px] border ${TYPE_STYLES[scheme.type]}`}>
+            <Badge className={`mt-1.5 text-xs border ${TYPE_STYLES[scheme.type]}`}>
               {scheme.type} Scheme
             </Badge>
           </div>
@@ -914,7 +914,7 @@ function SchemeCard({
       <CardHeader className="pb-3 pt-4 px-4 sm:px-5">
         <div className="flex items-start justify-between gap-2 mb-1.5">
           <Badge
-            className={`text-[11px] border font-semibold ${TYPE_STYLES[scheme.type]}`}
+            className={`text-xs border font-semibold ${TYPE_STYLES[scheme.type]}`}
           >
             {scheme.type}
           </Badge>
@@ -1002,6 +1002,9 @@ export default function GovSchemes() {
           <p className="text-sm sm:text-lg text-white/80 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">
             {t("schemesHeroSubtitle")}
           </p>
+          <p className="text-sm sm:text-base text-white/70 max-w-2xl mx-auto leading-relaxed mb-6 sm:mb-8 -mt-4">
+            Need help applying for a scheme? Learn more about the <a href="/about" className="font-medium underline hover:text-white">Gram Panchayat</a> or file a <a href="/grievance" className="font-medium underline hover:text-white">grievance online</a>.
+          </p>
           <div className="flex flex-col xs:flex-row gap-3 justify-center">
             <Button
               size="lg"
@@ -1037,7 +1040,7 @@ export default function GovSchemes() {
               className="text-center bg-white rounded-xl border border-gray-100 shadow-sm py-3 sm:py-4 px-2"
             >
               <p className="text-xl sm:text-2xl font-extrabold text-primary">{value}</p>
-              <p className="text-[10px] sm:text-xs text-gray-400 uppercase tracking-wide mt-0.5">
+              <p className="text-xs sm:text-sm text-gray-400 uppercase tracking-wide mt-0.5">
                 {label}
               </p>
             </div>
@@ -1051,7 +1054,7 @@ export default function GovSchemes() {
               <TabsTrigger
                 key={id}
                 value={id}
-                className="flex flex-col items-center gap-1 py-2 sm:py-2.5 px-1 rounded-lg text-gray-500 data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-sm transition-all text-[10px] sm:text-xs font-medium"
+                className="flex flex-col items-center gap-1 py-2 sm:py-2.5 px-1 rounded-lg text-gray-500 data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-sm transition-all text-xs sm:text-sm font-medium"
               >
                 <Icon className="h-4 w-4 flex-shrink-0" />
                 <span className="hidden sm:block leading-tight">{name}</span>
