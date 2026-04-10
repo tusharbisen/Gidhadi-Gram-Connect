@@ -23,7 +23,7 @@ const events = [
   },
   {
     id: 3,
-    titleKey: "Honoring Social Reformers and LeadernCeremony – Shiv Jayanti",
+    titleKey: "Honoring Social Reformers and Leader Ceremony – Shiv Jayanti",
     date: "2026-02-19",
     image: "https://res.cloudinary.com/dy1w6zqom/image/upload/v1775817163/Untitled_design_kdia2z.jpg",
   },

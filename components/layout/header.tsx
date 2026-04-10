@@ -16,7 +16,7 @@ const NAV_ITEMS = [
   { key: "braveSoldiers", href: "/brave-soldiers" },
   { key: "grievance", href: "/grievance" },
   { key: "gallery", href: "/gallery" },
-  { key: "education", href: "/documents" },
+  { key: "education", href: "/education" },
 ];
 
 const LANGUAGES = [
