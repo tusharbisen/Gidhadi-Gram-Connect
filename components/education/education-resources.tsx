@@ -48,7 +48,7 @@ const CATEGORIES: ResourceCategory[] = [
       {
         channel: "Alina Rais Live",
         description: "Best for spoken English and grammar. Highly engaging lessons for beginners.",
-        link: "https://www.youtube.com/@AlinaRaisLive",
+        link: "https://www.youtube.com/@AleenaRaisLive",
         badgeLevel: "Spoken English",
         badgeColorClass: "bg-blue-100 text-blue-800 border-blue-200",
       },
@@ -102,14 +102,14 @@ const CATEGORIES: ResourceCategory[] = [
       {
         channel: "Commerce Wallah (PW)",
         description: "Accounts, Economics, Business Studies. By Physics Wallah for commerce students.",
-        link: "https://www.youtube.com/@CommerceWallah",
+        link: "https://www.youtube.com/@commercewallahpw",
         badgeLevel: "Commerce – 11 & 12",
         badgeColorClass: "bg-teal-100 text-teal-800 border-teal-200",
       },
       {
         channel: "Drishti IAS (Hindi)",
         description: "History, Geography, Polity. Great for Arts students & UPSC foundation.",
-        link: "https://www.youtube.com/@DrishtiIASHindi",
+        link: "https://www.youtube.com/@DrishtiIASvideos",
         badgeLevel: "Arts – 11 & 12",
         badgeColorClass: "bg-purple-100 text-purple-800 border-purple-200",
       },
@@ -122,7 +122,7 @@ const CATEGORIES: ResourceCategory[] = [
       {
         channel: "StudyIQ IAS",
         description: "19M+ subscribers. Daily current affairs, UPSC, State PCS. Hindi & English.",
-        link: "https://www.youtube.com/@StudyIQ",
+        link: "https://www.youtube.com/@StudyIQEducationLtd",
         badgeLevel: "Competitive Exams",
         badgeColorClass: "bg-rose-100 text-rose-800 border-rose-200",
       },
@@ -136,7 +136,7 @@ const CATEGORIES: ResourceCategory[] = [
       {
         channel: "Khan GS Research Centre",
         description: "Khan Sir's famous channel. GK, Current Affairs, SSC, Railway prep in Hindi.",
-        link: "https://www.youtube.com/@KhanGSResearchCentre",
+        link: "https://www.youtube.com/@khangsresearchcentre1685",
         badgeLevel: "Competitive Exams",
         badgeColorClass: "bg-rose-100 text-rose-800 border-rose-200",
       },
@@ -190,7 +190,7 @@ const CATEGORIES: ResourceCategory[] = [
       {
         channel: "Prakhar ke Pravachan",
         description: "Deep conversations on psychology, philosophy, culture, and personal growth by Prakhar Gupta.",
-        link: "https://www.youtube.com/@PrakharKePravachan",
+        link: "https://www.youtube.com/@ThePrakharGuptaXperience",
         badgeLevel: "Podcasts",
         badgeColorClass: "bg-orange-100 text-orange-800 border-orange-200",
       },
