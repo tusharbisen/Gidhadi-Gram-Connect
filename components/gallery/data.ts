@@ -2,11 +2,30 @@ import { GalleryItem } from "./types";
 
 const CLOUD_NAME = "dy1w6zqom"; // 👈 Replace with your Cloudinary cloud name
 
-export const cldUrl = (publicId: string, width = 800, quality = "auto") =>
-  `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_${quality},w_${width}/${publicId}`;
+export function getPublicId(urlOrId: string) {
+  if (urlOrId.startsWith("http") && urlOrId.includes("cloudinary.com/")) {
+    const parts = urlOrId.split("/upload/");
+    if (parts.length > 1) {
+      let path = parts[1];
+      // strip out transformations like q_auto/, f_auto,w_800/, etc.
+      path = path.replace(/([a-zA-Z]_[^/]+\/)+/g, "");
+      return path;
+    }
+  }
+  return urlOrId;
+}
 
-export const cldThumb = (publicId: string, size = 400) =>
-  `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_auto,w_${size},h_${size},c_fill,g_auto/${publicId}`;
+export const cldUrl = (publicId: string, width = 800, quality = "auto") => {
+  if (publicId.startsWith("http") && !publicId.includes("cloudinary.com/")) return publicId;
+  const id = getPublicId(publicId);
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_${quality},w_${width}/${id}`;
+};
+
+export const cldThumb = (publicId: string, size = 400) => {
+  if (publicId.startsWith("http") && !publicId.includes("cloudinary.com/")) return publicId;
+  const id = getPublicId(publicId);
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_auto,w_${size},h_${size},c_fill,g_auto/${id}`;
+};
 
 export const galleryItems: GalleryItem[] = [
   {
@@ -17,8 +36,8 @@ export const galleryItems: GalleryItem[] = [
       mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "events",
-    date: "2023-08-15",
-    cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774262122/DSC_7429.JPG_v9k2ci.jpg",
+    date: "2023-02-29",
+    cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774261999/DSC_7400.JPG_c4qnr3.jpg",
   },
   {
     id: 2,
@@ -28,8 +47,8 @@ export const galleryItems: GalleryItem[] = [
       mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "events",
-    date: "2023-08-15",
-    cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774262014/DSC_7401.JPG_dotxuq.jpg",
+    date: "2023-02-29",
+    cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774262095/DSC_7419.JPG_eb5wfy.jpg",
   },
   {
     id: 3,
@@ -84,7 +103,7 @@ export const galleryItems: GalleryItem[] = [
     },
     category: "events",
     date: "2023-08-15",
-    cloudinaryId: "DSC_7429.JPG_v9k2ci",
+    cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774261890/DSC_7378.JPG_sduz8y.jpg",
   },
   {
     id: 8,
@@ -106,7 +125,7 @@ export const galleryItems: GalleryItem[] = [
     },
     category: "events",
     date: "2023-08-15",
-    cloudinaryId: "DSC_7429.JPG_v9k2ci",
+    cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774261877/DSC_7376.JPG_uoq4di.jpg",
   },
   {
     id: 10,
@@ -130,5 +149,5 @@ export const galleryItems: GalleryItem[] = [
     date: "2023-08-15",
     cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774262105/DSC_7418.JPG_blymh6.jpg",
   },
-  
+
 ];
