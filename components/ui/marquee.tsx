@@ -36,8 +36,8 @@ export function Marquee({ text, speed = "normal", className, icon = true, urgent
     <div
       ref={containerRef}
       className={cn(
-        "relative overflow-hidden whitespace-nowrap py-2 px-4",
-        urgent ? "bg-red-50" : "bg-blue-50",
+        "relative overflow-hidden whitespace-nowrap py-2.5 px-4",
+        urgent ? "bg-destructive text-destructive-foreground" : "bg-primary text-primary-foreground",
         className,
       )}
       role="marquee"
@@ -54,20 +54,20 @@ export function Marquee({ text, speed = "normal", className, icon = true, urgent
       >
         {icon && (
           <AlertCircle
-            className={cn("mr-2 inline-block h-4 w-4", urgent ? "text-red-600" : "text-gov-blue")}
+            className="mr-2 inline-block h-4.5 w-4.5 opacity-90"
             aria-hidden="true"
           />
         )}
-        <span className={cn("font-medium", urgent ? "text-blue-600" : "text-blue-600")}>{text}</span>
-        <span className="mx-8">•</span>
+        <span className="font-medium tracking-wide text-[15px]">{text}</span>
+        <span className="mx-8 opacity-50">•</span>
         {icon && (
           <AlertCircle
-            className={cn("mr-2 inline-block h-4 w-4", urgent ? "text-blue-600" : "text-gov-blue")}
+            className="mr-2 inline-block h-4.5 w-4.5 opacity-90"
             aria-hidden="true"
           />
         )}
-        <span className={cn("font-medium", urgent ? "text-blue-600" : "text-gov-blue")}>{text}</span>
-        <span className="mx-8">•</span>
+        <span className="font-medium tracking-wide text-[15px]">{text}</span>
+        <span className="mx-8 opacity-50">•</span>
       </div>
     </div>
   )

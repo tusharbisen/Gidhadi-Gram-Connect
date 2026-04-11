@@ -12,7 +12,7 @@ const AnnouncementMarquee = () => {
   const announcement = t("scrollmarquee");
 
   return (
-    <div className="sticky top-[60px] md:top-[68px] z-40 border-b border-blue-100 shadow-sm">
+    <div className="sticky top-[60px] md:top-[68px] z-40 shadow-md">
       <Marquee text={announcement} />
     </div>
   );
