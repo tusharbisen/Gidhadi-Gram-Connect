@@ -36,7 +36,7 @@ export const galleryItems: GalleryItem[] = [
       mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "events",
-    date: "2023-02-29",
+    date: "2023-01-29",
     cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774261999/DSC_7400.JPG_c4qnr3.jpg",
   },
   {
@@ -47,7 +47,7 @@ export const galleryItems: GalleryItem[] = [
       mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "events",
-    date: "2023-02-29",
+    date: "2023-01-29",
     cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774262095/DSC_7419.JPG_eb5wfy.jpg",
   },
   {
@@ -58,7 +58,7 @@ export const galleryItems: GalleryItem[] = [
       mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "events",
-    date: "2023-08-15",
+    date: "2023-01-29",
     cloudinaryId: "DSC_7429.JPG_v9k2ci",
   },
   {
@@ -69,7 +69,7 @@ export const galleryItems: GalleryItem[] = [
       mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "events",
-    date: "2023-08-15",
+    date: "2023-01-29",
     cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774262008/DSC_7402.JPG_hwxj6f.jpg",
   },
   {
@@ -80,7 +80,7 @@ export const galleryItems: GalleryItem[] = [
       mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "events",
-    date: "2023-08-15",
+    date: "2023-01-29",
     cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774261988/DSC_7396.JPG_lplllc.jpg",
   },
   {
@@ -91,7 +91,7 @@ export const galleryItems: GalleryItem[] = [
       mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "events",
-    date: "2023-08-15",
+    date: "2023-01-29",
     cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774261989/DSC_7399.JPG_qsfvz0.jpg",
   },
   {
@@ -102,7 +102,7 @@ export const galleryItems: GalleryItem[] = [
       mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "events",
-    date: "2023-08-15",
+    date: "2023-01-29",
     cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774261890/DSC_7378.JPG_sduz8y.jpg",
   },
   {
@@ -113,7 +113,7 @@ export const galleryItems: GalleryItem[] = [
       mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "events",
-    date: "2023-08-15",
+    date: "2023-01-29",
     cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774261968/DSC_7393.JPG_aoij4o.jpg",
   },
   {
@@ -124,7 +124,7 @@ export const galleryItems: GalleryItem[] = [
       mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "events",
-    date: "2023-08-15",
+    date: "2023-01-29",
     cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774261877/DSC_7376.JPG_uoq4di.jpg",
   },
   {
@@ -135,7 +135,7 @@ export const galleryItems: GalleryItem[] = [
       mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "events",
-    date: "2023-08-15",
+    date: "2023-01-29",
     cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774262062/DSC_7411.JPG_c1fxoq.jpg",
   },
   {
@@ -146,7 +146,7 @@ export const galleryItems: GalleryItem[] = [
       mr: "जि.प. शाळेची १५० वर्षे पूर्ण – प्रमुख पाहुण्यांचा सत्कार",
     },
     category: "events",
-    date: "2023-08-15",
+    date: "2023-01-29",
     cloudinaryId: "https://res.cloudinary.com/dy1w6zqom/image/upload/q_auto/f_auto/v1774262105/DSC_7418.JPG_blymh6.jpg",
   },
 
