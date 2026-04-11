@@ -84,6 +84,7 @@
   "drainageCleaning": "नाली सफाई",
   "education": "शिक्षा",
   "educationalInst": "शैक्षणिक संस्थान",
+  "egramSwaraj": "ई-ग्रामस्वराज पोर्टल",
   "election": "चुनाव",
   "electoral": "निर्वाचन",
   "electoralRoll": "मतदाता सूची",
@@ -138,6 +139,7 @@
   "login": "लॉगिन",
   "loginSuccessful": "लॉगिन सफल",
   "male": "पुरुष",
+  "maharashtraRDD": "ग्रामीण विकास विभाग, महाराष्ट्र",
   "maleVoters": "पुरुष मतदाता",
   "meetingMinutes": "बैठक कार्यवृत्त",
   "meetingsCategory": "बैठकें",
@@ -246,5 +248,10 @@
   "villagePhoto": "गांव की तस्वीरें",
   "readMore": "और पढ़ें",
   "tapToCall": "कॉल करने के लिए टैप करें",
-  "braveSoldiers": "वीर जवान 🇮🇳"
+  "braveSoldiers": "वीर जवान \ud83c\uddee\ud83c\uddf3",
+  "Mahila Samuh Celebrating Shiv Jayant 20266 Ganesh Chawok Gidhadi": "महिला समूह द्वारा गणेश चौक, गिधाड़ी में शिव जयंती समारोह",
+  "populationStats": "जनसंख्या सांख्यिकी",
+  "Near Mata Mandir Gidhadi.": "माता मंदिर के पास, गिधाड़ी।",
+  "GidhadiGramConnect": "गिधाड़ी ग्राम कनेक्ट",
+  "Built With Team": "टीम द्वारा निर्मित"
 }

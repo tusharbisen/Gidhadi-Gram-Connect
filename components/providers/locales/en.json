@@ -84,6 +84,7 @@
   "drainageCleaning": "Drainage Cleaning",
   "education": "Education",
   "educationalInst": "Educational Institutions",
+  "egramSwaraj": "eGramSwaraj Portal",
   "election": "Election",
   "electoral": "Electoral",
   "electoralRoll": "Electoral Roll",
@@ -138,6 +139,7 @@
   "login": "Login",
   "loginSuccessful": "Login successful",
   "male": "Male",
+  "maharashtraRDD": "Rural Development Dept. Maharashtra",
   "maleVoters": "Male Voters",
   "meetingMinutes": "Meeting Minutes",
   "meetingsCategory": "Meetings",
@@ -246,5 +248,10 @@
   "villagePhoto": "Village Photos",
   "readMore": "Read More",
   "tapToCall": "Tap to Call",
-  "braveSoldiers": "Brave Soldiers 🇮🇳"
+  "braveSoldiers": "Brave Soldiers \ud83c\uddee\ud83c\uddf3",
+  "Mahila Samuh Celebrating Shiv Jayant 20266 Ganesh Chawok Gidhadi": "Mahila Samuh Celebrating Shiv Jayanti 2026 at Ganesh Chowk, Gidhadi",
+  "populationStats": "Population Statistics",
+  "Near Mata Mandir Gidhadi.": "Near Mata Mandir, Gidhadi.",
+  "GidhadiGramConnect": "Gidhadi Gram Connect",
+  "Built With Team": "Built by Team"
 }

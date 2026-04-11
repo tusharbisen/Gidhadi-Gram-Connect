@@ -136,17 +136,14 @@ export default function AboutUs() {
     <div className="mx-auto max-w-6xl bg-gradient-to-br from-primary/5 via-white to-primary/5 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         <div className="mb-10 text-center sm:mb-14">
           <div className="mb-5 flex justify-center sm:mb-6">
-            <div className="relative">
-              <div className="absolute inset-0 scale-110 rounded-full bg-primary/20 opacity-60 blur-xl" />
-              <div className="relative flex h-20 w-20 items-center justify-center rounded-full border-4 border-primary/20 bg-white shadow-xl sm:h-24 sm:w-24 md:h-28 md:w-28">
-                <Image
-                  src="/logo.png"
-                  alt="Gidhadi Gram Connect Logo"
-                  width={220}
-                  height={220}
-                  className="h-4/5 w-4/5 object-contain"
-                />
-              </div>
+            <div className="relative flex h-24 w-24 items-center justify-center sm:h-32 sm:w-32 md:h-40 md:w-40">
+              <Image
+                src="/logo.png"
+                alt="Gidhadi Gram Connect Logo"
+                width={220}
+                height={220}
+                className="h-full w-full object-contain drop-shadow-md"
+              />
             </div>
           </div>
 

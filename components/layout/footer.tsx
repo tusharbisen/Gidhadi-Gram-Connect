@@ -3,12 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Facebook,
-  Instagram,
   Mail,
   MapPin,
   Phone,
-  Twitter,
   ArrowUpRight,
 } from "lucide-react";
 import { useLanguage } from "@/components/providers/language-provider";
@@ -49,17 +46,6 @@ const Footer = () => {
               {t("footerDescription")}
             </p>
 
-            {/* SOCIAL */}
-            <div className="flex gap-3">
-              {[Facebook, Twitter, Instagram].map((Icon, i) => (
-                <div
-                  key={i}
-                  className="w-9 h-9 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 hover:bg-primary hover:text-white transition cursor-pointer"
-                >
-                  <Icon size={16} />
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* QUICK LINKS */}
@@ -73,7 +59,7 @@ const Footer = () => {
                 { href: "/schemes", key: "schemes" },
                 { href: "/brave-soldiers", key: "braveSoldiers" },
                 { href: "/grievance", key: "grievance" },
-                { href: "/documents", key: "documents" },
+                { href: "/education", key: "education" },
               ].map((item) => (
                 <li key={item.key}>
                   <Link
@@ -95,7 +81,7 @@ const Footer = () => {
             <ul className="space-y-2">
               {[
                 {
-                  href: "https://rural.nic.in",
+                  href: "https://rural.gov.in",
                   key: "ministryRuralDevelopment",
                 },
                 {
@@ -103,6 +89,8 @@ const Footer = () => {
                   key: "ministryPanchayatiRaj",
                 },
                 { href: "https://india.gov.in", key: "nationalPortal" },
+                { href: "https://egramswaraj.gov.in", key: "egramSwaraj" },
+                { href: "https://rdd.maharashtra.gov.in", key: "maharashtraRDD" },
               ].map((item) => (
                 <li key={item.key}>
                   <a

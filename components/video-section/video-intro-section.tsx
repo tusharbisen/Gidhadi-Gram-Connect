@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
-import { Play, Pause, Volume2, VolumeX, Users, Briefcase, Smartphone } from "lucide-react";
+import { Users, Briefcase, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/components/providers/language-provider";
 
@@ -47,33 +46,6 @@ const FEATURE_CARDS = [
 
 export default function VideoIntroSection() {
   const { t } = useLanguage();
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true); // start muted for mobile autoplay policy
-  const [showControls, setShowControls] = useState(false);
-
-  const handlePlayPause = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (isPlaying) {
-      video.pause();
-    } else {
-      video.play().catch((err) => {
-        // Autoplay was blocked — user interaction needed
-        console.warn("Play prevented:", err);
-      });
-    }
-  }, [isPlaying]);
-
-  const handleMuteToggle = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const next = !isMuted;
-    video.muted = next;
-    setIsMuted(next);
-  }, [isMuted]);
-
   return (
     <section className="w-full py-10 sm:py-14 md:py-20 bg-gradient-to-br from-primary/5 via-white to-primary/5 mt-5 rounded-2xl border border-primary/20 shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -101,73 +73,19 @@ export default function VideoIntroSection() {
 
         {/* ── Video Player ─────────────────────────────────────────────── */}
         <div className="max-w-4xl mx-auto">
-          <div
-            className="relative bg-black rounded-2xl overflow-hidden shadow-2xl ring-1 ring-primary/20"
-            onMouseEnter={() => setShowControls(true)}
-            onMouseLeave={() => setShowControls(false)}
-            onTouchStart={() => setShowControls((v) => !v)}
-          >
-            {/* Video */}
+          <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl ring-1 ring-primary/20">
+            {/* Native Video */}
             <video
-              ref={videoRef}
               className="w-full aspect-video"
               poster="/thumbel.png"
-              muted={isMuted}
+              controls
               playsInline
               preload="metadata"
-              onPlay={() => setIsPlaying(true)}
-              onPause={() => setIsPlaying(false)}
-              onEnded={() => setIsPlaying(false)}
               aria-label="Gidhadi Gram Connect introduction video"
             >
               <source src={VIDEO_SRC} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-
-            {/* Hover/touch overlay controls */}
-            <div
-              className={`absolute inset-0 bg-black/20 flex items-end justify-start p-3 sm:p-4 transition-opacity duration-300 ${
-                showControls && isPlaying ? "opacity-100" : "opacity-0 pointer-events-none"
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={handlePlayPause}
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center text-gray-800 shadow transition-transform hover:scale-105"
-                  aria-label={isPlaying ? "Pause video" : "Play video"}
-                >
-                  {isPlaying ? (
-                    <Pause className="h-4 w-4 sm:h-5 sm:w-5" />
-                  ) : (
-                    <Play className="h-4 w-4 sm:h-5 sm:w-5 ml-0.5" />
-                  )}
-                </button>
-                <button
-                  onClick={handleMuteToggle}
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center text-gray-800 shadow transition-transform hover:scale-105"
-                  aria-label={isMuted ? "Unmute video" : "Mute video"}
-                >
-                  {isMuted ? (
-                    <VolumeX className="h-4 w-4 sm:h-5 sm:w-5" />
-                  ) : (
-                    <Volume2 className="h-4 w-4 sm:h-5 sm:w-5" />
-                  )}
-                </button>
-              </div>
-            </div>
-
-            {/* Centre play button — visible when paused */}
-            {!isPlaying && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                <button
-                  onClick={handlePlayPause}
-                  className="w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full bg-primary hover:bg-primary text-white shadow-xl flex items-center justify-center transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary"
-                  aria-label="Play video"
-                >
-                  <Play className="h-6 w-6 sm:h-7 sm:w-7 ml-1" />
-                </button>
-              </div>
-            )}
           </div>
 
           {/* ── Feature Cards ───────────────────────────────────────────── */}
@@ -197,6 +115,7 @@ export default function VideoIntroSection() {
         <div className="text-center mt-8 sm:mt-10">
           <Button
             size="lg"
+            onClick={() => window.open("https://chat.whatsapp.com/KeddNQWgeb94SSGnZYxCDy", "_blank", "noopener,noreferrer")}
             className="bg-primary hover:bg-primary active:bg-primary text-white px-7 sm:px-9 py-2.5 sm:py-3 text-sm sm:text-base font-semibold rounded-full shadow-lg hover:shadow-primary/20 transition-all duration-200 hover:scale-105"
           >
             {t("joinCommunityBtn") !== "joinCommunityBtn"

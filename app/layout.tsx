@@ -205,12 +205,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
+    <html lang="en" className={`${poppins.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
         <meta name="color-scheme" content="light" />
         <meta name="theme-color" content="#f8f9fa" />
       </head>
-      <body className={`${inter.className} antialiased overflow-x-hidden`}>
+      <body className={`${inter.className} antialiased overflow-x-hidden`} suppressHydrationWarning>
         <Script
           id="json-ld-structured-data"
           type="application/ld+json"
